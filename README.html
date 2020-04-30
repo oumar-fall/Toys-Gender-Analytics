@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Toys DataBase  <!-- omit in toc --></title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+    </head>
+    <body class="vscode-light">
+        <h1 id="toys-database----omit-in-toc">Toys DataBase  <!-- omit in toc --></h1>
+<p>By : <em><strong>Oumar Fall</strong></em><br>
+Source : <a href="https://www.lagranderecre.fr"><em><strong>La Grande Récré</strong></em></a></p>
+<h2 id="table-of-content----omit-in-toc">Table of content:  <!-- omit in toc --></h2>
+<ul>
+<li><a href="#a-scraping-method">A. Scraping Method</a>
+<ul>
+<li><a href="#1-datas">1. Datas</a></li>
+<li><a href="#2-method">2. Method</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="a-scraping-method">A. Scraping Method</h2>
+<h3 id="1-datas">1. Datas</h3>
+<ul>
+<li><strong>Source</strong> : <em><a href="http://www.lagranderecre.fr">www.lagranderecre.fr</a></em></li>
+<li><strong>Begin</strong> : <em>29/03/2020</em> at <em>01:23:56</em></li>
+<li><strong>End</strong> : <em>29/03/2020</em> at <em>07:17:49</em></li>
+</ul>
+<h3 id="2-method">2. Method</h3>
+<p>The idea was to browse the website in order to collect as much information as possible about each toy sold on this website. I decided to code the algorithm by myself in <strong>javascript</strong> using <a href="https://pptr.dev/"><strong><code>puppeteer</code></strong></a> library. This allowed me to open an headless browser to visit webpages programmatically.</p>
+<p><a href="#Summary">    <em><sub>Skip Details and go to summary</sub></em></a></p>
+<h4 id="analysing-html-structure----omit-in-toc">Analysing html structure  <!-- omit in toc --></h4>
+<p>First, I figured out that I had to analyse the <strong>html structure</strong> of the pages to determine how to access each field. I then realized that the fields weren't organized with a unique ID for each one like I thought. Thus I had to manage it using <strong>XPath selectors</strong>.</p>
+<h4 id="getting-the-different-categories----omit-in-toc">Getting the different categories  <!-- omit in toc --></h4>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">→</span></span></span></span> <em><a href="https://www.lagranderecre.fr/age/">https://www.lagranderecre.fr/age/</a></em></p>
+<p><img src="file:////medias/RM_AgeList.png" alt=""></p>
+<p>Using an appropriate XPath selector, we can get the list of categories and corresponding urls:</p>
+<pre><code><code><div>const ageList = await page.$x(
+    '//div[@class=&quot;items-container&quot;]//div[@class=&quot;item&quot;]//a'
+  );
+</div></code></code></pre>
+<p>From this we can extract:</p>
+<table>
+<thead>
+<tr>
+<th>Category name</th>
+<th>Url</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JOUETS BÉBÉ 0 À 12 MOIS</td>
+<td><a href="https://www.lagranderecre.fr/1062584/jouets-be-be-0-a-12-mois.html">https://www.lagranderecre.fr/1062584/jouets-be-be-0-a-12-mois.html</a></td>
+</tr>
+<tr>
+<td>JOUETS ENFANT 1 À 3 ANS</td>
+<td><a href="https://www.lagranderecre.fr/1062589/jouets-enfant-1-a-3-ans.html">https://www.lagranderecre.fr/1062589/jouets-enfant-1-a-3-ans.html</a></td>
+</tr>
+<tr>
+<td>JOUETS ENFANT 3 À 5 ANS</td>
+<td><a href="https://www.lagranderecre.fr/1062594/jouets-enfant-3-a-5-ans.html">https://www.lagranderecre.fr/1062594/jouets-enfant-3-a-5-ans.html</a></td>
+</tr>
+<tr>
+<td>JOUETS ENFANT 6 À 8 ANS</td>
+<td><a href="https://www.lagranderecre.fr/1062599/jouets-enfant-6-a-8-ans.html">https://www.lagranderecre.fr/1062599/jouets-enfant-6-a-8-ans.html</a></td>
+</tr>
+<tr>
+<td>JOUETS ENFANT 9 À 11 ANS</td>
+<td><a href="https://www.lagranderecre.fr/1062604/jouets-enfant-9-a-11-ans.html">https://www.lagranderecre.fr/1062604/jouets-enfant-9-a-11-ans.html</a></td>
+</tr>
+<tr>
+<td>JOUETS 12 ANS ET PLUS</td>
+<td><a href="https://www.lagranderecre.fr/1062609/jouets-12-ans-et-plus.html">https://www.lagranderecre.fr/1062609/jouets-12-ans-et-plus.html</a></td>
+</tr>
+</tbody>
+</table>
+<p>Then I could iter in each Category through those urls.</p>
+<h4 id="modifying-gender-filter----omit-in-toc">Modifying gender filter  <!-- omit in toc --></h4>
+<p>First, I tried to filter gender using filter tab frow the website. With <code>puppeteer</code>, I was able to simulate a click on an element.</p>
+<p><img src="file:////medias/RM_GenderFilter.png" alt=""></p>
+<p>But after that, I realized that the delay between the click and the catalogue update was way too long and I started to collect data before this update. Then I used a little trick, I noticed that filters were displayed in clear in the url so I determined resulting url from the current one.</p>
+<table>
+<thead>
+<tr>
+<th>Gender</th>
+<th>url</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Girl</td>
+<td><span style="color:lightblue;">[current url]</span>?facetFilters%5Bf_973192%5D%5B <strong style="color:red;"> Girl </strong>%5D=1&amp;storeStockFilter=0&amp;webStoreStockFilter=1</td>
+</tr>
+<tr>
+<td>Boy</td>
+<td><span style="color:lightblue;">[current url]</span>?facetFilters%5Bf_973192%5D%5B <strong style="color:red;"> Boy </strong>%5D=1&amp;storeStockFilter=0&amp;webStoreStockFilter=1</td>
+</tr>
+<tr>
+<td>mixed</td>
+<td><span style="color:lightblue;">[current url]</span>?facetFilters%5Bf_973192%5D%5B <strong style="color:red;"> Mixte </strong>%5D=1&amp;storeStockFilter=0&amp;webStoreStockFilter=1</td>
+</tr>
+</tbody>
+</table>
+<h4 id="navigate-between-pages----omit-in-toc">Navigate between pages  <!-- omit in toc --></h4>
+<h4 id="summary----omit-in-toc">Summary <!-- omit in toc --></h4>
+
+    </body>
+    </html>
