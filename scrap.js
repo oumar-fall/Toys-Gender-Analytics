@@ -149,10 +149,6 @@ async function scrap() {
 
         /*****/
 
-        var toysList = await page.$x(
-          '//div[contains(@class, "thumbnail-product")]'
-        );
-
         var product_name_a = await page.$x(
           '//div[contains(@class, "thumbnail-product")]//a[@class = "product-name"]'
         );
@@ -161,9 +157,9 @@ async function scrap() {
           '//div[contains(@class, "thumbnail-product")]//li[contains(@class, "price-with-taxes")]//span[@class = "price-value"]'
         );
 
-        for (let toy in toysList) {
+        for (let toy in product_name_a) {
           // console.log("> > > > " + toy + " sur " + (toysList.length - 1));
-          advencementStatus.pourcentage = Math.round(100*toy/(toysList.length - 1));
+          advencementStatus.pourcentage = Math.round(100*toy/(product_name_a.length - 1));
           let newDBItem = new Object();
 
           try {
