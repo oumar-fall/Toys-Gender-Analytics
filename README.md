@@ -93,15 +93,10 @@ Now that I got all of the pages' url, the next step was to browse those pages to
 
 ![](/medias/RM_ToySection.png)
 
-```js
-var product_name_a = await page.$x(
-  '//div[contains(@class, "thumbnail-product")]//a[@class = "product-name"]'
-);
-
-var price_span = await page.$x(
-  '//div[contains(@class, "thumbnail-product")]//li[contains(@class, "price-with-taxes")]//span[@class = "price-value"]'
-);
-```
+|Field                 |XPath selector|
+|----------------------|--------------|
+|*Product names*                |```$x('//div[contains(@class, "thumbnail-product")]//a[@class = "product-name"]')```|
+|*Prices*                 |```$x('//div[contains(@class, "thumbnail-product")]//li[contains(@class, "price-with-taxes")]//span[@class = "price-value"]')```|
 
 Then, for each toy, I extracted the url of the page contained in the html ```<a>``` tags of the names and open this page in a new tab of my browser.
 
