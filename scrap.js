@@ -1,26 +1,27 @@
+/** Importing modules **/
 const puppeteer = require("puppeteer");
 const fs = require("fs");
 const request = require("request");
 const readline = require("readline");
 
+/** Defining constants **/
 const path = "./LaGrandeRecre/";
-
 const genres = ["Boy", "Girl", "Mixte"];
 
 var date = new Date();
-const _date =
+const _date = // Date in the following format "dd/mm/yyyy"
   ("0" + date.getDate()).slice(-2) +
   "/" +
   ("0" + date.getMonth()).slice(-2) +
   "/" +
   date.getFullYear();
-const _time =
+const _time = // Time in the following format "hh:mm:ss"
   ("0" + date.getHours()).slice(-2) +
   ":" +
   ("0" + date.getMinutes()).slice(-2) +
   ":" +
   ("0" + date.getSeconds()).slice(-2);
-const logFile =
+const logFile = // logFile path in the following format "logs/log_[date:ddmmyyyy]_[time:hhmmss].txt"
   path +
   "logs/log_" +
   _date.split("/").join("") +
@@ -28,13 +29,13 @@ const logFile =
   _time.split(":").join("") +
   ".txt";
 
-var partialIDs = {
+var partialIDs = { // Useful to build toys ids
   Boy: 0,
   Girl: 0,
   Mixte: 0,
 };
 
-const DB = {
+const DB = { // Initialising the database with an empty object
   0: {
     id: 0,
     nom: "None",
@@ -53,7 +54,7 @@ const DB = {
   },
 };
 
-const advencementStatus = {
+const advencementStatus = { // Keeping the current state to log the progression in the console
   "categorie" : "",
   "genre" : "",
   "page" : "",
@@ -61,12 +62,13 @@ const advencementStatus = {
   "pourcentage" : ""
 }
 
+/**Download an image from [uri] and saves it as [filename].jpg**/
 var download = function (uri, filename, callback) {
   if (!fs.existsSync(filename)) {
     request.head(uri, function (err, res, body) {
       request(uri).pipe(fs.createWriteStream(filename)).on("close", callback);
     });
-  } else {
+  } else { // If file already exists, log it in logfile and save image with a unique identifier 
     appendLog(filename, "image", "Image already exists");
     request.head(uri, function (err, res, body) {
       request(uri).pipe(fs.createWriteStream(filename+(new Date()).getTime() + ".jpg")).on("close", callback);
@@ -74,6 +76,7 @@ var download = function (uri, filename, callback) {
   }
 };
 
+/**Main function**/
 async function scrap() {
   await createLog();
 
@@ -391,6 +394,7 @@ async function scrap() {
   await browser.close();
 }
 
+/**Converts an object in .csv file**/
 var objectToCSV = function (obj) {
   var csv = Object.keys(DB[0]).join(";");
   for (let id in DB) {
@@ -399,13 +403,15 @@ var objectToCSV = function (obj) {
   return csv;
 };
 
+/**Save DB in a .json file for easy reload**/
 var saveTxt = function () {
-  fs.writeFileSync(path + "DB.txt", JSON.stringify(DB), (err) => {
+  fs.writeFileSync(path + "DB.json", JSON.stringify(DB), (err) => {
     // In case of a error throw err.
     if (err) throw err;
   });
 };
 
+/**Save DB in a .csv file**/
 var saveCSV = function () {
   fs.writeFile(path + "DB.csv", objectToCSV(DB), (err) => {
     // In case of a error throw err.
@@ -413,6 +419,7 @@ var saveCSV = function () {
   });
 };
 
+/**Append a new line in DB.csv corresponding to [newObj]**/
 var appendCSV = function (filePath, newObj) {
   let newLine = '';
 
@@ -433,6 +440,7 @@ var appendCSV = function (filePath, newObj) {
   });
 };
 
+/**Initialize log file and log starting time**/
 var createLog = function () {
   fs.appendFile(
     logFile,
@@ -447,12 +455,14 @@ var createLog = function () {
   );
 };
 
+/**Log an issue with [id] on [value] with [msg] error in the log file**/
 var appendLog = function (id, value, msg) {
   fs.appendFile(logFile, id + ">" + value + " --> " + msg + "\n\n", (err) => {
     if (err) throw err;
   });
 };
 
+/**Log end time in log file and mentionned if we stoped it Intentionally**/
 var endLog = async function (keyBoardInterrupt) {
   date = new Date();
   var keyBoardInterruptionTxt = keyBoardInterrupt ? " INTENTIONALLY " : " ";
@@ -480,6 +490,7 @@ var endLog = async function (keyBoardInterrupt) {
   process.exit();
 };
 
+/**Log the current state in the console**/
 var showAdvencement = function(){
   console.log('\033[2J');
   console.log(
@@ -490,6 +501,7 @@ var showAdvencement = function(){
     );
 }
 
+/**Detect a keyboard interruption if needed to do some actions before stopping**/
 readline.emitKeypressEvents(process.stdin);
 // process.stdin.setRawMode(true);
 process.stdin.on("keypress", (str, key) => {
