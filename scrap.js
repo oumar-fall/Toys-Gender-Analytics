@@ -339,7 +339,7 @@ async function scrap() {
             if (weight) {
               let weight_handler = await weight.getProperty("innerText");
               let weight_txt = await weight_handler.jsonValue();
-              newDBItem.weight = await weight_txt;
+              newDBItem.poids = await weight_txt;
             } else {
               newDBItem.poids = "None";
             }
