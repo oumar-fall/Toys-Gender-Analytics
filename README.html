@@ -23,37 +23,78 @@
     <body class="vscode-light">
         <h1 id="toys-database----omit-in-toc">Toys DataBase  <!-- omit in toc --></h1>
 <p>By : <em><strong>Oumar Fall</strong></em><br>
-Source : <a href="https://www.lagranderecre.fr"><em><strong>La Grande Récré</strong></em></a></p>
+Source : <a href="https://www.lagranderecre.fr"><em><strong>La Grande Récré</strong></em></a><br>
+Database : <a href="https://drive.google.com/file/d/1lp2Kl-jLG9j-Zd9zzqqSQuzpIkyASweb/view?usp=sharing"><em>Download (1.9Go)</em></a></p>
+<blockquote>
 <h2 id="table-of-content----omit-in-toc">Table of content:  <!-- omit in toc --></h2>
+</blockquote>
 <ul>
 <li><a href="#a-scraping-method">A. Scraping Method</a>
 <ul>
-<li><a href="#1-datas">1. Datas</a></li>
-<li><a href="#2-method">2. Method</a></li>
+<li><a href="#1-properties">1. Properties</a></li>
+<li><a href="#2-method">2. Method</a>
+<ul>
+<li><a href="#analysing-html-structure">Analysing html structure</a></li>
+<li><a href="#getting-the-different-categories">Getting the different categories</a></li>
+<li><a href="#modifying-gender-filter">Modifying gender filter</a></li>
+<li><a href="#navigate-between-pages">Navigate between pages</a></li>
+<li><a href="#browsing-pages">Browsing pages</a></li>
+<li><a href="#data-scrapping">Data scrapping</a></li>
+<li><a href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#b-database">B. Database</a>
+<ul>
+<li><a href="#1-properties-1">1. Properties</a></li>
+<li><a href="#2-reorganization">2. Reorganization</a></li>
+<li><a href="#3-structure">3. Structure</a></li>
 </ul>
 </li>
 </ul>
 <hr>
+<blockquote>
 <h2 id="a-scraping-method">A. Scraping Method</h2>
-<h3 id="1-datas">1. Datas</h3>
+</blockquote>
+<blockquote>
+<h3 id="1-properties">1. Properties</h3>
+</blockquote>
 <ul>
 <li><strong>Source</strong> : <em><a href="http://www.lagranderecre.fr">www.lagranderecre.fr</a></em></li>
 <li><strong>Begin</strong> : <em>29/03/2020</em> at <em>01:23:56</em></li>
 <li><strong>End</strong> : <em>29/03/2020</em> at <em>07:17:49</em></li>
+<li><strong>Code</strong> : <a href="./scrap.js">scrap.js</a></li>
 </ul>
+<blockquote>
 <h3 id="2-method">2. Method</h3>
+</blockquote>
 <p>The idea was to browse the website in order to collect as much information as possible about each toy sold on this website. I decided to code the algorithm by myself in <strong>javascript</strong> using <a href="https://pptr.dev/"><strong><code>puppeteer</code></strong></a> library. This allowed me to open an headless browser to visit webpages programmatically.</p>
 <p><a href="#Summary">    <em><sub>Skip Details and go to summary</sub></em></a></p>
-<h4 id="analysing-html-structure----omit-in-toc">Analysing html structure  <!-- omit in toc --></h4>
+<blockquote>
+<h4 id="analysing-html-structure">Analysing html structure</h4>
+</blockquote>
 <p>First, I figured out that I had to analyse the <strong>html structure</strong> of the pages to determine how to access each field. I then realized that the fields weren't organized with a unique ID for each one like I thought. Thus I had to manage it using <strong>XPath selectors</strong>.</p>
-<h4 id="getting-the-different-categories----omit-in-toc">Getting the different categories  <!-- omit in toc --></h4>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">→</span></span></span></span> <em><a href="https://www.lagranderecre.fr/age/">https://www.lagranderecre.fr/age/</a></em></p>
-<p><img src="file:////medias/RM_AgeList.png" alt=""></p>
+<blockquote>
+<h4 id="getting-the-different-categories">Getting the different categories</h4>
+</blockquote>
+<p>--&gt; <em><a href="https://www.lagranderecre.fr/age/">https://www.lagranderecre.fr/age/</a></em></p>
+<p><img src="file:////medias/RM_AgeList.png" alt="RM_AgeList"></p>
 <p>Using an appropriate XPath selector, we can get the list of categories and corresponding urls:</p>
-<pre><code><code><div>const ageList = await page.$x(
-    '//div[@class=&quot;items-container&quot;]//div[@class=&quot;item&quot;]//a'
-  );
-</div></code></code></pre>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>XPath selector</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Links</em></td>
+<td><code>$x('//div[@class=&quot;items-container&quot;]//div[@class=&quot;item&quot;]//a')</code></td>
+</tr>
+</tbody>
+</table>
 <p>From this we can extract:</p>
 <table>
 <thead>
@@ -90,9 +131,11 @@ Source : <a href="https://www.lagranderecre.fr"><em><strong>La Grande Récré</s
 </tbody>
 </table>
 <p>Then I could iter in each Category through those urls.</p>
-<h4 id="modifying-gender-filter----omit-in-toc">Modifying gender filter  <!-- omit in toc --></h4>
+<blockquote>
+<h4 id="modifying-gender-filter">Modifying gender filter</h4>
+</blockquote>
 <p>First, I tried to filter gender using filter tab frow the website. With <code>puppeteer</code>, I was able to simulate a click on an element.</p>
-<p><img src="file:////medias/RM_GenderFilter.png" alt=""></p>
+<p><img src="file:////medias/RM_GenderFilter.png" alt="RM_GenderFilter"></p>
 <p>But after that, I realized that the delay between the click and the catalogue update was way too long and I started to collect data before this update. Then I used a little trick, I noticed that filters were displayed in clear in the url so I determined resulting url from the current one.</p>
 <table>
 <thead>
@@ -116,8 +159,322 @@ Source : <a href="https://www.lagranderecre.fr"><em><strong>La Grande Récré</s
 </tr>
 </tbody>
 </table>
-<h4 id="navigate-between-pages----omit-in-toc">Navigate between pages  <!-- omit in toc --></h4>
-<h4 id="summary----omit-in-toc">Summary <!-- omit in toc --></h4>
+<blockquote>
+<h4 id="navigate-between-pages">Navigate between pages</h4>
+</blockquote>
+<p>Once again, I first tried to navigate between pages by clicking on the next button at the nottom of the page.</p>
+<p><img src="file:////medias/RM_NextPage.png" alt="RM_NextPage"></p>
+<p>But I got the same issue about charging time so I used the same trick looking for page number in the url. To do so, I had to know the total number of available pages. Inspecting the html code, I discovered that, at the bottom of each page, there was an hidden <code>&lt;span&gt;</code> that I could use to get this value:</p>
+<pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"page-count"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span> Page 1 sur 43 <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+</div></code></pre>
+<p>From there I could build the specific url for each page by adding &quot;<em>&amp;pageNumber-23=<strong>[pageNumber]</strong>#top-23</em>&quot; at its end.</p>
+<blockquote>
+<h4 id="browsing-pages">Browsing pages</h4>
+</blockquote>
+<p>Now that I got all of the pages' url, the next step was to browse those pages to isolate each toy-specific informations such as names and prices. Once again I inspected html code in order to determine the corresponding XPath selector.</p>
+<p><img src="file:////medias/RM_ToySection.png" alt="RM_ToySection"></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>XPath selector</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Product names</em></td>
+<td><code>$x('//div[contains(@class, &quot;thumbnail-product&quot;)]//a[@class = &quot;product-name&quot;]')</code></td>
+</tr>
+<tr>
+<td><em>Prices</em></td>
+<td><code>$x('//div[contains(@class, &quot;thumbnail-product&quot;)]//li[contains(@class, &quot;price-with-taxes&quot;)]//span[@class = &quot;price-value&quot;]')</code></td>
+</tr>
+</tbody>
+</table>
+<p>Then, for each toy, I extracted the url of the page contained in the html <code>&lt;a&gt;</code> tags of the names and open this page in a new tab of my browser.</p>
+<pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"product-name"</span> <span class="hljs-attr">...</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://www.lagranderecre.fr/3-mini-vehicules-city-a-friction.html"</span>&gt;</span> 3 MINI VÉHICULES CITY À FRICTION <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</div></code></pre>
+<blockquote>
+<h4 id="data-scrapping">Data scrapping</h4>
+</blockquote>
+<p>I identified the fields I wanted to extract and determined the corresponding XPath selectors.</p>
+<p><img src="file:////medias/RM_ProductPage.png" alt="RM_ProductPage"></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>XPath selector</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Images</em></td>
+<td><code>$x('//img[@class = &quot;media-visuals-main-img&quot;]')</code></td>
+</tr>
+<tr>
+<td><em>Brand</em></td>
+<td><code>$x('//div[@class = &quot;product-brand&quot;]//a')</code></td>
+</tr>
+<tr>
+<td><em>Description</em></td>
+<td><code>$x(&quot;//div[@class = 'description-container']//h4[contains(text(), 'RACONTE MOI UNE HISTOIRE')]/following-sibling::*&quot;)</code></td>
+</tr>
+<tr>
+<td><em>Security Instructions</em></td>
+<td><code>$x('//div[@class = &quot;description-container&quot;]//h4[contains(text(), &quot;SÉCURITÉ&quot;)]/following-sibling::*')</code></td>
+</tr>
+<tr>
+<td><em>Internal code</em></td>
+<td><code>$x('//*[*[contains(text(), &quot;CODE INTERNE&quot;)]]')</code></td>
+</tr>
+<tr>
+<td><em>EAN code</em></td>
+<td><code>$x('//*[*[contains(text(), &quot;CODE EAN&quot;)]]')</code></td>
+</tr>
+<tr>
+<td><em>Manufacturer reference</em></td>
+<td><code>$x('//*[*[contains(text(), &quot;RÉFÉRENCE FABRICANT&quot;)]]')</code></td>
+</tr>
+<tr>
+<td><em>Min age</em></td>
+<td><code>$x('//i[contains(@class, &quot;icon-cake&quot;)]/following-sibling::p')</code></td>
+</tr>
+<tr>
+<td><em>Dimensions</em></td>
+<td><code>$x('//i[contains(@class, &quot;icon-size&quot;)]/following-sibling::p')</code></td>
+</tr>
+<tr>
+<td><em>Weight</em></td>
+<td><code>$x('//i[contains(@class, &quot;icon-weight&quot;)]/following-sibling::p')</code></td>
+</tr>
+</tbody>
+</table>
+<p>I then collected all of this information and downloaded all of the images.</p>
+<blockquote>
+<h4 id="summary">Summary</h4>
+</blockquote>
+<p>All of the above steps can be summarized in the following diagram.</p>
+<p><img src="file:////medias/RM_ScrapingTree.png" alt="RM_ScrapingTree"></p>
+<blockquote>
+<h2 id="b-database">B. Database</h2>
+</blockquote>
+<blockquote>
+<h3 id="1-properties-1">1. Properties</h3>
+</blockquote>
+<p><strong>Total size = 1.9Go</strong><br>
+<strong>41.907 elements</strong> including <strong>41.899 images</strong></p>
+<p>The resulting Database is stored in the ./LaGrandeRecre/ folder with following architecture :</p>
+<pre><code><code><div>.
+└── LaGrandeRecre/
+    ├── Boy/
+    │   └── Boy0_0.jpg
+    ├── Girl/
+    │   └── Girl0_0.jpg
+    ├── Mixte/
+    │   └── Mixte0_0.jpg
+    ├── logs/
+    │   └── log_29032020_012356.txt
+    ├── DB.csv
+    ├── categories.csv
+    ├── marques.csv
+    └── DB.json
+</div></code></code></pre>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LaGrandeRecre/</td>
+<td>Root <strong>Folder</strong></td>
+</tr>
+<tr>
+<td>Boy/</td>
+<td><strong>Folder</strong> containing all images of toys for Boys</td>
+</tr>
+<tr>
+<td>Girl/</td>
+<td><strong>Folder</strong> containing all images of toys for Girls</td>
+</tr>
+<tr>
+<td>Mixte/</td>
+<td><strong>Folder</strong> containing all images of toys for Both</td>
+</tr>
+<tr>
+<td>logs/</td>
+<td><strong>Folder</strong> containing the log files</td>
+</tr>
+<tr>
+<td>DB.csv</td>
+<td><strong>File</strong> containing the database in csv format</td>
+</tr>
+<tr>
+<td>categories.csv</td>
+<td><em>see <a href="#3-Structure">Structure</a></em></td>
+</tr>
+<tr>
+<td>marques.csv</td>
+<td><em>see <a href="#3-Structure">Structure</a></em></td>
+</tr>
+<tr>
+<td>DB.json</td>
+<td><strong>File</strong> containing the database in json format <em>(useful to convert it in a javascript object to apply some changes)</em></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Log files are named with following structure : <em><code>log_[date]_[time].txt</code></em></li>
+<li>Image files are named with following structure : <em><code>[Toy id]_[Image indice].jpg</code></em></li>
+</ul>
+<blockquote>
+<h3 id="2-reorganization">2. Reorganization</h3>
+</blockquote>
+<p>At the end of the scraping, I had to reorganize the database for it to be clearer and to get coherence between datas.</p>
+<p>I did it in <a href="./modifyCSV.js"><em>modifyCSV.js</em></a>.</p>
+<blockquote>
+<h3 id="3-structure">3. Structure</h3>
+</blockquote>
+<p>Database is structure in 3 parts :</p>
+<ul>
+<li><strong>Images folders</strong> <em>(see <a href="#1-Properties-1">Properties</a>)</em></li>
+<li><strong>Categories table</strong> : <em>categories.csv</em></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">categorie_id</th>
+<th style="text-align:center">categorie_short_name</th>
+<th style="text-align:center">categorie_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">&quot;0_1&quot;</td>
+<td style="text-align:center">&quot;JOUETS BÉBÉ 0 À 12 MOIS&quot;</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">&quot;1_3&quot;</td>
+<td style="text-align:center">&quot;JOUETS ENFANT 1 À 3 ANS&quot;</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">&quot;3_5&quot;</td>
+<td style="text-align:center">&quot;JOUETS ENFANT 3 À 5 ANS&quot;</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">&quot;6_8&quot;</td>
+<td style="text-align:center">&quot;JOUETS ENFANT 6 À 8 ANS&quot;</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">&quot;9_11&quot;</td>
+<td style="text-align:center">&quot;JOUETS ENFANT 9 À 11 ANS&quot;</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">&quot;12_plus&quot;</td>
+<td style="text-align:center">&quot;JOUETS 12 ANS ET PLUS&quot;</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Marques table</strong> : <em>marques.csv</em></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">marque_id</th>
+<th style="text-align:center">marque_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">&quot;ABY SMILE&quot;</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">&quot;ABYSSE CORP&quot;</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">&quot;AMSCAN&quot;</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">&quot;ASMODÉE&quot;</td>
+</tr>
+<tr>
+<td style="text-align:center">...</td>
+<td style="text-align:center">...</td>
+</tr>
+<tr>
+<td style="text-align:center">101</td>
+<td style="text-align:center">&quot;None&quot;</td>
+</tr>
+<tr>
+<td style="text-align:center">...</td>
+<td style="text-align:center">...</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Database table</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:right"></th>
+<th style="text-align:center">id</th>
+<th style="text-align:center">nom</th>
+<th style="text-align:center">genre</th>
+<th style="text-align:center">prix <em>(€)</em></th>
+<th style="text-align:center">description</th>
+<th style="text-align:center">securite</th>
+<th style="text-align:center">codeInterne</th>
+<th style="text-align:center">codeEAN</th>
+<th style="text-align:center">referenceFabricant</th>
+<th style="text-align:center">ageMin <em>(années)</em></th>
+<th style="text-align:center">categorie_id</th>
+<th style="text-align:center">longueur <em>(cm)</em></th>
+<th style="text-align:center">largeur <em>(cm)</em></th>
+<th style="text-align:center">hauteur <em>(cm)</em></th>
+<th style="text-align:center">poids <em>(kg)</em></th>
+<th style="text-align:center">marque_id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"><strong>type</strong></td>
+<td style="text-align:center"><em>string</em></td>
+<td style="text-align:center"><em>string</em></td>
+<td style="text-align:center"><em>string</em></td>
+<td style="text-align:center"><em>float</em></td>
+<td style="text-align:center"><em>string</em></td>
+<td style="text-align:center"><em>string</em></td>
+<td style="text-align:center"><em>int</em></td>
+<td style="text-align:center"><em>string</em></td>
+<td style="text-align:center"><em>string</em></td>
+<td style="text-align:center"><em>float</em></td>
+<td style="text-align:center"><em>int</em></td>
+<td style="text-align:center"><em>float</em></td>
+<td style="text-align:center"><em>float</em></td>
+<td style="text-align:center"><em>float</em></td>
+<td style="text-align:center"><em>float</em></td>
+<td style="text-align:center"><em>int</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>id</strong> is created by concatenating the <em><strong>gender</strong></em> of the product and its <em><strong>indice</strong></em> among all product of this gender.<br>
+<em>e.g.</em> <code>Boy217</code></p>
 
     </body>
     </html>

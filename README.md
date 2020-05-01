@@ -1,7 +1,8 @@
 # Toys DataBase  <!-- omit in toc -->
 
 By : ***Oumar Fall***  
-Source : [***La Grande Récré***](https://www.lagranderecre.fr)
+Source : [***La Grande Récré***](https://www.lagranderecre.fr)  
+Database : [*Download (1.9Go)*](https://drive.google.com/file/d/1lp2Kl-jLG9j-Zd9zzqqSQuzpIkyASweb/view?usp=sharing)
 
 > ## Table of content:  <!-- omit in toc -->
 - [A. Scraping Method](#a-scraping-method)
@@ -27,6 +28,7 @@ Source : [***La Grande Récré***](https://www.lagranderecre.fr)
 - **Source** : *www.lagranderecre.fr*
 - **Begin** : *29/03/2020* at *01:23:56*  
 - **End** : *29/03/2020* at *07:17:49*
+- **Code** : [scrap.js](./scrap.js)
 
 >### 2. Method
 The idea was to browse the website in order to collect as much information as possible about each toy sold on this website. I decided to code the algorithm by myself in **javascript** using [**```puppeteer```**](https://pptr.dev/) library. This allowed me to open an headless browser to visit webpages programmatically.
@@ -39,7 +41,7 @@ First, I figured out that I had to analyse the **html structure** of the pages t
 >#### Getting the different categories
 --> *https://www.lagranderecre.fr/age/*
 
-![](/medias/RM_AgeList.png)
+![RM_AgeList](/medias/RM_AgeList.png)
 
 Using an appropriate XPath selector, we can get the list of categories and corresponding urls:
 
@@ -65,7 +67,7 @@ Then I could iter in each Category through those urls.
 >#### Modifying gender filter
 First, I tried to filter gender using filter tab frow the website. With ```puppeteer```, I was able to simulate a click on an element.
 
-![](/medias/RM_GenderFilter.png)
+![RM_GenderFilter](/medias/RM_GenderFilter.png)
 
 But after that, I realized that the delay between the click and the catalogue update was way too long and I started to collect data before this update. Then I used a little trick, I noticed that filters were displayed in clear in the url so I determined resulting url from the current one.
 
@@ -79,7 +81,7 @@ But after that, I realized that the delay between the click and the catalogue up
 
 Once again, I first tried to navigate between pages by clicking on the next button at the nottom of the page.
 
-![](/medias/RM_NextPage.png)
+![RM_NextPage](/medias/RM_NextPage.png)
 
 But I got the same issue about charging time so I used the same trick looking for page number in the url. To do so, I had to know the total number of available pages. Inspecting the html code, I discovered that, at the bottom of each page, there was an hidden ``` <span> ``` that I could use to get this value:
 
@@ -95,7 +97,7 @@ From there I could build the specific url for each page by adding "*&pageNumber-
 
 Now that I got all of the pages' url, the next step was to browse those pages to isolate each toy-specific informations such as names and prices. Once again I inspected html code in order to determine the corresponding XPath selector.
 
-![](/medias/RM_ToySection.png)
+![RM_ToySection](/medias/RM_ToySection.png)
 
 |Field                 |XPath selector|
 |----------------------|--------------|
@@ -112,7 +114,7 @@ Then, for each toy, I extracted the url of the page contained in the html ```<a>
 
 I identified the fields I wanted to extract and determined the corresponding XPath selectors.
 
-![](/medias/RM_ProductPage.png)
+![RM_ProductPage](/medias/RM_ProductPage.png)
 
 |Field                 |XPath selector|
 |----------------------|--------------|
@@ -133,7 +135,7 @@ I then collected all of this information and downloaded all of the images.
 
 All of the above steps can be summarized in the following diagram.
 
-![](/medias/RM_ScrapingTree.png)
+![RM_ScrapingTree](/medias/RM_ScrapingTree.png)
 
 >## B. Database
 
@@ -214,17 +216,10 @@ Database is structure in 3 parts :
 
 * **Database table**
 
-|| id | nom | genre | prix *(€)* | description | securite | codeInterne | codeEAN | referenceFabricant 
-|-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|**type**| *string* | *string* | *string* | *float* | *string* | *string* | *int* | *string* | *string* |
-
-<br>
-<br>
-
-
-|| ageMin *(années)*| categorie_id | longueur *(cm)* | largeur *(cm)* | hauteur *(cm)* | poids *(kg)* | marque_id |
-|-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|**type**| *float* | *int* | *float* | *float* | *float* | *float* | *int* |
+|| id | nom | genre | prix *(€)* | description | securite | codeInterne | codeEAN | referenceFabricant | ageMin *(années)*| categorie_id | longueur *(cm)* | largeur *(cm)* | hauteur *(cm)* | poids *(kg)* | marque_id |
+|-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|**type**| *string* | *string* | *string* | *float* | *string* | *string* | *int* | *string* | *string*  | *float* | *int* | *float* | *float* | *float* | *float* | *int* |
+ 
 
 **id** is created by concatenating the ***gender*** of the product and its ***indice*** among all product of this gender.  
 *e.g.* ```Boy217```
