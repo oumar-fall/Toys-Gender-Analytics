@@ -16,7 +16,7 @@ Source : [***La Grande Récré***](https://www.lagranderecre.fr)
     - [Summary](#summary)
 - [B. Database](#b-database)
   - [1. Properties](#1-properties-1)
-  - [2. Datas](#2-datas)
+  - [2. Reorganization](#2-reorganization)
   - [3. Structure](#3-structure)
 
 <hr>
@@ -176,11 +176,12 @@ The resulting Database is stored in the ./LaGrandeRecre/ folder with following a
 * Log files are named with following structure : *```log_[date]_[time].txt```*
 * Image files are named with following structure : *```[Toy id]_[Image indice].jpg```*
 
->### 2.Reorganization
+>### 2. Reorganization
 
 At the end of the scraping, I had to reorganize the database for it to be clearer and to get coherence between datas.
 
-I did it in *modifyCSV.js*.
+I did it in [*modifyCSV.js*](./modifyCSV.js).
+
 
 >### 3. Structure
 
