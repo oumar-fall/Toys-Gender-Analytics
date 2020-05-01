@@ -216,9 +216,9 @@ Database is structure in 3 parts :
 
 * **Database table**
 
-|| id | nom | genre | prix *(€)* | description | securite | codeInterne | codeEAN | referenceFabricant | ageMin *(années)*| categorie_id | longueur *(cm)* | largeur *(cm)* | hauteur *(cm)* | poids *(kg)* | marque_id |
-|-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|**type**| *string* | *string* | *string* | *float* | *string* | *string* | *int* | *string* | *string*  | *float* | *int* | *float* | *float* | *float* | *float* | *int* |
+|        |    id    |   nom    |  genre   | prix *(€)* | description | securite | codeInterne | codeEAN  | referenceFabricant | ageMin *(années)*| categorie_id | longueur *(cm)* | largeur *(cm)* | hauteur *(cm)* | poids *(kg)* | marque_id |
+|:------:|:--------:|:--------:|:--------:|:----------:|:-----------:|:--------:|:-----------:|:--------:|:------------------:|:----------------:|:------------:|:---------------:|:--------------:|:--------------:|:------------:|:---------:|
+|**type**| *string* | *string* | *string* |  *float*   |  *string*   | *string* |    *int*    | *string* |     *string*       |     *float*      |    *int*     |     *float*     |    *float*     |    *float*     |   *float*    |   *int*   |
  
 
 **id** is created by concatenating the ***gender*** of the product and its ***indice*** among all product of this gender.  
