@@ -2,7 +2,7 @@
 
 By : ***Oumar Fall***  
 Source : [***La Grande Récré***](https://www.lagranderecre.fr)  
-Database : [*Download (1.9Go)*](https://drive.google.com/file/d/1lp2Kl-jLG9j-Zd9zzqqSQuzpIkyASweb/view?usp=sharing)
+Database : [*Download (1.9Go)*](https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstCq9KEFg)
 
 > ## Table of content:  <!-- omit in toc -->
 - [A. Scraping Method](#a-scraping-method)
@@ -28,7 +28,7 @@ Database : [*Download (1.9Go)*](https://drive.google.com/file/d/1lp2Kl-jLG9j-Zd9
 - **Source** : *www.lagranderecre.fr*
 - **Begin** : *29/03/2020* at *01:23:56*  
 - **End** : *29/03/2020* at *07:17:49*
-- **Code** : [scrap.js](./scrap.js)
+- **Code** : [scrap_LGR.js](./scrap_LGR.js)
 
 >### 2. Method
 The idea was to browse the website in order to collect as much information as possible about each toy sold on this website. I decided to code the algorithm by myself in **javascript** using [**```puppeteer```**](https://pptr.dev/) library. This allowed me to open an headless browser to visit webpages programmatically.
@@ -182,7 +182,7 @@ The resulting Database is stored in the ./LaGrandeRecre/ folder with following a
 
 At the end of the scraping, I had to reorganize the database for it to be clearer and to get coherence between datas.
 
-I did it in [*modifyCSV.js*](./modifyCSV.js).
+I did it in [*modifyCSV_LGR.js*](./modifyCSV_LGR.js).
 
 
 >### 3. Structure
