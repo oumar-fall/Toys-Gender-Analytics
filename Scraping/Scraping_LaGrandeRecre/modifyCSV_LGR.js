@@ -36,7 +36,7 @@ const categories_id = {
   "JOUETS 12 ANS ET PLUS": 5,
 };
 
-const securityNoneValues = [];
+var securityNoneValues = [];
 const marques = [];
 
 var correct_categorie = function (jouet) {
@@ -92,7 +92,7 @@ var correct_marque = function (jouet) {
 };
 
 var analyse_securite = function (database) {
-  var candidates = {};
+  /*var candidates = {};
   for (let id_jouet in database) {
     let jouet = database[id_jouet];
     if (jouet.securite.length < 50) {
@@ -103,47 +103,11 @@ var analyse_securite = function (database) {
     }
   }
 
-  var sortable_candidates = [];
+  fs.writeFileSync("./securityNoneValues.json", JSON.stringify(candidates));*/
 
-  for (let securite in candidates) {
-    sortable_candidates.push([securite, candidates[securite]]);
-  }
+  //From there I determined all of the values equivalent to "None" and keeped that in securityNoneValues.json
 
-  sortable_candidates.sort(function (a, b) {
-    return b[1] - a[1];
-  });
-
-  //From there I determined all of the values equivalent to "None"
-
-  var securityNoneValuesIDs = [
-    0,
-    1,
-    4,
-    5,
-    6,
-    7,
-    11,
-    12,
-    15,
-    16,
-    22,
-    47,
-    55,
-    60,
-    61,
-    76,
-    80,
-    88,
-    90,
-    113,
-    116,
-  ];
-
-  securityNoneValues.length = 0;
-
-  for (let id of securityNoneValuesIDs) {
-    securityNoneValues.push(sortable_candidates[id][0]);
-  }
+  securityNoneValues = Object.keys(JSON.parse(fs.readFileSync("./securityNoneValues.json")));
 };
 
 var analyse_marques = function (database) {

@@ -43,6 +43,13 @@ Database : <a href="https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstC
 <li><a href="#summary">Summary</a></li>
 </ul>
 </li>
+<li><a href="#3-limitations">3. Limitations</a>
+<ul>
+<li><a href="#observations">Observations</a></li>
+<li><a href="#tests">Tests</a></li>
+<li><a href="#solutions">Solutions</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#b-database">B. Database</a>
@@ -257,6 +264,25 @@ Database : <a href="https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstC
 </blockquote>
 <p>All of the above steps can be summarized in the following diagram.</p>
 <p><img src="file:////medias/RM_ScrapingTree.png" alt="RM_ScrapingTree"></p>
+<blockquote>
+<h3 id="3-limitations">3. Limitations</h3>
+</blockquote>
+<p>However, I assume that this method may have some defaults.</p>
+<blockquote>
+<h4 id="observations">Observations</h4>
+</blockquote>
+<p>In fact, when checking briefly the <em>DB.csv</em> file, I noticed that some entries appeared 2, 3 or even 4 times. And what's even more intriguing is that there are some sequences of entries that are repeating themselves. From there, I began to think about the possible reasons for that.</p>
+<p>First, it could be the structure of the internal database of the website that's containing several times the same entries. In this case I can't do anything but taking them in consideration or filtering them using their internal reference.</p>
+<p>The second reason is much less pleasant because it would be due to a problem in my scraping method. In fact, because I'm navigating between pages using only their urls, there could be issues with the order objects are given. If this order isn't fixed, it is possible that it changes between each page and this would explain why I've got several times the same entries or sequences. In this case, A much more important issue is that I'm probably missing some entries.</p>
+<blockquote>
+<h4 id="tests">Tests</h4>
+</blockquote>
+<p>In order to verify my assumptions, I decided to build a quite simply test. The idea was to scrap the website a second time (without images for memory reasons) and to compare both databases to see if the entries were the same.</p>
+<p>Unfortunately, I saw quite quickly that the two resulting databases were different. This could be due to my problem but it also could be due to a database update in between (a week passed between both) but it's more likely to be due to my problem.</p>
+<blockquote>
+<h4 id="solutions">Solutions</h4>
+</blockquote>
+<p>Therefore I searched some solutions in order to solve this issue and the first one that came to me is to force the ordering of the entries in an alphabetic order for instance. Therefore I decided to scrap the website again applying this modification.</p>
 <blockquote>
 <h2 id="b-database">B. Database</h2>
 </blockquote>

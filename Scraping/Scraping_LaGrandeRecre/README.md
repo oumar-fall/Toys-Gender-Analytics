@@ -15,6 +15,10 @@ Database : [*Download (1.9Go)*](https://drive.google.com/open?id=1i_q4RZ_1FFNXxM
     - [Browsing pages](#browsing-pages)
     - [Data scrapping](#data-scrapping)
     - [Summary](#summary)
+  - [3. Limitations](#3-limitations)
+    - [Observations](#observations)
+    - [Tests](#tests)
+    - [Solutions](#solutions)
 - [B. Database](#b-database)
   - [1. Properties](#1-properties-1)
   - [2. Reorganization](#2-reorganization)
@@ -77,6 +81,8 @@ But after that, I realized that the delay between the click and the catalogue up
 |Boy| <span style="color:lightblue;">[current url]</span>?facetFilters%5Bf_973192%5D%5B <strong style="color:red;"> Boy </strong>%5D=1&storeStockFilter=0&webStoreStockFilter=1
 |mixed| <span style="color:lightblue;">[current url]</span>?facetFilters%5Bf_973192%5D%5B <strong style="color:red;"> Mixte </strong>%5D=1&storeStockFilter=0&webStoreStockFilter=1
 
+Then I change the value of *webStoreStockFilter* to **0** (*see [Limitations](#3-limitations)*)
+
 >#### Navigate between pages
 
 Once again, I first tried to navigate between pages by clicking on the next button at the nottom of the page.
@@ -92,6 +98,10 @@ But I got the same issue about charging time so I used the same trick looking fo
 ```
 
 From there I could build the specific url for each page by adding "*&pageNumber-23=**[pageNumber]**#top-23*" at its end.
+
+I also added "*&sortBy-23=title.asc*" before "*#top-23*" (*see [Limitations](#3-limitations)*)
+
+
 
 >#### Browsing pages
 
@@ -136,6 +146,26 @@ I then collected all of this information and downloaded all of the images.
 All of the above steps can be summarized in the following diagram.
 
 ![RM_ScrapingTree](/medias/RM_ScrapingTree.png)
+
+>### 3. Limitations
+However, I assume that this method may have some defaults.
+>#### Observations
+* In fact, when checking briefly the *DB.csv* file, I noticed that some entries appeared 2, 3 or even 4 times. And what's even more intriguing is that there are some sequences of entries that are repeating themselves. From there, I began to think about the possible reasons for that. 
+  * First, it could be the structure of the internal database of the website that's containing several times the same entries. In this case I can't do anything but taking them in consideration or filtering them using their internal reference.
+  * The second reason is much less pleasant because it would be due to a problem in my scraping method. In fact, because I'm navigating between pages using only their urls, there could be issues with the order objects are given. If this order isn't fixed, it is possible that it changes between each page and this would explain why I've got several times the same entries or sequences. In this case, A much more important issue is that I'm probably missing some entries.
+* Another thing that I noticed is that I was only focusing on available toys. Therefore, I was missing a huge part of the database.
+
+
+
+
+>#### Tests
+In order to verify my assumptions, I decided to build a quite simply test. The idea was to scrap the website a second time (without images for memory reasons) and to compare both databases to see if the entries were the same.
+
+Unfortunately, I saw quite quickly that the two resulting databases were different. This could be due to my problem but it also could be due to a database update in between (a week passed between both and like I mentioned before, I was only focusing on availbale toys) but it's more likely to be due to my problem.
+
+>#### Solutions
+Therefore I searched some solutions in order to solve this issue and the first one that came to me is to force the ordering of the entries in an alphabetic order for instance (add ***sortBy-23=title.asc*** in the url). What's more, I found how to get all of the toys and not only the available ones (I had to change the *webStoreStockFilter* value to **0** in the url). Therefore I decided to scrap the website again applying this modification.
+
 
 >## B. Database
 

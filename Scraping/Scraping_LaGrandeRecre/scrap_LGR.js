@@ -118,7 +118,7 @@ async function scrap() {
         age.href +
           "?facetFilters%5Bf_973192%5D%5B" +
           genre.toLowerCase() +
-          "%5D=1&storeStockFilter=0&webStoreStockFilter=1"
+          "%5D=1&storeStockFilter=0&webStoreStockFilter=0"
       );
 
       // await console.log("> > " + genre);
@@ -141,10 +141,10 @@ async function scrap() {
           age.href +
             "?facetFilters%5Bf_973192%5D%5B" +
             genre.toLowerCase() +
-            "%5D=1&storeStockFilter=0&webStoreStockFilter=1" +
+            "%5D=1&storeStockFilter=0&webStoreStockFilter=0" +
             "&pageNumber-23=" +
             id_page +
-            "#top-23"
+            "&sortBy-23=title.asc#top-23"
         );
         // await console.log("> > > Page " + id_page);
         advencementStatus.page = id_page;
@@ -383,7 +383,7 @@ async function scrap() {
         age.href +
           "?facetFilters%5Bf_973192%5D%5B" +
           genres[id_genre].toLowerCase() +
-          "%5D=1&storeStockFilter=0&webStoreStockFilter=1"
+          "%5D=1&storeStockFilter=0&webStoreStockFilter=0"
       );
     }
   }
@@ -442,7 +442,7 @@ var appendCSV = function (filePath, newObj) {
 
 /**Initialize log file and log starting time**/
 var createLog = function () {
-  fs.appendFile(
+  fs.writeFileSync(
     logFile,
     "Scraping started on " +
       _date +
