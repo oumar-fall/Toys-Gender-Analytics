@@ -191,6 +191,9 @@ async function scrap() {
             let price_handler = await price_span[toy].getProperty("innerText");
             let price_txt = await price_handler.jsonValue();
             newDBItem.prix = parseFloat(price_txt.replace(",", "."));
+            if (Number.isNaN(newDBItem.prix)){
+              newDBItem.prix = "None";
+            }
           } catch (err) {
             appendLog(newDBItem.id, "prix", err);
             newDBItem.prix = "%Error%";
@@ -239,11 +242,16 @@ async function scrap() {
               '//div[@class = "description-container"]//h4[contains(text(), "SÉCURITÉ")]/following-sibling::*'
             );
 
-            let product_securite_handler = await product_securite_p.getProperty(
-              "innerText"
-            );
-            newDBItem.securite = await product_securite_handler.jsonValue();
-            if (newDBItem.securite === "") {
+            if (product_securite_p){
+                let product_securite_handler = await product_securite_p.getProperty(
+                "innerText"
+              );
+              newDBItem.securite = await product_securite_handler.jsonValue();
+              if (newDBItem.securite === "") {
+                newDBItem.securite = "None";
+              }
+            }
+            else {
               newDBItem.securite = "None";
             }
           } catch (err) {

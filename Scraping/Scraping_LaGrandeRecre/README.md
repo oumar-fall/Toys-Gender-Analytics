@@ -2,7 +2,7 @@
 
 By : ***Oumar Fall***  
 Source : [***La Grande Récré***](https://www.lagranderecre.fr)  
-Database : [*Download (1.9Go)*](https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstCq9KEFg)
+Database : [*Download (7.9Go)*](https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstCq9KEFg)
 
 > ## Table of content:  <!-- omit in toc -->
 - [A. Scraping Method](#a-scraping-method)
@@ -30,8 +30,8 @@ Database : [*Download (1.9Go)*](https://drive.google.com/open?id=1i_q4RZ_1FFNXxM
 
 >### 1. Properties
 - **Source** : *www.lagranderecre.fr*
-- **Begin** : *29/03/2020* at *01:23:56*  
-- **End** : *29/03/2020* at *07:17:49*
+- **Begin** : *10/04/2020* at *00:01:32*  
+- **End** : *11/04/2020* at *02:56:12*
 - **Code** : [scrap_LGR.js](./scrap_LGR.js)
 
 >### 2. Method
@@ -166,13 +166,13 @@ Unfortunately, I saw quite quickly that the two resulting databases were differe
 >#### Solutions
 Therefore I searched some solutions in order to solve this issue and the first one that came to me is to force the ordering of the entries in an alphabetic order for instance (add ***sortBy-23=title.asc*** in the url). What's more, I found how to get all of the toys and not only the available ones (I had to change the *webStoreStockFilter* value to **0** in the url). Therefore I decided to scrap the website again applying this modification.
 
-
+With this modifications, both problems mentioned above seemed to disapear!
 >## B. Database
 
 >### 1. Properties
 
-**Total size = 1.9Go**  
-**41.907 elements** including **41.899 images**
+**Total size = 8.3Go**  
+**178,872 elements** including **178,860 images**
 
 The resulting Database is stored in the ./LaGrandeRecre/ folder with following architecture :
 
@@ -186,7 +186,7 @@ The resulting Database is stored in the ./LaGrandeRecre/ folder with following a
     ├── Mixte/
     │   └── Mixte0_0.jpg
     ├── logs/
-    │   └── log_29032020_012356.txt
+    │   └── log_11042020_013234.txt
     ├── DB.csv
     ├── categories.csv
     ├── marques.csv
@@ -213,6 +213,7 @@ The resulting Database is stored in the ./LaGrandeRecre/ folder with following a
 At the end of the scraping, I had to reorganize the database for it to be clearer and to get coherence between datas.
 
 I did it in [*modifyCSV_LGR.js*](./modifyCSV_LGR.js).
+*(I also used some find/replace manipulations to solve some interpretation issues due to some particular values in the csv file)*
 
 
 >### 3. Structure
@@ -236,12 +237,11 @@ Database is structure in 3 parts :
 
 | marque_id    | marque_name |
 |:------------:|:-----------:|
-|0             |"ABY SMILE"  |
-|1             |"ABYSSE CORP"|
-|2             |"AMSCAN"     |
-|3             |"ASMODÉE"    |
+|0             |"AB LUDIS"   |
+|1             |"ABY SMILE"  |
+|2             |"ABY STYLE"  |
 |...           |...          |
-|101           |"None"       |
+|177           |"None"       |
 |...           |...          |
 
 * **Database table**

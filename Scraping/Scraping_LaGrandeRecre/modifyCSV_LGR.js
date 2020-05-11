@@ -45,7 +45,7 @@ var correct_categorie = function (jouet) {
 };
 
 var correct_ageMin = function (jouet) {
-    if (jouet.ageMin && jouet.ageMin != 'None'){
+    if (jouet.ageMin && jouet.ageMin != "None"){
         var ageMin = parseInt((jouet.ageMin).match(/[0-9]+/)[0]);
         if (jouet.ageMin.toLowerCase().includes("mois")){
             ageMin = ageMin/12;
@@ -91,6 +91,12 @@ var correct_marque = function (jouet) {
     }
 };
 
+var correct_price = function(jouet){
+  if (jouet.prix && jouet.prix !== "None"){
+    jouet.prix = parseFloat(jouet.prix);
+  }
+}
+
 var analyse_securite = function (database) {
   /*var candidates = {};
   for (let id_jouet in database) {
@@ -135,6 +141,7 @@ var createNewCSV = function () {
     correct_poids(obj[id_jouet]);
     correct_securite(obj[id_jouet]);
     correct_marque(obj[id_jouet])
+    correct_price(obj[id_jouet]);
     appendCSV("./LaGrandeRecre/newDB.csv", obj[id_jouet]);
   }
 };

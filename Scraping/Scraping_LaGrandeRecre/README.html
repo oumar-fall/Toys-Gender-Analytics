@@ -24,7 +24,7 @@
         <h1 id="toys-database----omit-in-toc">Toys DataBase  <!-- omit in toc --></h1>
 <p>By : <em><strong>Oumar Fall</strong></em><br>
 Source : <a href="https://www.lagranderecre.fr"><em><strong>La Grande Récré</strong></em></a><br>
-Database : <a href="https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstCq9KEFg"><em>Download (1.9Go)</em></a></p>
+Database : <a href="https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstCq9KEFg"><em>Download (7.9Go)</em></a></p>
 <blockquote>
 <h2 id="table-of-content----omit-in-toc">Table of content:  <!-- omit in toc --></h2>
 </blockquote>
@@ -69,8 +69,8 @@ Database : <a href="https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstC
 </blockquote>
 <ul>
 <li><strong>Source</strong> : <em><a href="http://www.lagranderecre.fr">www.lagranderecre.fr</a></em></li>
-<li><strong>Begin</strong> : <em>29/03/2020</em> at <em>01:23:56</em></li>
-<li><strong>End</strong> : <em>29/03/2020</em> at <em>07:17:49</em></li>
+<li><strong>Begin</strong> : <em>10/04/2020</em> at <em>00:01:32</em></li>
+<li><strong>End</strong> : <em>11/04/2020</em> at <em>02:56:12</em></li>
 <li><strong>Code</strong> : <a href="./scrap_LGR.js">scrap_LGR.js</a></li>
 </ul>
 <blockquote>
@@ -166,6 +166,7 @@ Database : <a href="https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstC
 </tr>
 </tbody>
 </table>
+<p>Then I change the value of <em>webStoreStockFilter</em> to <strong>0</strong> (<em>see <a href="#3-limitations">Limitations</a></em>)</p>
 <blockquote>
 <h4 id="navigate-between-pages">Navigate between pages</h4>
 </blockquote>
@@ -177,6 +178,7 @@ Database : <a href="https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstC
 <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
 </div></code></pre>
 <p>From there I could build the specific url for each page by adding &quot;<em>&amp;pageNumber-23=<strong>[pageNumber]</strong>#top-23</em>&quot; at its end.</p>
+<p>I also added &quot;<em>&amp;sortBy-23=title.asc</em>&quot; before &quot;<em>#top-23</em>&quot; (<em>see <a href="#3-limitations">Limitations</a></em>)</p>
 <blockquote>
 <h4 id="browsing-pages">Browsing pages</h4>
 </blockquote>
@@ -271,26 +273,33 @@ Database : <a href="https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstC
 <blockquote>
 <h4 id="observations">Observations</h4>
 </blockquote>
-<p>In fact, when checking briefly the <em>DB.csv</em> file, I noticed that some entries appeared 2, 3 or even 4 times. And what's even more intriguing is that there are some sequences of entries that are repeating themselves. From there, I began to think about the possible reasons for that.</p>
-<p>First, it could be the structure of the internal database of the website that's containing several times the same entries. In this case I can't do anything but taking them in consideration or filtering them using their internal reference.</p>
-<p>The second reason is much less pleasant because it would be due to a problem in my scraping method. In fact, because I'm navigating between pages using only their urls, there could be issues with the order objects are given. If this order isn't fixed, it is possible that it changes between each page and this would explain why I've got several times the same entries or sequences. In this case, A much more important issue is that I'm probably missing some entries.</p>
+<ul>
+<li>In fact, when checking briefly the <em>DB.csv</em> file, I noticed that some entries appeared 2, 3 or even 4 times. And what's even more intriguing is that there are some sequences of entries that are repeating themselves. From there, I began to think about the possible reasons for that.
+<ul>
+<li>First, it could be the structure of the internal database of the website that's containing several times the same entries. In this case I can't do anything but taking them in consideration or filtering them using their internal reference.</li>
+<li>The second reason is much less pleasant because it would be due to a problem in my scraping method. In fact, because I'm navigating between pages using only their urls, there could be issues with the order objects are given. If this order isn't fixed, it is possible that it changes between each page and this would explain why I've got several times the same entries or sequences. In this case, A much more important issue is that I'm probably missing some entries.</li>
+</ul>
+</li>
+<li>Another thing that I noticed is that I was only focusing on available toys. Therefore, I was missing a huge part of the database.</li>
+</ul>
 <blockquote>
 <h4 id="tests">Tests</h4>
 </blockquote>
 <p>In order to verify my assumptions, I decided to build a quite simply test. The idea was to scrap the website a second time (without images for memory reasons) and to compare both databases to see if the entries were the same.</p>
-<p>Unfortunately, I saw quite quickly that the two resulting databases were different. This could be due to my problem but it also could be due to a database update in between (a week passed between both) but it's more likely to be due to my problem.</p>
+<p>Unfortunately, I saw quite quickly that the two resulting databases were different. This could be due to my problem but it also could be due to a database update in between (a week passed between both and like I mentioned before, I was only focusing on availbale toys) but it's more likely to be due to my problem.</p>
 <blockquote>
 <h4 id="solutions">Solutions</h4>
 </blockquote>
-<p>Therefore I searched some solutions in order to solve this issue and the first one that came to me is to force the ordering of the entries in an alphabetic order for instance. Therefore I decided to scrap the website again applying this modification.</p>
+<p>Therefore I searched some solutions in order to solve this issue and the first one that came to me is to force the ordering of the entries in an alphabetic order for instance (add <em><strong>sortBy-23=title.asc</strong></em> in the url). What's more, I found how to get all of the toys and not only the available ones (I had to change the <em>webStoreStockFilter</em> value to <strong>0</strong> in the url). Therefore I decided to scrap the website again applying this modification.</p>
+<p>With this modifications, both problems mentioned above seemed to disapear!</p>
 <blockquote>
 <h2 id="b-database">B. Database</h2>
 </blockquote>
 <blockquote>
 <h3 id="1-properties-1">1. Properties</h3>
 </blockquote>
-<p><strong>Total size = 1.9Go</strong><br>
-<strong>41.907 elements</strong> including <strong>41.899 images</strong></p>
+<p><strong>Total size = 8.3Go</strong><br>
+<strong>178,872 elements</strong> including <strong>178,860 images</strong></p>
 <p>The resulting Database is stored in the ./LaGrandeRecre/ folder with following architecture :</p>
 <pre><code><code><div>.
 └── LaGrandeRecre/
@@ -301,7 +310,7 @@ Database : <a href="https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstC
     ├── Mixte/
     │   └── Mixte0_0.jpg
     ├── logs/
-    │   └── log_29032020_012356.txt
+    │   └── log_11042020_013234.txt
     ├── DB.csv
     ├── categories.csv
     ├── marques.csv
@@ -361,7 +370,8 @@ Database : <a href="https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstC
 <h3 id="2-reorganization">2. Reorganization</h3>
 </blockquote>
 <p>At the end of the scraping, I had to reorganize the database for it to be clearer and to get coherence between datas.</p>
-<p>I did it in <a href="./modifyCSV_LGR.js"><em>modifyCSV_LGR.js</em></a>.</p>
+<p>I did it in <a href="./modifyCSV_LGR.js"><em>modifyCSV_LGR.js</em></a>.
+<em>(I also used some find/replace manipulations to solve some interpretation issues due to some particular values in the csv file)</em></p>
 <blockquote>
 <h3 id="3-structure">3. Structure</h3>
 </blockquote>
@@ -424,26 +434,22 @@ Database : <a href="https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstC
 <tbody>
 <tr>
 <td style="text-align:center">0</td>
-<td style="text-align:center">&quot;ABY SMILE&quot;</td>
+<td style="text-align:center">&quot;AB LUDIS&quot;</td>
 </tr>
 <tr>
 <td style="text-align:center">1</td>
-<td style="text-align:center">&quot;ABYSSE CORP&quot;</td>
+<td style="text-align:center">&quot;ABY SMILE&quot;</td>
 </tr>
 <tr>
 <td style="text-align:center">2</td>
-<td style="text-align:center">&quot;AMSCAN&quot;</td>
-</tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">&quot;ASMODÉE&quot;</td>
+<td style="text-align:center">&quot;ABY STYLE&quot;</td>
 </tr>
 <tr>
 <td style="text-align:center">...</td>
 <td style="text-align:center">...</td>
 </tr>
 <tr>
-<td style="text-align:center">101</td>
+<td style="text-align:center">177</td>
 <td style="text-align:center">&quot;None&quot;</td>
 </tr>
 <tr>
