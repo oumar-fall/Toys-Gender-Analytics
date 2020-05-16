@@ -1,0 +1,9 @@
+header, div, nav, footer {
+    border:solid black 0.1px;
+}
+
+.temporary-indicator{
+    display: block;
+    font-size: 50px;
+    margin: 0;
+}
