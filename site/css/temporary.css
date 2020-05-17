@@ -1,3 +1,8 @@
 header, section, nav, footer, main {
     border:dashed black 1px;
 }
+
+.container {
+    font-size: 50px;
+    font-style: italic;
+}

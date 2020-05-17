@@ -1,0 +1,17 @@
+[
+    {
+        "name" : "Project",
+        "show" : "showProject()",
+        "img" : "medias/project.svg"
+    }, 
+    {
+        "name" : "Visualization",
+        "show" : "showVisualization()",
+        "img" : "medias/visualizations.svg"
+    }, 
+    {
+        "name" : "Toy Classifier",
+        "show" : "showClassifier()",
+        "img" : "medias/classifier.svg"
+    }
+]
