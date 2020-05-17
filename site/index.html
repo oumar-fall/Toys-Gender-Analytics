@@ -9,26 +9,33 @@
 </head>
 <body>
     <header>
-        <h1 class="temporary-indicator">TITLE</h1>
+        <h1 class="temporary temporary-indicator">TITLE</h1>
     </header>
     <main>
-        <section class="main-left">
-            <div class="nav-spacer"></div>
-            <nav class="main-nav">
-                <h1 class="temporary-indicator">NAV</h1>
-            </nav>
-        </section>
-        <section class="main-right">
-            <nav class="secondary-nav">
-                <h1 class="temporary-indicator">SECONDARY NAV</h1>
-            </nav>
-            <section class="container">
-                <h1 class="temporary-indicator">CONTAINER</h1>
-            </section>
+        <nav class="main-nav">
+            <h1 class="temporary temporary-indicator">NAV</h1>
+        </nav>
+        <nav class="secondary-nav">
+            <h1 class="temporary temporary-indicator">SECONDARY NAV</h1>
+        </nav>
+        <section class="container">
+            <h1 class="temporary temporary-indicator">CONTAINER</h1>
         </section>
     </main>
     <footer>
-        <h1 class="temporary-indicator">FOOTER</h1>
+        <h1 class="temporary temporary-indicator">FOOTER</h1>
     </footer>
+    <script>
+        const main_nav_btns = ["Project", "Visualizations", "Toy Classifier"];
+        let [main_nav] = document.getElementsByClassName('main-nav');
+        let size = parseInt(getComputedStyle(main_nav).width)*0.5 + "px";
+        for (let btn_name of main_nav_btns){
+            let btn = document.createElement("span");
+            btn.style.width = size;
+            btn.style.height = size;
+            btn.className = "button round-btn";
+;            main_nav.appendChild(btn);
+        }
+    </script>
 </body>
 </html>

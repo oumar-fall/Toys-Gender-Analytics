@@ -1,9 +1,17 @@
-header, section, nav, footer {
-    border:solid black 0.1px;
+header, section, nav, footer, main {
+    border:solid black 1px;
+}
+
+.temporary {
+    display: block;
 }
 
 .temporary-indicator{
-    display: block;
+    display: none;
     font-size: 50px;
     margin: 0;
+}
+
+.button {
+    border : solid black 1px;
 }
