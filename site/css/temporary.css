@@ -1,17 +1,3 @@
 header, section, nav, footer, main {
-    border:solid black 1px;
-}
-
-.temporary {
-    display: block;
-}
-
-.temporary-indicator{
-    display: none;
-    font-size: 50px;
-    margin: 0;
-}
-
-.button {
-    border : solid black 1px;
+    border:dashed black 1px;
 }
