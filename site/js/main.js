@@ -9,6 +9,8 @@ const [main_nav] = document.getElementsByClassName('main-nav');
 const [secondary_nav] = document.getElementsByClassName('secondary-nav');
 const [container] = document.getElementsByClassName("container");
 
+var rollSecondaryNavLocked = false;
+
 function init(){
     if (w >= h){
         main.style.height = h + "px";
@@ -67,11 +69,26 @@ function generate_secondaryNav(path) {
     request.responseType = 'json';
     request.send();
     request.onload = function() {
-        secondary_nav_tabs = this.response;
-        if (secondary_nav_tabs){
+        if (this.response){
+            secondary_nav_tabs = this.response.tabs;
+            secondary_nav.current = 0;
+            secondary_nav.max_tabs = this.response.max_tabs;
             secondary_nav.innerHTML = "";
             let secondary_nav_height = parseInt(getComputedStyle(secondary_nav).height);
-            for (let tab of secondary_nav_tabs){
+
+            if (secondary_nav_tabs.length > secondary_nav.max_tabs){
+                let rollRightBtn = document.createElement("button");
+                rollRightBtn.style.backgroundImage = "url('medias/rollRight.svg')";
+                rollRightBtn.alt = "roll right";
+                rollRightBtn.style.width = secondary_nav_height*0.5 + "px";
+                rollRightBtn.style.height = secondary_nav_height*0.5 + "px";
+                rollRightBtn.onclick = rollSecondaryNavRight;
+                rollRightBtn.className = "rollBtn";
+                secondary_nav.appendChild(rollRightBtn)
+            }
+            
+            for (let tab_id in secondary_nav_tabs){
+                let tab = secondary_nav_tabs[tab_id]
                 let btn = document.createElement("span");
                 let icon = document.createElement("img");
                 icon.alt = tab.name;
@@ -79,10 +96,31 @@ function generate_secondaryNav(path) {
                 btn.appendChild(icon);
                 btn.setAttribute("tooltip", tab.name);
                 btn.setAttribute("onclick", tab.show);
-                btn.style.width = secondary_nav_height*0.8 + "px";
-                btn.style.height = secondary_nav_height*0.8 + "px";
-                btn.className = "button round-btn";
+
+                if (tab_id < secondary_nav.max_tabs) {
+                    btn.style.width = secondary_nav_height*0.8 + "px";
+                    btn.style.height = secondary_nav_height*0.8 + "px";
+                }
+                else {
+                    btn.style.height = "0";
+                    btn.style.width = "0";
+                    btn.style.margin = "0";
+                    btn.firstChild.style.borderWidth = "0";
+                }
+                
+                btn.className = "button round-btn tab";
                 secondary_nav.appendChild(btn);
+            }
+
+            if (secondary_nav_tabs.length > secondary_nav.max_tabs){
+                let rollLeftBtn = document.createElement("button");
+                rollLeftBtn.style.backgroundImage = "url('medias/rollLeft.svg')";
+                rollLeftBtn.alt = "roll left";
+                rollLeftBtn.style.width = secondary_nav_height*0.5 + "px";
+                rollLeftBtn.style.height = secondary_nav_height*0.5 + "px";
+                rollLeftBtn.onclick = rollSecondaryNavLeft;
+                rollLeftBtn.className = "rollBtn";
+                secondary_nav.appendChild(rollLeftBtn)
             }
         }
         else {
@@ -91,20 +129,71 @@ function generate_secondaryNav(path) {
     }
 }
 
+function rollSecondaryNavLeft() {
+    if (!rollSecondaryNavLocked) {
+        rollSecondaryNavLocked = true;
+        let tabs = secondary_nav.getElementsByClassName("tab");
+
+        let toBeHidden = tabs[0];
+        let toBeShown = tabs[secondary_nav.max_tabs];
+        
+        setTimeout(() => {
+            toBeHidden.style.width = "0";
+            toBeHidden.style.height = "0";
+            toBeHidden.style.margin = "0";
+            toBeHidden.firstChild.style.borderWidth = "0";
+            toBeShown.style.width = tabs[1].style.width;
+            toBeShown.style.height = tabs[1].style.height;
+            toBeShown.style.margin = "20px";
+            toBeShown.firstChild.style.borderWidth = "3px";
+        }, 200);        
+
+        setTimeout(() => 
+        {
+            secondary_nav.appendChild(toBeHidden);
+            rollSecondaryNavLocked = false;
+        }, 2000);
+    }
+}
+
+function rollSecondaryNavRight() {
+    if (!rollSecondaryNavLocked) {
+        rollSecondaryNavLocked = true;
+        let tabs = secondary_nav.getElementsByClassName("tab");
+
+        let toBeShown = tabs[tabs.length-1];
+        let toBeHidden = tabs[secondary_nav.max_tabs-1];
+        
+        secondary_nav.insertBefore(toBeShown, secondary_nav.firstChild.nextSibling);
+        setTimeout(() => {
+            toBeHidden.style.width = "0";
+            toBeHidden.style.height = "0";
+            toBeHidden.style.margin = "0";
+            toBeHidden.firstChild.style.borderWidth = "0";
+            toBeShown.style.width = tabs[1].style.width;
+            toBeShown.style.height = tabs[1].style.height;
+            toBeShown.style.margin = "20px";
+            toBeShown.firstChild.style.borderWidth = "3px";
+        }, 200);
+        
+        setTimeout(() => 
+        {
+            rollSecondaryNavLocked = false;
+        }, 2000);
+    }
+}
+
 function showProject(){
-    console.log("Project");
     generate_secondaryNav("values/projectNav.json");
     container.innerHTML = "Project Description";
 }
 
 function showVisualization(){
-    console.log("Visualization");
     generate_secondaryNav("values/visualizationNav.json");
     container.innerHTML = "Visualizations";
 }
 
 function showClassifier(){
-    console.log("Classifier");
     generate_secondaryNav("values/classifierNav.json");
     container.innerHTML = "Toy Classifier";
 }
