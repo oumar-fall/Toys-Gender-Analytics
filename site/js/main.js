@@ -10,6 +10,7 @@ const [secondary_nav] = document.getElementsByClassName('secondary-nav');
 const [container] = document.getElementsByClassName("container");
 
 var rollSecondaryNavLocked = false;
+var wave_id;
 
 function init(){
     if (w >= h){
@@ -31,6 +32,7 @@ function init(){
 
     generate_mainNav();
     showProject();
+    wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
 }
 
 function generate_mainNav() {
@@ -70,18 +72,31 @@ function generate_secondaryNav(path) {
     request.send();
     request.onload = function() {
         if (this.response){
+            let tabSizeFactor = 0.7;
+            let btnSizeFactor = 0.5;
+            let tabMarginFactor = 0.1;
+            secondary_nav.height = parseInt(getComputedStyle(secondary_nav).height);
+            secondary_nav.width = parseInt(getComputedStyle(secondary_nav).width);
             secondary_nav_tabs = this.response.tabs;
             secondary_nav.current = 0;
             secondary_nav.max_tabs = this.response.max_tabs;
             secondary_nav.innerHTML = "";
-            let secondary_nav_height = parseInt(getComputedStyle(secondary_nav).height);
+            secondary_nav.tabSize = secondary_nav.height*tabSizeFactor + "px";
+            secondary_nav.btnSize = secondary_nav.height*btnSizeFactor + "px";
+            secondary_nav.tabMargin = "0 " + secondary_nav.height * tabMarginFactor + "px";
+
+            secondary_nav.max_tabs = Math.min(
+                    Math.floor((secondary_nav.width - 2 * btnSizeFactor * secondary_nav.height)/
+                                ((2 * tabMarginFactor + tabSizeFactor)*
+                                    secondary_nav.height)),
+                    secondary_nav.max_tabs);
 
             if (secondary_nav_tabs.length > secondary_nav.max_tabs){
                 let rollRightBtn = document.createElement("button");
                 rollRightBtn.style.backgroundImage = "url('medias/rollRight.svg')";
                 rollRightBtn.alt = "roll right";
-                rollRightBtn.style.width = secondary_nav_height*0.5 + "px";
-                rollRightBtn.style.height = secondary_nav_height*0.5 + "px";
+                rollRightBtn.style.width = secondary_nav.btnSize;
+                rollRightBtn.style.height = secondary_nav.btnSize;
                 rollRightBtn.onclick = rollSecondaryNavRight;
                 rollRightBtn.className = "rollBtn";
                 secondary_nav.appendChild(rollRightBtn)
@@ -98,8 +113,9 @@ function generate_secondaryNav(path) {
                 btn.setAttribute("onclick", tab.show);
 
                 if (tab_id < secondary_nav.max_tabs) {
-                    btn.style.width = secondary_nav_height*0.8 + "px";
-                    btn.style.height = secondary_nav_height*0.8 + "px";
+                    btn.style.width = secondary_nav.tabSize;
+                    btn.style.height = secondary_nav.tabSize;
+                    btn.style.margin = secondary_nav.tabMargin;
                 }
                 else {
                     btn.style.height = "0";
@@ -116,8 +132,8 @@ function generate_secondaryNav(path) {
                 let rollLeftBtn = document.createElement("button");
                 rollLeftBtn.style.backgroundImage = "url('medias/rollLeft.svg')";
                 rollLeftBtn.alt = "roll left";
-                rollLeftBtn.style.width = secondary_nav_height*0.5 + "px";
-                rollLeftBtn.style.height = secondary_nav_height*0.5 + "px";
+                rollLeftBtn.style.width = secondary_nav.btnSize;
+                rollLeftBtn.style.height = secondary_nav.btnSize;
                 rollLeftBtn.onclick = rollSecondaryNavLeft;
                 rollLeftBtn.className = "rollBtn";
                 secondary_nav.appendChild(rollLeftBtn)
@@ -142,21 +158,22 @@ function rollSecondaryNavLeft() {
             toBeHidden.style.height = "0";
             toBeHidden.style.margin = "0";
             toBeHidden.firstChild.style.borderWidth = "0";
-            toBeShown.style.width = tabs[1].style.width;
-            toBeShown.style.height = tabs[1].style.height;
-            toBeShown.style.margin = "20px";
+            toBeShown.style.width = secondary_nav.tabSize;
+            toBeShown.style.height = secondary_nav.tabSize;
+            toBeShown.style.margin = secondary_nav.tabMargin;
             toBeShown.firstChild.style.borderWidth = "3px";
         }, 200);        
 
         setTimeout(() => 
         {
-            secondary_nav.appendChild(toBeHidden);
+            secondary_nav.insertBefore(toBeHidden, secondary_nav.lastChild);
             rollSecondaryNavLocked = false;
         }, 2000);
     }
 }
 
 function rollSecondaryNavRight() {
+    console.log(secondary_nav.height);
     if (!rollSecondaryNavLocked) {
         rollSecondaryNavLocked = true;
         let tabs = secondary_nav.getElementsByClassName("tab");
@@ -170,9 +187,9 @@ function rollSecondaryNavRight() {
             toBeHidden.style.height = "0";
             toBeHidden.style.margin = "0";
             toBeHidden.firstChild.style.borderWidth = "0";
-            toBeShown.style.width = tabs[1].style.width;
-            toBeShown.style.height = tabs[1].style.height;
-            toBeShown.style.margin = "20px";
+            toBeShown.style.width = secondary_nav.tabSize;
+            toBeShown.style.height = secondary_nav.tabSize;
+            toBeShown.style.margin = secondary_nav.tabMargin;
             toBeShown.firstChild.style.borderWidth = "3px";
         }, 200);
         
@@ -180,6 +197,18 @@ function rollSecondaryNavRight() {
         {
             rollSecondaryNavLocked = false;
         }, 2000);
+    }
+}
+
+function waveContent(items, itemClass) {
+    let elts = items.getElementsByClassName(itemClass);
+    for (let elt_id = 0; elt_id < elts.length; elt_id++){
+        setTimeout(() => {
+            elts[elt_id].classList.add("flying");
+        }, elt_id * 50);
+        setTimeout(() => {
+            elts[elt_id].classList.remove("flying");
+        }, elt_id * 50 + 100);
     }
 }
 
@@ -196,26 +225,6 @@ function showVisualization(){
 function showClassifier(){
     generate_secondaryNav("values/classifierNav.json");
     container.innerHTML = "Toy Classifier";
-}
-
-function showVisualisation1(){
-    console.log(1);
-    container.innerHTML = "Visualization 1";
-}
-
-function showVisualisation2(){
-    console.log(2);
-    container.innerHTML = "Visualization 2";
-}
-
-function showVisualisation3(){
-    console.log(3);
-    container.innerHTML = "Visualization 3";
-}
-
-function showVisualisation4(){
-    console.log(4);
-    container.innerHTML = "Visualization 4";
 }
 
 init();

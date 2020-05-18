@@ -1,7 +1,9 @@
 body {
     display: grid;
     grid-template-rows: repeat(13, 1fr);
-}
+    font-family: Impact, Charcoal, sans-serif;
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,247,211,1) 90%);}
 
 header {
     grid-row: 1/3;
@@ -65,6 +67,7 @@ main {
     justify-content: center;
     margin : 10px;
     border-radius: 20px;
+    background-color: white;
 }
 
 .round-btn{
@@ -72,7 +75,6 @@ main {
 }
 
 .button {
-    margin : 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -103,11 +105,11 @@ main {
 .rollBtn {
     margin : 0;
     background-color: transparent;
-    border: none;
     cursor: pointer;
+    border: none;
     opacity: 0.2;
     outline : none;
-
+    display: block;
 }
 
 .rollBtn:hover {
@@ -169,4 +171,9 @@ main {
     font-style: italic;
     text-align: center;
     margin-top: 5px;
+}
+
+.flying::after{
+    content : "";
+    margin-top: 20%;
 }
