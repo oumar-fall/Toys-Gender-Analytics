@@ -1,4 +1,30 @@
 {
-    "max_tabs" : 0,
-    "tabs" : []
+    "max_tabs" : 5,
+    "tabs" : [
+        {
+            "name" : "Colors",
+            "show" : "showVisualisation1()",
+            "img" : "medias/color.svg"
+        },
+        {
+            "name" : "Pink Taxe",
+            "show" : "showVisualisation2()",
+            "img" : "medias/price.svg"
+        },
+        {
+            "name" : "Words",
+            "show" : "showVisualisation3()",
+            "img" : "medias/size.svg"
+        },
+        {
+            "name" : "Brands",
+            "show" : "showVisualisation4()",
+            "img" : "medias/text.svg"
+        },
+        {
+            "name" : "Prices",
+            "show" : "showVisualisation1()",
+            "img" : "medias/price.svg"
+        }
+    ]
 }

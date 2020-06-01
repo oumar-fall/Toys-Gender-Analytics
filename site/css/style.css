@@ -177,3 +177,30 @@ main {
     content : "";
     margin-top: 20%;
 }
+
+.textDescription{
+  overflow: scroll;
+  height: 80%;
+  margin: 10%;
+  font-size: 30px;
+  line-height: 170%;
+  text-align: justify;
+  /* overflow: hidden; */
+}
+
+.textDescription::-webkit-scrollbar {
+  display: none;
+  overflow: -moz-scrollbars-none;
+}
+
+.pink {
+  color: pink;
+}
+
+.blue{
+  color: blue;
+}
+
+a{
+  color: black;
+}

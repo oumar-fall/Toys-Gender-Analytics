@@ -101,7 +101,7 @@ function generate_secondaryNav(path) {
                 rollRightBtn.className = "rollBtn";
                 secondary_nav.appendChild(rollRightBtn)
             }
-            
+
             for (let tab_id in secondary_nav_tabs){
                 let tab = secondary_nav_tabs[tab_id]
                 let btn = document.createElement("span");
@@ -123,7 +123,7 @@ function generate_secondaryNav(path) {
                     btn.style.margin = "0";
                     btn.firstChild.style.borderWidth = "0";
                 }
-                
+
                 btn.className = "button round-btn tab";
                 secondary_nav.appendChild(btn);
             }
@@ -152,7 +152,7 @@ function rollSecondaryNavLeft() {
 
         let toBeHidden = tabs[0];
         let toBeShown = tabs[secondary_nav.max_tabs];
-        
+
         setTimeout(() => {
             toBeHidden.style.width = "0";
             toBeHidden.style.height = "0";
@@ -162,9 +162,9 @@ function rollSecondaryNavLeft() {
             toBeShown.style.height = secondary_nav.tabSize;
             toBeShown.style.margin = secondary_nav.tabMargin;
             toBeShown.firstChild.style.borderWidth = "3px";
-        }, 200);        
+        }, 200);
 
-        setTimeout(() => 
+        setTimeout(() =>
         {
             secondary_nav.insertBefore(toBeHidden, secondary_nav.lastChild);
             rollSecondaryNavLocked = false;
@@ -180,7 +180,7 @@ function rollSecondaryNavRight() {
 
         let toBeShown = tabs[tabs.length-1];
         let toBeHidden = tabs[secondary_nav.max_tabs-1];
-        
+
         secondary_nav.insertBefore(toBeShown, secondary_nav.firstChild.nextSibling);
         setTimeout(() => {
             toBeHidden.style.width = "0";
@@ -192,8 +192,8 @@ function rollSecondaryNavRight() {
             toBeShown.style.margin = secondary_nav.tabMargin;
             toBeShown.firstChild.style.borderWidth = "3px";
         }, 200);
-        
-        setTimeout(() => 
+
+        setTimeout(() =>
         {
             rollSecondaryNavLocked = false;
         }, 2000);
@@ -214,7 +214,11 @@ function waveContent(items, itemClass) {
 
 function showProject(){
     generate_secondaryNav("values/projectNav.json");
-    container.innerHTML = "Project Description";
+    var projectDescription = document.createElement("div");
+    projectDescription.classList.add("textDescription");
+    container.innerHTML = "";
+    container.appendChild(projectDescription);
+    projectDescription.innerHTML = "What color were your toys when you were a child? Let us guess... you're a woman? We bet they were <span class='pink'>pink</span>! A man? Rather <span class='blue'>blue</span> then. We wanted to see if those clichés were still relevant in the gendered toy catalogues in 2020. Take a stroll through our website to discover our findings and establish your own by playing with our interactive visualizations. <br><br> For this study we have retrieved the toys from the catalogue of La Grande Récré : <a href='https://www.lagranderecre.fr/'>https://www.lagranderecre.fr/</a>. This catalogue is indeed still gendered in spite of the new French legislation in force. The conclusions drawn are therefore characteristic of this catalogue, in spring 2020. <br><br> We have retrieved information about 75269 toys, including image, brand, price, description, dimensions, weight... in order to study them as well as possible.";
 }
 
 function showVisualization(){
