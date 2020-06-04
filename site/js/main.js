@@ -228,7 +228,20 @@ function showVisualization(){
 
 function showClassifier(){
     generate_secondaryNav("values/classifierNav.json");
-    container.innerHTML = "Toy Classifier";
-}
+    var sendButton = document.createElement("button");
+    sendButton.innerHTML = "SEND";
+    sendButton.id = 'send';
+    sendButton.onclick = send;
+    container.innerHTML='';
+    container.appendChild(sendButton);
+    }
+
+  function send() {
+    console.log("send");
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../../classifier');
+    xhr.send();
+    xhr.onload = function(){container.innerHTML = xhr.response;}
+  }
 
 init();
