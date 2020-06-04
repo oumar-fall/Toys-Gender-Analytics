@@ -285,7 +285,6 @@ function showClassifier(){
     }
 
   function send() {
-    console.log("send");
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '../../classifier');
     xhr.send();

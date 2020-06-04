@@ -3,27 +3,27 @@
     "tabs" : [
         {
             "name" : "Colors",
-            "show" : "showVisualisation1()",
+            "show" : "projectColor()",
             "img" : "medias/color.svg"
         },
         {
             "name" : "Pink Taxe",
-            "show" : "showVisualisation2()",
+            "show" : "projectPinkTaxe()",
             "img" : "medias/price.svg"
         },
         {
             "name" : "Words",
-            "show" : "showVisualisation3()",
+            "show" : "projectWords()",
             "img" : "medias/size.svg"
         },
         {
             "name" : "Brands",
-            "show" : "showVisualisation4()",
+            "show" : "ProjectBrands()",
             "img" : "medias/text.svg"
         },
         {
             "name" : "Prices",
-            "show" : "showVisualisation1()",
+            "show" : "projectPrices",
             "img" : "medias/price.svg"
         }
     ]
