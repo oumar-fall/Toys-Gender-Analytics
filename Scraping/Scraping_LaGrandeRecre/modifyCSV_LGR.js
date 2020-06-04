@@ -2,25 +2,24 @@ var fs = require("fs");
 
 let obj = JSON.parse(fs.readFileSync("./LaGrandeRecre/DB.json"));
 
-var appendCSV = function (filePath, newObj) {
+var appendTSV = function (filePath, newObj) {
   let newLine = "";
-  if (newObj.id !== 0) {
+  if (newObj.id != 0) {
     for (key in newObj) {
       /**Write here specific treatment **/
       if (!["prix", "ageMin", "categorie_id", "longueur", "largeur", "hauteur", "codeInterne", "marque_id", "poids"].includes(key)) {
-        newLine += ';"' + newObj[key].replace(/[\n]+/g, " ") + '"';
+        newLine += '\t' + newObj[key].replace(/[\n|\t]+/g, " ");
       } 
       else {
-        newLine += ";" + newObj[key];
+        newLine += "\t" + newObj[key];
       }
     }
 
     newLine = "\n" + newLine.substr(1);
   } else {
-    newLine = '"' + Object.keys(newObj).join('";"') + '"';
+    newLine = Object.keys(newObj).join('\t');
   }
 
-  // let newLine = '\n"' + Object.values(newObj).join('";"') + '"';
   fs.appendFileSync(filePath, newLine, (err) => {
     // In case of a error throw err.
     if (err) throw err;
@@ -65,13 +64,11 @@ var correct_dimensions = function (jouet) {
 };
 
 var correct_poids = function (jouet) {
-    if (jouet.weight){
-        var poids = parseFloat((jouet.weight).match(/[0-9]+(.[0-9]+)?/)[0]);
+    if (jouet.poids && !jouet.poids.includes("None")){
+        var poids = parseFloat((jouet.poids).match(/[0-9]+(.[0-9]+)?/)[0]);
         jouet.poids = poids;
-        delete jouet.weight;
     }
     else {
-        delete jouet.poids;
         jouet.poids = 'None';
     }
 };
@@ -125,13 +122,13 @@ var analyse_marques = function (database) {
     }
   }
   marques.sort();
-  fs.writeFileSync("./LaGrandeRecre/marques.csv", "marque_id;marque_name\n");
+  fs.writeFileSync("./LaGrandeRecre/marques.tsv", "marque_id\tmarque_name\n");
   for (let id_marque in marques){
-      fs.appendFileSync("./LaGrandeRecre/marques.csv", id_marque + ';"' + marques[id_marque] + '"\n');
+      fs.appendFileSync("./LaGrandeRecre/marques.tsv", id_marque + '\t' + marques[id_marque] + '\n');
   }
 };
 
-var createNewCSV = function () {
+var createNewTSV = function () {
   analyse_securite(obj);
   analyse_marques(obj);
   for (let id_jouet in obj) {
@@ -142,8 +139,8 @@ var createNewCSV = function () {
     correct_securite(obj[id_jouet]);
     correct_marque(obj[id_jouet])
     correct_price(obj[id_jouet]);
-    appendCSV("./LaGrandeRecre/newDB.csv", obj[id_jouet]);
+    appendTSV("./LaGrandeRecre/newDB.tsv", obj[id_jouet]);
   }
 };
 
-createNewCSV();
+createNewTSV();

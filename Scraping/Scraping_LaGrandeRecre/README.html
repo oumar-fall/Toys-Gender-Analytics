@@ -274,7 +274,7 @@ Database : <a href="https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstC
 <h4 id="observations">Observations</h4>
 </blockquote>
 <ul>
-<li>In fact, when checking briefly the <em>DB.csv</em> file, I noticed that some entries appeared 2, 3 or even 4 times. And what's even more intriguing is that there are some sequences of entries that are repeating themselves. From there, I began to think about the possible reasons for that.
+<li>In fact, when checking briefly the <em>DB.tsv</em> file, I noticed that some entries appeared 2, 3 or even 4 times. And what's even more intriguing is that there are some sequences of entries that are repeating themselves. From there, I began to think about the possible reasons for that.
 <ul>
 <li>First, it could be the structure of the internal database of the website that's containing several times the same entries. In this case I can't do anything but taking them in consideration or filtering them using their internal reference.</li>
 <li>The second reason is much less pleasant because it would be due to a problem in my scraping method. In fact, because I'm navigating between pages using only their urls, there could be issues with the order objects are given. If this order isn't fixed, it is possible that it changes between each page and this would explain why I've got several times the same entries or sequences. In this case, A much more important issue is that I'm probably missing some entries.</li>
@@ -311,9 +311,9 @@ Database : <a href="https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstC
     │   └── Mixte0_0.jpg
     ├── logs/
     │   └── log_11042020_013234.txt
-    ├── DB.csv
-    ├── categories.csv
-    ├── marques.csv
+    ├── DB.tsv
+    ├── categories.tsv
+    ├── marques.tsv
     └── DB.json
 </div></code></code></pre>
 <table>
@@ -345,15 +345,15 @@ Database : <a href="https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstC
 <td><strong>Folder</strong> containing the log files</td>
 </tr>
 <tr>
-<td>DB.csv</td>
-<td><strong>File</strong> containing the database in csv format</td>
+<td>DB.tsv</td>
+<td><strong>File</strong> containing the database in tsv format</td>
 </tr>
 <tr>
-<td>categories.csv</td>
+<td>categories.tsv</td>
 <td><em>see <a href="#3-Structure">Structure</a></em></td>
 </tr>
 <tr>
-<td>marques.csv</td>
+<td>marques.tsv</td>
 <td><em>see <a href="#3-Structure">Structure</a></em></td>
 </tr>
 <tr>
@@ -371,14 +371,14 @@ Database : <a href="https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstC
 </blockquote>
 <p>At the end of the scraping, I had to reorganize the database for it to be clearer and to get coherence between datas.</p>
 <p>I did it in <a href="./modifyCSV_LGR.js"><em>modifyCSV_LGR.js</em></a>.
-<em>(I also used some find/replace manipulations to solve some interpretation issues due to some particular values in the csv file)</em></p>
+<em>(I also used some find/replace manipulations to solve some interpretation issues due to some particular values in the tsv file)</em></p>
 <blockquote>
 <h3 id="3-structure">3. Structure</h3>
 </blockquote>
 <p>Database is structure in 3 parts :</p>
 <ul>
 <li><strong>Images folders</strong> <em>(see <a href="#1-Properties-1">Properties</a>)</em></li>
-<li><strong>Categories table</strong> : <em>categories.csv</em></li>
+<li><strong>Categories table</strong> : <em>categories.tsv</em></li>
 </ul>
 <table>
 <thead>
@@ -422,7 +422,7 @@ Database : <a href="https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstC
 </tbody>
 </table>
 <ul>
-<li><strong>Marques table</strong> : <em>marques.csv</em></li>
+<li><strong>Marques table</strong> : <em>marques.tsv</em></li>
 </ul>
 <table>
 <thead>

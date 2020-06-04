@@ -150,7 +150,7 @@ All of the above steps can be summarized in the following diagram.
 >### 3. Limitations
 However, I assume that this method may have some defaults.
 >#### Observations
-* In fact, when checking briefly the *DB.csv* file, I noticed that some entries appeared 2, 3 or even 4 times. And what's even more intriguing is that there are some sequences of entries that are repeating themselves. From there, I began to think about the possible reasons for that. 
+* In fact, when checking briefly the *DB.tsv* file, I noticed that some entries appeared 2, 3 or even 4 times. And what's even more intriguing is that there are some sequences of entries that are repeating themselves. From there, I began to think about the possible reasons for that. 
   * First, it could be the structure of the internal database of the website that's containing several times the same entries. In this case I can't do anything but taking them in consideration or filtering them using their internal reference.
   * The second reason is much less pleasant because it would be due to a problem in my scraping method. In fact, because I'm navigating between pages using only their urls, there could be issues with the order objects are given. If this order isn't fixed, it is possible that it changes between each page and this would explain why I've got several times the same entries or sequences. In this case, A much more important issue is that I'm probably missing some entries.
 * Another thing that I noticed is that I was only focusing on available toys. Therefore, I was missing a huge part of the database.
@@ -187,9 +187,9 @@ The resulting Database is stored in the ./LaGrandeRecre/ folder with following a
     │   └── Mixte0_0.jpg
     ├── logs/
     │   └── log_11042020_013234.txt
-    ├── DB.csv
-    ├── categories.csv
-    ├── marques.csv
+    ├── DB.tsv
+    ├── categories.tsv
+    ├── marques.tsv
     └── DB.json
 ```
 
@@ -200,9 +200,9 @@ The resulting Database is stored in the ./LaGrandeRecre/ folder with following a
 |Girl/|**Folder** containing all images of toys for Girls|
 |Mixte/|**Folder** containing all images of toys for Both|
 |logs/|**Folder** containing the log files|
-|DB.csv|**File** containing the database in csv format|
-|categories.csv|*see [Structure](#3-Structure)*|
-|marques.csv|*see [Structure](#3-Structure)*|
+|DB.tsv|**File** containing the database in tsv format|
+|categories.tsv|*see [Structure](#3-Structure)*|
+|marques.tsv|*see [Structure](#3-Structure)*|
 |DB.json|**File** containing the database in json format *(useful to convert it in a javascript object to apply some changes)*|
 
 * Log files are named with following structure : *```log_[date]_[time].txt```*
@@ -213,7 +213,7 @@ The resulting Database is stored in the ./LaGrandeRecre/ folder with following a
 At the end of the scraping, I had to reorganize the database for it to be clearer and to get coherence between datas.
 
 I did it in [*modifyCSV_LGR.js*](./modifyCSV_LGR.js).
-*(I also used some find/replace manipulations to solve some interpretation issues due to some particular values in the csv file)*
+*(I also used some find/replace manipulations to solve some interpretation issues due to some particular values in the tsv file)*
 
 
 >### 3. Structure
@@ -222,7 +222,7 @@ I did it in [*modifyCSV_LGR.js*](./modifyCSV_LGR.js).
 Database is structure in 3 parts :
 
 * **Images folders** *(see [Properties](#1-Properties-1))*
-* **Categories table** : *categories.csv*
+* **Categories table** : *categories.tsv*
 
 | categorie_id | categorie_short_name |       categorie_name       |
 |:------------:|:--------------------:|:--------------------------:|
@@ -233,7 +233,7 @@ Database is structure in 3 parts :
 | 4            |"9_11"                | "JOUETS ENFANT 9 À 11 ANS" |
 | 5            |"12_plus"             | "JOUETS 12 ANS ET PLUS"    |
 
-* **Marques table** : *marques.csv*
+* **Marques table** : *marques.tsv*
 
 | marque_id    | marque_name |
 |:------------:|:-----------:|
