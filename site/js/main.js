@@ -294,7 +294,30 @@ function showClassifier(){
       xhr.onload = function(){container.innerHTML = xhr.response;}
     }
 
+}
+
+function uploadImage() {
+    container.innerHTML = "";
+    var sendButton = document.createElement("button");
+    sendButton.innerHTML = "SEND";
+    sendButton.id = 'send';
+    var form = document.createElement('form');
+    var input = document.createElement('input');
+    input.type = "file";
+    input.accept = "image/*"
+    input.name = "imagepath";
+    form.appendChild(input);
+    container.appendChild(form);
+    container.appendChild(sendButton);
+    sendButton.onclick = send;
+    function send() {
+        var xhr = new XMLHttpRequest();
+        const FD = new FormData( form );
+        xhr.open('POST', '../../imageupload');
+        xhr.send(FD);
+        xhr.onload = function(){container.innerHTML = xhr.response;}
     }
+}
 
 
 

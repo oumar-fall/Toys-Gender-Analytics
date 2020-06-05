@@ -3,6 +3,7 @@ var url = require("url"); //url
 var fs = require("fs"); //files
 var net = require('net');
 var querystring = require('querystring');
+var formidable = require('formidable');
 
 var PORT = (process.argv[2])? process.argv[2] : 8000;
 
@@ -113,14 +114,19 @@ http.createServer(function(request, response) {
         client.destroy(); // kill client after server's response
     });
   }
-  // if(myPath == "fileupload"){
-  //   var form = new formidable.IncomingForm();
-  //   form.parse(req, function (err, fields, files) {
-  //   res.write('File uploaded');
-  //   res.end();
-  //  });
-  //
-  // }
+  if(myPath == "imageupload"){
+    var form = new formidable.IncomingForm();
+    form.parse(request, function (err, fields, files) {
+      var oldpath = files.imagepath.path;
+      var newpath = './temp/' + files.imagepath.name;
+      fs.rename(oldpath, newpath, function (err) {
+        if (err) throw err;
+        response.write('<span>File loaded :</span><br>');
+        response.end();
+      });
+   });
+  
+  }
 
 }).listen(PORT);
 console.log("Node.js sever running on port " + PORT + '.')
