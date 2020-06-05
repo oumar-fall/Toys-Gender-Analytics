@@ -275,20 +275,27 @@ function showVisualization(){
 }
 
 function showClassifier(){
-    generate_secondaryNav("values/classifierNav.json");
+    // generate_secondaryNav("values/classifierNav.json");
+    container.innerHTML = "";
     var sendButton = document.createElement("button");
     sendButton.innerHTML = "SEND";
     sendButton.id = 'send';
-    sendButton.onclick = send;
-    container.innerHTML='';
+
+    var input = document.createElement('input');
+    input.type = "text";
+    input.name = "filetoupload";
+    container.appendChild(input);
     container.appendChild(sendButton);
+    sendButton.onclick = send;
+    function send() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '../../classifier?' + input.name + '=' + input.value);
+      xhr.send();
+      xhr.onload = function(){container.innerHTML = xhr.response;}
     }
 
-  function send() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '../../classifier');
-    xhr.send();
-    xhr.onload = function(){container.innerHTML = xhr.response;}
-  }
+    }
+
+
 
 init();
