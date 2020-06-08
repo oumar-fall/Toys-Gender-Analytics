@@ -131,13 +131,29 @@ http.createServer(function(request, response) {
     form.parse(request, function (err, fields, files) {
       var oldpath = files.imagepath.path;
       var newpath = encodeURI('temp/' + files.imagepath.name);
+      console.log("New path : " + newpath);
       fs.rename(oldpath, newpath, function (err) {
         if (err) throw err;
-        response.write('<span>File loaded :</span><img class="uploadPreview" src="' + newpath + '" alt="uploaded Image">');
-        response.end();
+
+        var client = new net.Socket();
+        client.connect(8484, '127.0.0.1', function() {
+            console.log('Connected');
+            client.write(newpath);
+        });
+        client.on('data', function(data) {
+            response.writeHead(200, {'Content-Type': 'text/json'});
+            response.write(data, 'binary')
+            response.end();
+            console.log('Received: ' + data);
+            client.destroy(); // kill client after server's response
+        });
+
+        // response.write('<span>File loaded :</span><img class="uploadPreview" src="' + newpath + '" alt="uploaded Image">');
+        // response.end();
       });
    });
-  
+
+
   }
 
 }).listen(PORT);
