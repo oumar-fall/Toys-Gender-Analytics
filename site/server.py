@@ -1,4 +1,5 @@
 import socket
+import prediction
 
 HOST = '127.0.0.1'
 PORT = 8484
@@ -19,5 +20,9 @@ while 1:
         print('')
     if data:
         print(data.decode('utf-8'))
-        conn.sendall(b'Hello, client ! Love, Server.')
+        gender = prediction.predict(data.decode('utf-8'))
+        
+        conn.sendall(gender)
+        
+        #conn.sendall(b'Hello, client ! Love, Server.')
     conn.close()
