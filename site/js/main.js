@@ -68,7 +68,6 @@ function loadDatabase(){
                 database = rows;
                 generate_mainNav();
                 showProject();
-                wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
             }
         });
     d3.tsv("data/categories.tsv")
@@ -114,6 +113,7 @@ function generate_mainNav() {
 }
 
 function generate_secondaryNav(path) {
+    clearInterval(wave_id);
     let request = new XMLHttpRequest();
     request.open('GET', path);
     request.responseType = 'json';
@@ -186,6 +186,7 @@ function generate_secondaryNav(path) {
                 rollLeftBtn.className = "rollBtn";
                 secondary_nav.appendChild(rollLeftBtn)
             }
+            wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
         }
         else {
             console.log("Fail to load secondary nav : " + path);
@@ -275,7 +276,7 @@ function showVisualization(){
 }
 
 function showClassifier(){
-    // generate_secondaryNav("values/classifierNav.json");
+    generate_secondaryNav("values/classifierNav.json");
     container.innerHTML = "";
     var sendButton = document.createElement("button");
     sendButton.innerHTML = "SEND";

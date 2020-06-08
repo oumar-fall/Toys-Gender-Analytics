@@ -10,7 +10,6 @@ var PORT = (process.argv[2])? process.argv[2] : 8000;
 http.createServer(function(request, response) {
   var myUrl = url.parse(request.url, true);
   var myPath = myUrl.pathname.substr(1);
-  //console.log(myPath);
 
   if (myPath == "") { //lanch website
     fs.readFile('index.html', 'binary', function(err, file){
@@ -67,6 +66,19 @@ http.createServer(function(request, response) {
       }
     })
   }
+  if(myPath.substr(0,5) == "temp/") {
+    fs.readFile(myPath, function(err, file){
+      if (err) {
+        response.writeHead(404, {'Content-Type': 'text/html'});
+        response.write("File not found")
+        response.end();
+      }
+      else{
+        response.writeHead(200, {'Content-Type': 'image/*'});
+        response.end(file);
+      }
+    })
+  }
   if(myPath.substr(0,7) == "values/") {
     fs.readFile(myPath, 'binary', function(err, file){
       if (err) {
@@ -118,10 +130,10 @@ http.createServer(function(request, response) {
     var form = new formidable.IncomingForm();
     form.parse(request, function (err, fields, files) {
       var oldpath = files.imagepath.path;
-      var newpath = './temp/' + files.imagepath.name;
+      var newpath = encodeURI('temp/' + files.imagepath.name);
       fs.rename(oldpath, newpath, function (err) {
         if (err) throw err;
-        response.write('<span>File loaded :</span><br>');
+        response.write('<span>File loaded :</span><img class="uploadPreview" src="' + newpath + '" alt="uploaded Image">');
         response.end();
       });
    });

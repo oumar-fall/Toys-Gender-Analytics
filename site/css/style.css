@@ -210,3 +210,8 @@ main {
 a{
   color: black;
 }
+
+.uploadPreview.uploadPreview {
+    max-width : 300px;
+    max-height : 300px;
+}
