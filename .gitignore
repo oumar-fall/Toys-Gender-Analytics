@@ -2,5 +2,6 @@ LaGrandeRecre/
 node_modules/
 package.json
 package-lock.json
-data/
+*.tsv
 www/
+site/__pycache__/
