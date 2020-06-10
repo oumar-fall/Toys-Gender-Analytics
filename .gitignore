@@ -4,3 +4,4 @@ package.json
 package-lock.json
 data/
 www/
+site/__pycache__/
