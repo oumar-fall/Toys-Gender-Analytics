@@ -59,3 +59,32 @@ function showVisualisation4(){
     initVisualization();
     container.innerHTML = "Visualization 4";
 }
+
+//change ici 
+function projectColor(){
+    initVisualization();
+    var projectDescription = document.createElement("div");
+    projectDescription.classList.add("textDescription");
+    container.innerHTML = "";
+    container.appendChild(projectDescription);
+    projectDescription.innerHTML = "One of the first clichés we wanted to check is the following: the toys for girls are <span class='pink'>pink</span> while the toys for boys are rather <span class='blue'>blue</span>. As you can see on the attached diagrams this cliché is confirmed. Pink is indeed very present on girls' toys, while boys' toys are more varied in colour. <br> <br> We obtained these diagrams from the toys in the catalogue la grande récrée by looking at the majority tint of each picture. White and black are not considered.  ";
+    var img = document.createElement('img');
+    img.src = "data/color_repartition.png";
+    img.algin ="left";
+    container.appendChild(img);
+
+}
+
+function projectWords(){
+    initVisualization();
+    var projectDescription = document.createElement("div");
+    projectDescription.classList.add("textDescription");
+    container.innerHTML = "";
+    container.appendChild(projectDescription);
+    projectDescription.innerHTML = "One of the first clichés we wanted to check is the following: the toys for girls are <span class='pink'>pink</span> while the toys for boys are rather <span class='blue'>blue</span>. As you can see on the attached diagrams this picture is confirmed. Pink is indeed very present on girls' toys, while boys' toys are more varied in colour. <br> <br> We obtained these diagrams from the toys in the catalogue la grande récrée by looking at the majority tint of each picture. White and black are not considered.  ";
+    var img = document.createElement('img');
+    img.classList.add("imgDescription_words");
+    img.src = "data/description_words.png";
+    img.algin ="left";
+    container.appendChild(img);
+}

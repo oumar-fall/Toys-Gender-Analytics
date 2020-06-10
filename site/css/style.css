@@ -68,6 +68,7 @@ main {
     margin : 10px;
     border-radius: 20px;
     background-color: white;
+    padding: 10px;
 }
 
 .container img {
@@ -214,4 +215,10 @@ a{
 .uploadPreview.uploadPreview {
     max-width : 300px;
     max-height : 300px;
+}
+
+/* je rajoute ici  */
+.imgDescription_words {
+    border-radius: 20px;
+
 }
