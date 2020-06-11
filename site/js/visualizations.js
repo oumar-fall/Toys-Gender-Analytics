@@ -68,10 +68,17 @@ function projectColor(){
     container.innerHTML = "";
     container.appendChild(projectDescription);
     projectDescription.innerHTML = "One of the first clichés we wanted to check is the following: the toys for girls are <span class='pink'>pink</span> while the toys for boys are rather <span class='blue'>blue</span>. As you can see on the attached diagrams this cliché is confirmed. Pink is indeed very present on girls' toys, while boys' toys are more varied in colour. <br> <br> We obtained these diagrams from the toys in the catalogue la grande récrée by looking at the majority tint of each picture. White and black are not considered.  ";
-    var img = document.createElement('img');
-    img.src = "data/color_repartition.png";
-    img.algin ="left";
-    container.appendChild(img);
+    var imgContainer = document.createElement('div');
+    imgContainer.classList.add("imgContainer", "sideContent", "n_img2");
+    container.appendChild(imgContainer);
+    var img1 = document.createElement('img');
+    img1.classList.add("imgDescription");
+    img1.src = "data/img/color_repartition_1.png";
+    imgContainer.appendChild(img1);
+    var img2 = document.createElement('img');
+    img2.classList.add("imgDescription");
+    img2.src = "data/img/color_repartition_2.png";
+    imgContainer.appendChild(img2);
 
 }
 
@@ -83,9 +90,8 @@ function projectWords(){
     container.appendChild(projectDescription);
     projectDescription.innerHTML = "Are certain types of toys more associated with one gender or the other? For example, dolls for girls and trucks for boys.  That's often what people think. Well, this thinking is encouraged by toy catalogues, indeed, that's what the picture shows. The words most often found in the names of toys for girls are words like doll or princess, while for boys we find the famous trucks! ";
     var img = document.createElement('img');
-    img.classList.add("imgDescription_words");
-    img.src = "data/description_words.png";
-    img.algin ="left";
+    img.classList.add("imgDescription", "sideContent");
+    img.src = "data/img/description_words.png";
     container.appendChild(img);
 }
 
