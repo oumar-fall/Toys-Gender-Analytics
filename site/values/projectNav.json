@@ -23,7 +23,7 @@
         },
         {
             "name" : "Prices",
-            "show" : "projectPrices",
+            "show" : "ProjectPrices()",
             "img" : "medias/price.svg"
         }
     ]
