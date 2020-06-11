@@ -81,10 +81,23 @@ function projectWords(){
     projectDescription.classList.add("textDescription");
     container.innerHTML = "";
     container.appendChild(projectDescription);
-    projectDescription.innerHTML = "One of the first clichés we wanted to check is the following: the toys for girls are <span class='pink'>pink</span> while the toys for boys are rather <span class='blue'>blue</span>. As you can see on the attached diagrams this picture is confirmed. Pink is indeed very present on girls' toys, while boys' toys are more varied in colour. <br> <br> We obtained these diagrams from the toys in the catalogue la grande récrée by looking at the majority tint of each picture. White and black are not considered.  ";
+    projectDescription.innerHTML = "Are certain types of toys more associated with one gender or the other? For example, dolls for girls and trucks for boys.  That's often what people think. Well, this thinking is encouraged by toy catalogues, indeed, that's what the picture shows. The words most often found in the names of toys for girls are words like doll or princess, while for boys we find the famous trucks! ";
     var img = document.createElement('img');
     img.classList.add("imgDescription_words");
     img.src = "data/description_words.png";
+    img.algin ="left";
+    container.appendChild(img);
+}
+
+function ProjectBrands() {
+    initVisualization();
+    var projectDescription = document.createElement("div");
+    projectDescription.classList.add("textDescription");
+    container.innerHTML = "";
+    container.appendChild(projectDescription);
+    projectDescription.innerHTML = "The difference between the brands of girls' and boys' toys is also impressive.  Some brands make toys that are attributed to only one sex, such as Corolle (the doll brand) or Playmobil.  ";
+    var img = document.createElement('img');
+    img.src = "data/marques_words.png";
     img.algin ="left";
     container.appendChild(img);
 }
