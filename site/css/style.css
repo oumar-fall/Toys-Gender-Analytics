@@ -35,9 +35,6 @@ main {
     }
 }
 
-
-
-
 @media screen and (orientation: portrait) {
     main {
     grid-template-rows: repeat(8, 1fr);
