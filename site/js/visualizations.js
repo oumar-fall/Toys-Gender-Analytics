@@ -88,12 +88,11 @@ function projectWords(){
     projectDescription.classList.add("textDescription");
     container.innerHTML = "";
     container.appendChild(projectDescription);
-    projectDescription.innerHTML = "Are certain types of toys more associated with one gender or the other? For example, dolls for girls and trucks for boys.  That's often what people think. Well, this thinking is encouraged by toy catalogues, indeed, that's what the picture shows. The words most often found in the names of toys for girls are words like doll or princess, while for boys we find the famous trucks! <br> <br> Here are the most common words used in descriptions of girls' toys : <ol> <li> POUPÉE </li> <li> REINE </li> <li> NEIGES </li> <li> PRINCESSE </li> <li> DISNEY </li> <li> COROLLE </li> <li> COFFRET </li> <li> PELUCHE </li> <li> PRINCESSES </li> <li> DÉGUISEMENT </li> </ol> <br> <br> And here are the most common words used in descriptions of boys' toys : <ol> <li> PLAYMOBIL </li> <li> FIGURINE </li> <li>  VOITURE </li> <li> LEGO® </li> <li> VÉHICULE </li> <li> CAMION </li> <li> COFFRET </li> <li> SUPER </li> <li> DÉGUISEMENT </li> <li>MODÈLE </li> </ol> <br> <br> To obtain these word lists we have selected the most frequent words of more than 5 letters in the names of the toys.  ";
+    projectDescription.innerHTML = "One of the first clichés we wanted to check is the following: the toys for girls are <span class='pink'>pink</span> while the toys for boys are rather <span class='blue'>blue</span>. As you can see on the attached diagrams this picture is confirmed. Pink is indeed very present on girls' toys, while boys' toys are more varied in colour. <br> <br> We obtained these diagrams from the toys in the catalogue la grande récrée by looking at the majority tint of each picture. White and black are not considered.  ";
     var img = document.createElement('img');
     img.classList.add("imgDescription", "sideContent");
     img.src = "data/img/description_words.png";
     container.appendChild(img);
-}
 
 function ProjectBrands() {
     initVisualization();
