@@ -18,12 +18,12 @@
         },
         {
             "name" : "Brands",
-            "show" : "ProjectBrands()",
+            "show" : "projectBrands()",
             "img" : "medias/text.svg"
         },
         {
             "name" : "Prices",
-            "show" : "ProjectPrices()",
+            "show" : "projectPrices()",
             "img" : "medias/price.svg"
         }
     ]

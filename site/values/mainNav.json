@@ -13,10 +13,5 @@
         "name" : "Toy Classifier",
         "show" : "showClassifier()",
         "img" : "medias/classifier.svg"
-    },
-    {
-        "name" : "Upload Image",
-        "show" : "uploadImage()",
-        "img" : "medias/color.svg"
     }
 ]

@@ -20,26 +20,6 @@
             "name" : "Visualization 4",
             "show" : "showVisualisation4()",
             "img" : "medias/text.svg"
-        },
-        {
-            "name" : "Visualization 1",
-            "show" : "showVisualisation1()",
-            "img" : "medias/price.svg"
-        },
-        {
-            "name" : "Visualization 2",
-            "show" : "showVisualisation2()",
-            "img" : "medias/color.svg"
-        },
-        {
-            "name" : "Visualization 3",
-            "show" : "showVisualisation3()",
-            "img" : "medias/size.svg"
-        },
-        {
-            "name" : "Visualization 4",
-            "show" : "showVisualisation4()",
-            "img" : "medias/text.svg"
         }
     ]
 }

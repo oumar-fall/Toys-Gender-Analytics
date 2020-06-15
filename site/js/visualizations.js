@@ -43,6 +43,7 @@ function showVisualisation2(){
     initVisualization();
     container.innerHTML = "";
     var img = document.createElement('img');
+    img.classList.add("fullSize");
     img.src = "data/img/mosaique_boy.png";
     container.appendChild(img);
 }
@@ -51,6 +52,7 @@ function showVisualisation3(){
     initVisualization();
     container.innerHTML = "";
     var img = document.createElement('img');
+    img.classList.add("fullSize");
     img.src = "data/img/mosaique_girl.png";
     container.appendChild(img);
 }
@@ -93,8 +95,9 @@ function projectWords(){
     img.classList.add("imgDescription", "sideContent");
     img.src = "data/img/description_words.png";
     container.appendChild(img);
+}
 
-function ProjectBrands() {
+function projectBrands() {
     initVisualization();
     var projectDescription = document.createElement("div");
     projectDescription.classList.add("textDescription");
@@ -122,7 +125,7 @@ function projectPinkTaxe(){
     
 }
 
-function ProjectPrices(){
+function projectPrices(){
     initVisualization();
     var projectDescription = document.createElement("div");
     projectDescription.classList.add("textDescription");
