@@ -58,6 +58,10 @@ main {
     justify-content: center;
 }
 
+
+
+
+
 .container {
     border : solid black 3px;
     grid-row: 2 / end;
