@@ -105,7 +105,7 @@ function projectBrands() {
     container.appendChild(projectDescription);
     projectDescription.innerHTML = "The difference between the brands of girls' and boys' toys is also impressive.  Some brands make toys that are attributed to only one sex, such as Corolle (the doll brand) or Playmobil. <br> <br>  Here are the brands most present in girls' toys : <ol> <li> COROLLE </li> <li> MATTEL </li> <li> LEGO </li> <li> HASBRO </li> <li> GIOCHI PREZIOSI </li> <li> TY </li> <li> EPOCH </li> <li> PLAYMOBIL </li> <li> SMOBY </li> <li> DOUDOU ET COMPAGNIE </li> </ol> <br> <br> And here are the brands more present in boys' toys : <ol> <li> LEGO </li> <li> PLAYMOBIL </li> <li> HASBRO </li> <li> MATTEL </li> <li> SMOBY </li> <li> BRUDER </li> <li> RUBIE'S </li> <li> JOHN WORLD </li> <li> GIOCHI PREZIOSI </li> <li> LE COIN DES ENFANTS </li> </ol>";
     var img = document.createElement('img');
-    img.src = "data/marques_words.png";
+    img.src = "data/img/marques_words.png";
     img.algin ="left";
     img.classList.add("imgDescription", "sideContent");
     container.appendChild(img);
@@ -119,7 +119,7 @@ function projectPinkTaxe(){
     projectDescription.innerHTML = "Pink tax refers to a price difference between products labelled for women and those labelled for men, to the detriment of women. <br> <br> Does the pink tax apply to toys in the La grande récré catalogue? <br> <br> At first glance, the pink tax does not seem to concern this catalogue, in fact the average price of toys for girls is 25 euros against 33 euros for toys for boys (the distribution of toys according to their price and the gender they are associated with is visible on the second figure). <br> <br>  We have tried to highlight the pink tax by comparing the prices of toys with the same volume. But here again, as shown in the figure opposite, girls' toys are cheaper than boys' toys at the same volume.";
     var img = document.createElement('img');
     img.classList.add("imgDescription", "sideContent");
-    img.src = "data/pink_tax.png";
+    img.src = "data/img/pink_tax.png";
     img.algin ="left";
     container.appendChild(img);
     
@@ -134,7 +134,7 @@ function projectPrices(){
     projectDescription.innerHTML = "Are the most gendered toys the cheapest ones? <br> <br> Well! Not in the catalog of La Grande Récré! Among the girls' toys that cost less than 10 euros, 24% are pink while among the toys that cost more than 50 euros 31%. ";
     var img = document.createElement('img');
     img.classList.add("imgDescription", "sideContent");
-    img.src = "data/prices_girls.png";
+    img.src = "data/img/prices_girls.png";
     img.algin ="left";
     container.appendChild(img);
 }
