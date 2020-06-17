@@ -10,6 +10,9 @@ const div4  = document.createElement("div");
 const boutton = document.createElement("button");
 boutton.id = "see";
 boutton.onclick = showVisu;
+var z;
+var x;
+var y;
 
 function initVisualization(){
     clearInterval(wave_id);
@@ -41,6 +44,55 @@ function color(c){
     return(d3.hsv(c*360,1,1))
 }
 
+function compute_x(d,val){
+    console.log("salut");
+    switch(val){
+            case "price":
+                z = d3.scaleLinear()
+                .domain(d3.extent(database, (d) => d.prix))
+                .range([20, parseFloat(canvas_w)-20]);
+                return(z(d.prix))
+                break;
+            case "volume":
+                z = d3.scaleLinear()
+                .domain(d3.extent(database, (d) => volume))
+                .range([20, parseFloat(canvas_w)-20]);
+                return(z(volume));
+                break;
+            case "weight": 
+                z = d3.scaleLinear()
+                .domain(d3.extent(database, (d) => d.poids))
+                .range([20, parseFloat(canvas_w)-20]);
+                return(z(d.poids));
+                break;
+    }
+}
+
+function compute_y(d,val){
+    switch(val){
+            case "price":
+                y = d3.scaleLinear()
+                .domain(d3.extent(database, (d) => d.prix))
+                .range([20, parseFloat(canvas_h)-20]);
+                return(y(d.prix))
+                break;
+            case "volume":
+                y = d3.scaleLinear()
+                .domain(d3.extent(database, (d) => volume))
+                .range([20, parseFloat(canvas_h)-20]);
+                console.log("coucou");
+                return(y(volume));
+                break;
+            case "weight": 
+                y = d3.scaleLinear()
+                .domain(d3.extent(database, (d) => d.poids))
+                .range([20, parseFloat(canvas_h)-20]);
+                return(y(d.poids));
+                break;
+    }
+}
+
+
 function showVisu(){
     d3.select("svg").remove();
     svg = d3.select(container)
@@ -54,21 +106,40 @@ function showVisu(){
     var valeurmode;
 
     for(var i = 0; i < radios.length; i++){
-        console.log(radios[1].checked);
         if(radios[i].checked){
             valeurmode = radios[i].value;
         }
     }
 
-    console.log(valeurmode);
+    var radiosA = document.getElementsByName('abs');
+    console.log(radiosA)
+    var valeurmodeA;
 
-    let x = d3.scaleLinear()
-            .domain(d3.extent(database, (d) => d.poids))
-            .range([20, parseFloat(canvas_w)-20]);
+    for(var i = 0; i < radiosA.length; i++){
+        if(radiosA[i].checked){
+            valeurmodeA = radiosA[i].value;
+        }
+    }
+
+    var radiosB = document.getElementsByName('od');
+    console.log(radiosB)
+    var valeurmodeB;
+
+    for(var i = 0; i < radiosB.length; i++){
+        if(radiosB[i].checked){
+            valeurmodeB = radiosB[i].value;
+        }
+    }
     
-    let y = d3.scaleLinear()
-            .domain(d3.extent(database, (d) => d.prix))
-            .range([20, parseFloat(canvas_h)-20]);
+
+    // }
+    // let x = d3.scaleLinear()
+    //         .domain(d3.extent(database, (d) => d.poids))
+    //         .range([20, parseFloat(canvas_w)-20]);
+    
+    // let y = d3.scaleLinear()
+    //         .domain(d3.extent(database, (d) => d.prix))
+    //         .range([20, parseFloat(canvas_h)-20]);
     
 
     if (valeurmode=="gbm"){
@@ -81,8 +152,8 @@ function showVisu(){
         .enter()
         .append('circle')
         .attr('r', 3)
-        .attr('cx', (d) => x(d.poids))
-        .attr('cy', (d) => y(d.prix))
+        .attr('cx', (d) => compute_x(d,valeurmodeA))
+        .attr('cy', (d) => compute_y(d, valeurmodeB))
         .attr('fill', (d) => colorgbm( d.genre))
         .on("mouseover",function(d){div4.innerHTML = "Description du jouet : <br> </br>" + "Nom : " +  (d.nom).toLowerCase() +"<br> </br> Prix : " + (d.prix) });
         wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
@@ -94,8 +165,8 @@ function showVisu(){
         .enter()
         .append('circle')
         .attr('r', 3)
-        .attr('cx', (d) => x(d.poids))
-        .attr('cy', (d) => y(d.prix))
+        .attr('cx', (d) => compute_x(d,valeurmodeA))
+        .attr('cy', (d) => compute_y(d, valeurmodeB))
         .attr('fill', (d) => color( +d.couleur))
         .on("mouseover",function(d){div4.innerHTML = "Description du jouet : <br> </br>" + "Nom : " +  (d.nom).toLowerCase() +"<br> </br> Prix : " + (d.prix) });
         wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
@@ -105,14 +176,14 @@ function showVisu(){
 
 function showVisualisation1(){
     initVisualization();
-    
+    d3.select("svg").remove();
 
     let x = d3.scaleLinear()
             .domain(d3.extent(database, (d) => d.poids))
             .range([20, parseFloat(canvas_w)-20]);
     
     let y = d3.scaleLinear()
-            .domain(d3.extent(database, (d) => d.prix))
+            .domain(d3.extent(database, (d) => d.poids))
             .range([20, parseFloat(canvas_h)-20]);
     
     // let color = d3.scaleOrdinal()
@@ -125,7 +196,7 @@ function showVisualisation1(){
         .append('circle')
         .attr('r', 3)
         .attr('cx', (d) => x(d.poids))
-        .attr('cy', (d) => y(d.prix))
+        .attr('cy', (d) => y(d.poids))
         .attr('fill', (d) => color(+ d.couleur))
         .on("mouseover",function(d){div4.innerHTML = "Description du jouet : <br> </br>" + "Nom : " +  (d.nom).toLowerCase() +"<br> </br> Prix : " + (d.prix) });
     wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
