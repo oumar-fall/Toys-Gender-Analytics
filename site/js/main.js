@@ -270,9 +270,10 @@ function showProject(){
     request.onload = function() {
         var projectTabs = this.response;
         if (projectTabs){
-            for (let tab of projectTabs){
-                appendDiv(tab);
-            }
+            // for (let tab of projectTabs){
+            //     appendDiv(tab);
+            // }
+            appendDiv(projectTabs[1])
         }
         else {
             console.log("Can't load project index");
