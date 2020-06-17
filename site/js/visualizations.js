@@ -2,15 +2,23 @@ var svg;
 
 const canvas_h = getComputedStyle(container).height;
 const canvas_w = getComputedStyle(container).width;
+const p = document.createElement("p");
+p.className = "text_visu";
 
 function initVisualization(){
     clearInterval(wave_id);
     container.innerHTML = "";
+    container.appendChild(p);
     svg = d3.select(container)
             .append('svg')
             .attr("width", canvas_w)
             .attr("height", canvas_h)
             .attr("class", "canvas")
+}
+
+//je rajoute ici
+function color(c){
+    return(d3.hsv(c*360,1,1))
 }
 
 function showVisualisation1(){
@@ -24,9 +32,9 @@ function showVisualisation1(){
             .domain(d3.extent(database, (d) => d.prix))
             .range([20, parseFloat(canvas_h)-20]);
     
-    let color = d3.scaleOrdinal()
-                .domain(['Boy', 'Girl', 'Mixte'])
-                .range(['blue', 'pink', 'grey'])
+    // let color = d3.scaleOrdinal()
+    //             .domain(['Boy', 'Girl', 'Mixte'])
+    //             .range(['blue', 'pink', 'grey'])
 
     svg.selectAll('circle')
         .data(database)
@@ -35,8 +43,10 @@ function showVisualisation1(){
         .attr('r', 3)
         .attr('cx', (d) => x(d.poids))
         .attr('cy', (d) => y(d.prix))
-        .attr('fill', (d) => color(d.genre));
+        .attr('fill', (d) => color(+ d.couleur))
+        .on("mouseover",function(d){p.innerHTML = "Description du jouer <br> </br> " + (d.nom).toLowerCase()});
     wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
+
 }
 
 function showVisualisation2(){

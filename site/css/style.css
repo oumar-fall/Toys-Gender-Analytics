@@ -319,3 +319,10 @@ a{
 .modalImage:hover {
     cursor : zoom-out;
 }
+
+.text_visu {
+    font-size: small;
+
+    /* height: 100%;
+    background-color: red; */
+}

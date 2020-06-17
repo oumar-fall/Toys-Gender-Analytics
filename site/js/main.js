@@ -9,6 +9,7 @@ const [main_nav] = document.getElementsByClassName('main-nav');
 const [secondary_nav] = document.getElementsByClassName('secondary-nav');
 const [container] = document.getElementsByClassName("container");
 const [modal] = document.getElementsByClassName("modal");
+const [txt] = document.getElementsByClassName("mytext");
 
 var rollSecondaryNavLocked = false;
 var wave_id;
@@ -58,6 +59,7 @@ function loadDatabase(){
                 volume: d.longueur*d.largeur*d.hauteur,
                 poids: (d.poids === "None")? 0 : d.poids,
                 marque_id: +d.marque_id,
+                couleur : +d.couleur,
             }
         })
         .get( (error, rows) => {
@@ -142,7 +144,7 @@ function generate_secondaryNav(path) {
 
             if (secondary_nav_tabs.length > secondary_nav.max_tabs){
                 let rollRightBtn = document.createElement("button");
-                rollRightBtn.style.backgroundImage = "url('medias/rollRight.svg')";
+                rollRightBtn.style.backgroundImage = "url('medias/svg/rollRight.svg')";
                 rollRightBtn.alt = "roll right";
                 rollRightBtn.style.width = secondary_nav.btnSize;
                 rollRightBtn.style.height = secondary_nav.btnSize;
@@ -179,7 +181,7 @@ function generate_secondaryNav(path) {
 
             if (secondary_nav_tabs.length > secondary_nav.max_tabs){
                 let rollLeftBtn = document.createElement("button");
-                rollLeftBtn.style.backgroundImage = "url('medias/rollLeft.svg')";
+                rollLeftBtn.style.backgroundImage = "url('medias/svg/rollLeft.svg')";
                 rollLeftBtn.alt = "roll left";
                 rollLeftBtn.style.width = secondary_nav.btnSize;
                 rollLeftBtn.style.height = secondary_nav.btnSize;
