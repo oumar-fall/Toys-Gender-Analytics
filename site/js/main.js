@@ -8,33 +8,34 @@ const [footer] = document.getElementsByTagName("footer");
 const [main_nav] = document.getElementsByClassName('main-nav');
 const [secondary_nav] = document.getElementsByClassName('secondary-nav');
 const [container] = document.getElementsByClassName("container");
+const [modal] = document.getElementsByClassName("modal");
 
 var rollSecondaryNavLocked = false;
 var wave_id;
 var database, categories, marques;
 
 function init(){
-    if (w >= h){
-        main.style.height = h + "px";
-    }
-    else {
-        body.style.height = h + "px";
-    }
+    main.style.height = h + "px";
 
-    let mainTitle = document.createElement("span");
-    mainTitle.innerHTML = "Toys Story";
+    let mainTitle = document.createElement("img");
     mainTitle.className = "mainTitle";
-    mainTitle.style.fontSize = 0.6 * parseInt(getComputedStyle(header).height) + "px";
-    header.appendChild(mainTitle);
+    mainTitle.src = "medias/mainTitle.png"
+    container.appendChild(mainTitle);
 
     let footerContent = document.createElement("p");
     footerContent.innerHTML = "%footer%footer%footer%footer%footer%footer%footer%footer%footer%";
     footer.appendChild(footerContent);
 
-    loadDatabase();
+    setTimeout(() => {
+        container.innerHTML = "";
+        loadDatabase();
+    }, 2000);
 }
 
 function loadDatabase(){
+
+    container.innerHTML = "Loading data...";
+
     d3.tsv("data/database.tsv")
         .row( (d, i) => {
             d.longueur = (d.longueur === "None")? 0 : +d.longueur;

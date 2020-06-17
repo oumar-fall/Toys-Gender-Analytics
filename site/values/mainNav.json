@@ -2,16 +2,16 @@
     {
         "name" : "Project",
         "show" : "showProject()",
-        "img" : "medias/project.svg"
+        "img" : "medias/svg/project.svg"
     }, 
     {
         "name" : "Visualization",
         "show" : "showVisualization()",
-        "img" : "medias/visualizations.svg"
+        "img" : "medias/svg/visualizations.svg"
     }, 
     {
         "name" : "Toy Classifier",
         "show" : "showClassifier()",
-        "img" : "medias/classifier.svg"
+        "img" : "medias/svg/classifier.svg"
     }
 ]

@@ -5,27 +5,27 @@
         {
             "name" : "Colors",
             "show" : "projectColor()",
-            "img" : "medias/color.svg"
+            "img" : "medias/svg/color.svg"
         },
         {
             "name" : "Pink Taxe",
             "show" : "projectPinkTaxe()",
-            "img" : "medias/price.svg"
+            "img" : "medias/svg/price.svg"
         },
         {
             "name" : "Words",
             "show" : "projectWords()",
-            "img" : "medias/size.svg"
+            "img" : "medias/svg/size.svg"
         },
         {
             "name" : "Brands",
             "show" : "projectBrands()",
-            "img" : "medias/text.svg"
+            "img" : "medias/svg/text.svg"
         },
         {
             "name" : "Prices",
             "show" : "projectPrices()",
-            "img" : "medias/price.svg"
+            "img" : "medias/svg/price.svg"
         }
     ]
 }

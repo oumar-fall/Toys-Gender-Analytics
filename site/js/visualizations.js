@@ -84,6 +84,7 @@ function appendDiv(tab){
         var img = document.createElement("img");
         img.classList.add("tabImage", "n_img" + n_img);
         img.src = tab.images[i];
+        img.setAttribute("onclick",  "showImg('" + img.src + "');");
         imgContent.appendChild(img);
     }
     
@@ -94,4 +95,17 @@ function appendDiv(tab){
     }
     container.appendChild(tabDiv);
     container.appendChild(document.createElement("hr"));
+}
+
+function showImg(imgPath) {
+    var img = document.createElement('img');
+    img.src = imgPath;
+    modal.appendChild(img);
+    modal.style.display = "flex";
+    img.classList.add("modalImage");
+}
+
+function closeModal() {
+    modal.innerHTML = "";
+    modal.style.display = "none";
 }

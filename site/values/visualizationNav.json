@@ -4,22 +4,22 @@
         {
             "name" : "Visualization 1",
             "show" : "showVisualisation1()",
-            "img" : "medias/price.svg"
+            "img" : "medias/svg/price.svg"
         },
         {
             "name" : "Visualization 2",
             "show" : "showVisualisation2()",
-            "img" : "medias/color.svg"
+            "img" : "medias/svg/color.svg"
         },
         {
             "name" : "Visualization 3",
             "show" : "showVisualisation3()",
-            "img" : "medias/size.svg"
+            "img" : "medias/svg/size.svg"
         },
         {
             "name" : "Visualization 4",
             "show" : "showVisualisation4()",
-            "img" : "medias/text.svg"
+            "img" : "medias/svg/text.svg"
         }
     ]
 }
