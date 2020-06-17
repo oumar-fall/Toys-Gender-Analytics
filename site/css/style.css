@@ -319,10 +319,42 @@ a{
 .modalImage:hover {
     cursor : zoom-out;
 }
-
+/* je rajoute ici*/
 .text_visu {
     font-size: small;
+    line-height : 70%;
 
     /* height: 100%;
     background-color: red; */
+}
+
+#left {
+    float:left;
+    font-size: small;
+    line-height : 70%;
+    margin-left: 0px;
+
+}
+#right {
+    float:left;
+    font-size: small;
+    line-height : 70%;
+    margin-left: 20px;
+
+
+}
+#right_right {
+    float:left;
+    font-size: small;
+    line-height : 70%;
+    margin-left: 20px;
+
+
+}
+#center {
+    float:left;
+    font-size: small;
+    line-height : 70%;
+    margin-left : 20px;
+
 }

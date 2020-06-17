@@ -4,10 +4,27 @@ const canvas_h = getComputedStyle(container).height;
 const canvas_w = getComputedStyle(container).width;
 const p = document.createElement("p");
 p.className = "text_visu";
+const divgrosse = document.createElement("div");
+const div1 =  document.createElement("div");
+const div2 =  document.createElement("div");
+const div3  = document.createElement("div");
+const div4  = document.createElement("div");
 
 function initVisualization(){
     clearInterval(wave_id);
     container.innerHTML = "";
+    container.appendChild(divgrosse);
+    div1.id = "left";
+    div2.id = "center";
+    div3.id = "right";
+    div4.id ="right_right";
+    div1.innerHTML="Select the abscissa : <div><input type='radio' id='price' name='drone' value='price'checked><label for='price'> Price</label></div> <div><input type='radio' id='volume' name='drone' value='volume'> <label for='volume'>Volume</label></div><div><input type='radio' id='weight' name='drone' value='weight'><label for='weight'> Weight</label></div><div><input type='radio' id='age' name='drone' value='age'checked><label for='age'> Age</label></div>";
+    div2.innerHTML="Select the ordinate : <div><input type='radio' id='price' name='drone' value='price'checked><label for='price'> Price</label></div> <div><input type='radio' id='volume' name='drone' value='volume'> <label for='volume'>Volume</label></div><div><input type='radio' id='weight' name='drone' value='weight'><label for='weight'> Weight</label></div><div><input type='radio' id='age' name='drone' value='age'checked><label for='age'> Age</label></div>";
+    div3.innerHTML = "Select your mode : <div><input type='radio' id='gbm' name='drone' value='gbm'checked><label for='gbm'> Girl Boy Mixt </label></div> <div><input type='radio' id='colors' name='drone' value='colors'> <label for='colors'>Main color</label></div>";
+    divgrosse.appendChild(div1);
+    divgrosse.appendChild(div2);
+    divgrosse.appendChild(div3);
+    divgrosse.appendChild(div4);
     container.appendChild(p);
     svg = d3.select(container)
             .append('svg')
@@ -23,6 +40,7 @@ function color(c){
 
 function showVisualisation1(){
     initVisualization();
+    
 
     let x = d3.scaleLinear()
             .domain(d3.extent(database, (d) => d.poids))
@@ -44,7 +62,7 @@ function showVisualisation1(){
         .attr('cx', (d) => x(d.poids))
         .attr('cy', (d) => y(d.prix))
         .attr('fill', (d) => color(+ d.couleur))
-        .on("mouseover",function(d){p.innerHTML = "Description du jouer <br> </br> " + (d.nom).toLowerCase()});
+        .on("mouseover",function(d){div4.innerHTML = "Description du jouet : <br> </br>" + "Nom : " +  (d.nom).toLowerCase() +"<br> </br> Prix : " + (d.prix) });
     wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
 
 }
