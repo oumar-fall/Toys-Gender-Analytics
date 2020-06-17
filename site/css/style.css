@@ -320,13 +320,6 @@ a{
     cursor : zoom-out;
 }
 /* je rajoute ici*/
-.text_visu {
-    font-size: small;
-    line-height : 70%;
-
-    /* height: 100%;
-    background-color: red; */
-}
 
 #left {
     float:left;
@@ -357,4 +350,8 @@ a{
     line-height : 70%;
     margin-left : 20px;
 
+}
+
+#see {
+    margin-top: 10px;
 }
