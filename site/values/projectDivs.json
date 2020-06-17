@@ -1,0 +1,43 @@
+[
+    {
+        "tabname" : "intro",
+        "text" : "What color were your toys when you were a child? Let us guess... you're a woman? We bet they were <span class='pink'>pink</span>! A man? Rather <span class='blue'>blue</span> then. We wanted to see if those clichés were still relevant in the gendered toy catalogues in 2020. Take a stroll through our website to discover our findings and establish your own by playing with our interactive visualizations. <br><br> For this study we have retrieved the toys from the catalogue of La Grande Récré : <a href='https://www.lagranderecre.fr/'>https://www.lagranderecre.fr/</a>. This catalogue is indeed still gendered in spite of the new French legislation in force. The conclusions drawn are therefore characteristic of this catalogue, in spring 2020. <br><br> We have retrieved information about 75269 toys, including image, brand, price, description, dimensions, weight... in order to study them as well as possible.",
+        "images" : []
+    },
+    {
+        "tabname" : "color",
+        "text" : "One of the first clichés we wanted to check is the following: the toys for girls are <span class='pink'>pink</span> while the toys for boys are rather <span class='blue'>blue</span>. As you can see on the attached diagrams this cliché is confirmed. Pink is indeed very present on girls' toys, while boys' toys are more varied in colour. <br> <br> We obtained these diagrams from the toys in the catalogue la grande récrée by looking at the majority tint of each picture. White and black are not considered.  ",
+        "images" : [
+            "data/img/color_repartition_1.png",
+            "data/img/color_repartition_2.png"
+        ]
+    },
+    {
+        "tabname" : "pinkTaxe",
+        "text" : "Pink tax refers to a price difference between products labelled for women and those labelled for men, to the detriment of women. <br> <br> Does the pink tax apply to toys in the La grande récré catalogue? <br> <br> At first glance, the pink tax does not seem to concern this catalogue, in fact the average price of toys for girls is 25 euros against 33 euros for toys for boys (the distribution of toys according to their price and the gender they are associated with is visible on the second figure). <br> <br>  We have tried to highlight the pink tax by comparing the prices of toys with the same volume. But here again, as shown in the figure opposite, girls' toys are cheaper than boys' toys at the same volume.",
+        "images" : [
+            "data/img/pink_tax.png"
+        ]
+    },
+    {
+        "tabname" : "words",
+        "text" : "One of the first clichés we wanted to check is the following: the toys for girls are <span class='pink'>pink</span> while the toys for boys are rather <span class='blue'>blue</span>. As you can see on the attached diagrams this picture is confirmed. Pink is indeed very present on girls' toys, while boys' toys are more varied in colour. <br> <br> We obtained these diagrams from the toys in the catalogue la grande récrée by looking at the majority tint of each picture. White and black are not considered.  ",
+        "images" : [
+            "data/img/description_words.png"
+        ]
+    },
+    {
+        "tabname" : "brands",
+        "text" : "The difference between the brands of girls' and boys' toys is also impressive.  Some brands make toys that are attributed to only one sex, such as Corolle (the doll brand) or Playmobil. <br> <br>  Here are the brands most present in girls' toys : <ol> <li> COROLLE </li> <li> MATTEL </li> <li> LEGO </li> <li> HASBRO </li> <li> GIOCHI PREZIOSI </li> <li> TY </li> <li> EPOCH </li> <li> PLAYMOBIL </li> <li> SMOBY </li> <li> DOUDOU ET COMPAGNIE </li> </ol> <br> <br> And here are the brands more present in boys' toys : <ol> <li> LEGO </li> <li> PLAYMOBIL </li> <li> HASBRO </li> <li> MATTEL </li> <li> SMOBY </li> <li> BRUDER </li> <li> RUBIE'S </li> <li> JOHN WORLD </li> <li> GIOCHI PREZIOSI </li> <li> LE COIN DES ENFANTS </li> </ol>",
+        "images" : [
+            "data/img/marques_words.png"
+        ]
+    },
+    {
+        "tabname" : "prices",
+        "text" : "Are the most gendered toys the cheapest ones? <br> <br> Well! Not in the catalog of La Grande Récré! Among the girls' toys that cost less than 10 euros, 24% are pink while among the toys that cost more than 50 euros 31%. ",
+        "images" : [
+            "data/img/prices_girls.png"
+        ]
+    }
+]

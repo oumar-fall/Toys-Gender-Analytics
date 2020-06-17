@@ -262,12 +262,22 @@ function waveContent(items, itemClass) {
 }
 
 function showProject(){
-    generate_secondaryNav("values/projectNav.json");
-    var projectDescription = document.createElement("div");
-    projectDescription.classList.add("textDescription");
-    container.innerHTML = "";
-    container.appendChild(projectDescription);
-    projectDescription.innerHTML = "What color were your toys when you were a child? Let us guess... you're a woman? We bet they were <span class='pink'>pink</span>! A man? Rather <span class='blue'>blue</span> then. We wanted to see if those clichés were still relevant in the gendered toy catalogues in 2020. Take a stroll through our website to discover our findings and establish your own by playing with our interactive visualizations. <br><br> For this study we have retrieved the toys from the catalogue of La Grande Récré : <a href='https://www.lagranderecre.fr/'>https://www.lagranderecre.fr/</a>. This catalogue is indeed still gendered in spite of the new French legislation in force. The conclusions drawn are therefore characteristic of this catalogue, in spring 2020. <br><br> We have retrieved information about 75269 toys, including image, brand, price, description, dimensions, weight... in order to study them as well as possible.";
+    container.innerHTML = ""
+    let request = new XMLHttpRequest();
+    request.open('GET', "values/projectDivs.json");
+    request.responseType = 'json';
+    request.send();
+    request.onload = function() {
+        var projectTabs = this.response;
+        if (projectTabs){
+            for (let tab of projectTabs){
+                appendDiv(tab);
+            }
+        }
+        else {
+            console.log("Can't load project index");
+        }
+    }
 }
 
 function showVisualization(){

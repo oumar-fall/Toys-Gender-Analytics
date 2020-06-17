@@ -62,79 +62,31 @@ function showVisualisation4(){
     container.innerHTML = "Visualization 4";
 }
 
-//change ici 
-function projectColor(){
-    initVisualization();
-    var projectDescription = document.createElement("div");
-    projectDescription.classList.add("textDescription");
-    container.innerHTML = "";
-    container.appendChild(projectDescription);
-    projectDescription.innerHTML = "One of the first clichés we wanted to check is the following: the toys for girls are <span class='pink'>pink</span> while the toys for boys are rather <span class='blue'>blue</span>. As you can see on the attached diagrams this cliché is confirmed. Pink is indeed very present on girls' toys, while boys' toys are more varied in colour. <br> <br> We obtained these diagrams from the toys in the catalogue la grande récrée by looking at the majority tint of each picture. White and black are not considered.  ";
-    var imgContainer = document.createElement('div');
-    imgContainer.classList.add("imgContainer", "sideContent", "n_img2");
-    container.appendChild(imgContainer);
-    var img1 = document.createElement('img');
-    img1.classList.add("imgDescription");
-    img1.src = "data/img/color_repartition_1.png";
-    imgContainer.appendChild(img1);
-    var img2 = document.createElement('img');
-    img2.classList.add("imgDescription");
-    img2.src = "data/img/color_repartition_2.png";
-    imgContainer.appendChild(img2);
+function appendDiv(tab){
+    var tabDiv = document.createElement("div");
+    tabDiv.classList.add("tabDiv");
 
-}
+    var textContent = document.createElement("div");
+    textContent.classList.add("textContent");
+    textContent.innerHTML = "<p>" + tab.text + "</p>";
 
-function projectWords(){
-    initVisualization();
-    var projectDescription = document.createElement("div");
-    projectDescription.classList.add("textDescription");
-    container.innerHTML = "";
-    container.appendChild(projectDescription);
-    projectDescription.innerHTML = "One of the first clichés we wanted to check is the following: the toys for girls are <span class='pink'>pink</span> while the toys for boys are rather <span class='blue'>blue</span>. As you can see on the attached diagrams this picture is confirmed. Pink is indeed very present on girls' toys, while boys' toys are more varied in colour. <br> <br> We obtained these diagrams from the toys in the catalogue la grande récrée by looking at the majority tint of each picture. White and black are not considered.  ";
-    var img = document.createElement('img');
-    img.classList.add("imgDescription", "sideContent");
-    img.src = "data/img/description_words.png";
-    container.appendChild(img);
-}
+    var imgContent = document.createElement("div");
+    imgContent.classList.add("imgContent");
 
-function projectBrands() {
-    initVisualization();
-    var projectDescription = document.createElement("div");
-    projectDescription.classList.add("textDescription");
-    container.innerHTML = "";
-    container.appendChild(projectDescription);
-    projectDescription.innerHTML = "The difference between the brands of girls' and boys' toys is also impressive.  Some brands make toys that are attributed to only one sex, such as Corolle (the doll brand) or Playmobil. <br> <br>  Here are the brands most present in girls' toys : <ol> <li> COROLLE </li> <li> MATTEL </li> <li> LEGO </li> <li> HASBRO </li> <li> GIOCHI PREZIOSI </li> <li> TY </li> <li> EPOCH </li> <li> PLAYMOBIL </li> <li> SMOBY </li> <li> DOUDOU ET COMPAGNIE </li> </ol> <br> <br> And here are the brands more present in boys' toys : <ol> <li> LEGO </li> <li> PLAYMOBIL </li> <li> HASBRO </li> <li> MATTEL </li> <li> SMOBY </li> <li> BRUDER </li> <li> RUBIE'S </li> <li> JOHN WORLD </li> <li> GIOCHI PREZIOSI </li> <li> LE COIN DES ENFANTS </li> </ol>";
-    var img = document.createElement('img');
-    img.src = "data/img/marques_words.png";
-    img.algin ="left";
-    img.classList.add("imgDescription", "sideContent");
-    container.appendChild(img);
-}
-function projectPinkTaxe(){
-    initVisualization();
-    var projectDescription = document.createElement("div");
-    projectDescription.classList.add("textDescription");
-    container.innerHTML = "";
-    container.appendChild(projectDescription);
-    projectDescription.innerHTML = "Pink tax refers to a price difference between products labelled for women and those labelled for men, to the detriment of women. <br> <br> Does the pink tax apply to toys in the La grande récré catalogue? <br> <br> At first glance, the pink tax does not seem to concern this catalogue, in fact the average price of toys for girls is 25 euros against 33 euros for toys for boys (the distribution of toys according to their price and the gender they are associated with is visible on the second figure). <br> <br>  We have tried to highlight the pink tax by comparing the prices of toys with the same volume. But here again, as shown in the figure opposite, girls' toys are cheaper than boys' toys at the same volume.";
-    var img = document.createElement('img');
-    img.classList.add("imgDescription", "sideContent");
-    img.src = "data/img/pink_tax.png";
-    img.algin ="left";
-    container.appendChild(img);
+    var n_img = tab.images.length;
+
+    for (let i = 0; i < n_img; i++) {
+        var img = document.createElement("img");
+        img.classList.add("tabImage", "n_img" + n_img);
+        img.src = tab.images[i];
+        imgContent.appendChild(img);
+    }
     
-}
 
-function projectPrices(){
-    initVisualization();
-    var projectDescription = document.createElement("div");
-    projectDescription.classList.add("textDescription");
-    container.innerHTML = "";
-    container.appendChild(projectDescription);
-    projectDescription.innerHTML = "Are the most gendered toys the cheapest ones? <br> <br> Well! Not in the catalog of La Grande Récré! Among the girls' toys that cost less than 10 euros, 24% are pink while among the toys that cost more than 50 euros 31%. ";
-    var img = document.createElement('img');
-    img.classList.add("imgDescription", "sideContent");
-    img.src = "data/img/prices_girls.png";
-    img.algin ="left";
-    container.appendChild(img);
+    tabDiv.appendChild(textContent);
+    if (n_img > 0){
+        tabDiv.appendChild(imgContent);
+    }
+    container.appendChild(tabDiv);
+    container.appendChild(document.createElement("hr"));
 }
