@@ -63,6 +63,11 @@ function showVisualisation4(){
 }
 
 function appendDiv(tab){
+    var tabName = document.createElement("span");
+    tabName.classList.add("tabName");
+    tabName.innerHTML = tab.tabname;
+    container.appendChild(tabName);
+
     var tabDiv = document.createElement("div");
     tabDiv.classList.add("tabDiv");
 

@@ -262,6 +262,7 @@ function waveContent(items, itemClass) {
 }
 
 function showProject(){
+    generate_secondaryNav("values/projectNav.json");
     container.innerHTML = ""
     let request = new XMLHttpRequest();
     request.open('GET', "values/projectDivs.json");
@@ -270,10 +271,9 @@ function showProject(){
     request.onload = function() {
         var projectTabs = this.response;
         if (projectTabs){
-            // for (let tab of projectTabs){
-            //     appendDiv(tab);
-            // }
-            appendDiv(projectTabs[1])
+            for (let tab of projectTabs){
+                appendDiv(tab);
+            }
         }
         else {
             console.log("Can't load project index");

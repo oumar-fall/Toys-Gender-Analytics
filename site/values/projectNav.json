@@ -1,6 +1,7 @@
 {
     "max_tabs" : 5,
-    "tabs" : [
+    "tabs" : [],
+    "tabs2" : [
         {
             "name" : "Colors",
             "show" : "projectColor()",
