@@ -310,8 +310,13 @@ function showVisualisation4(){
 }
 
 function appendDiv(tab){
+    if (!tab.level){
+        tab.level = 1;
+    }
+    
     var tabName = document.createElement("span");
-    tabName.classList.add("tabName");
+    tabName.classList.add("tabName", "level-" + tab.level);
+    tabName.id = tab.tabname.toLowerCase().replace(" ", "-");
     tabName.innerHTML = tab.tabname;
     container.appendChild(tabName);
 
@@ -341,7 +346,6 @@ function appendDiv(tab){
         tabDiv.appendChild(imgContent);
     }
     container.appendChild(tabDiv);
-    container.appendChild(document.createElement("hr"));
 }
 
 function showImg(imgPath) {

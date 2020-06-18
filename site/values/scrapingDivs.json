@@ -1,0 +1,29 @@
+[
+    {
+        "tabname" : "Table of content",
+        "level" : 1,
+        "text" : "<ul><li><a href='#a-scraping-method'>A. Scraping Method</a><ul><li><a href='#1-properties'>1. Properties</a></li><li><a href='#2-method'>2. Method</a><ul><li><a href='#analysing-html-structure'>Analysing html structure</a></li><li><a href='#getting-the-different-categories'>Getting the different categories</a></li><li><a href='#modifying-gender-filter'>Modifying gender filter</a></li><li><a href='#navigate-between-pages'>Navigate between pages</a></li><li><a href='#browsing-pages'>Browsing pages</a></li><li><a href='#data-scrapping'>Data scrapping</a></li><li><a href='#summary'>Summary</a></li></ul></li><li><a href='#3-limitations'>3. Limitations</a><ul><li><a href='#observations'>Observations</a></li><li><a href='#tests'>Tests</a></li><li><a href='#solutions'>Solutions</a></li></ul></li></ul></li><li><a href='#b-database'>B. Database</a><ul><li><a href='#1-properties-1'>1. Properties</a></li><li><a href='#2-reorganization'>2. Reorganization</a></li><li><a href='#3-structure'>3. Structure</a></li></ul></li></ul>",
+        "images" : []
+    },
+    {
+        "tabname" : "Scraping Method",
+        "level" : 1,
+        "text" : "",
+        "images" : []
+    },
+    {
+        "tabname" : "",
+        "text" : "",
+        "images" : []
+    },
+    {
+        "tabname" : "",
+        "text" : "",
+        "images" : []
+    },
+    {
+        "tabname" : "",
+        "text" : "",
+        "images" : []
+    }
+]

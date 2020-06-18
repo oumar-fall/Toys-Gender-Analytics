@@ -71,7 +71,7 @@ function loadDatabase(){
                 console.log(error);
             }
             else {
-                waiting.classList.add('waiting-of');
+                waiting.classList.add('waiting-off');
                 console.log("Database loaded :" + rows.length + " rows");
                 database = rows;
                 generate_mainNav();
@@ -108,7 +108,7 @@ function loadDatabase(){
                 console.log(error);
             }
             else {
-                waiting.classList.add('waiting-of');
+                waiting.classList.add('waiting-off');
                 console.log("Database loaded :" + rows.length + " rows");
                 databaseL = rows;
                 generate_mainNav();
@@ -308,6 +308,25 @@ function showProject(){
         }
         else {
             console.log("Can't load project index");
+        }
+    }
+}
+
+function showScraping(){
+    container.innerHTML = ""
+    let request = new XMLHttpRequest();
+    request.open('GET', "values/scrapingDivs.json");
+    request.responseType = 'json';
+    request.send();
+    request.onload = function() {
+        var projectTabs = this.response;
+        if (projectTabs){
+            for (let tab of projectTabs){
+                appendDiv(tab);
+            }
+        }
+        else {
+            console.log("Can't load scraping datas");
         }
     }
 }
