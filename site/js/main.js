@@ -8,33 +8,38 @@ const [footer] = document.getElementsByTagName("footer");
 const [main_nav] = document.getElementsByClassName('main-nav');
 const [secondary_nav] = document.getElementsByClassName('secondary-nav');
 const [container] = document.getElementsByClassName("container");
+const [modal] = document.getElementsByClassName("modal");
+const [txt] = document.getElementsByClassName("mytext");
+
+const waiting = document.createElement("div");
+waiting.classList.add("waiting");
 
 var rollSecondaryNavLocked = false;
-var wave_id;
 var database, categories, marques;
 
 function init(){
-    if (w >= h){
-        main.style.height = h + "px";
-    }
-    else {
-        body.style.height = h + "px";
-    }
+    body.appendChild(waiting);
+    main.style.height = h + "px";
 
-    let mainTitle = document.createElement("span");
-    mainTitle.innerHTML = "Toys Story";
+    let mainTitle = document.createElement("img");
     mainTitle.className = "mainTitle";
-    mainTitle.style.fontSize = 0.6 * parseInt(getComputedStyle(header).height) + "px";
-    header.appendChild(mainTitle);
+    mainTitle.src = "medias/mainTitle.png"
+    container.appendChild(mainTitle);
 
-    let footerContent = document.createElement("p");
-    footerContent.innerHTML = "%footer%footer%footer%footer%footer%footer%footer%footer%footer%";
-    footer.appendChild(footerContent);
+    // let footerContent = document.createElement("p");
+    // footerContent.innerHTML = "%footer%footer%footer%footer%footer%footer%footer%footer%footer%";
+    // footer.appendChild(footerContent);
 
-    loadDatabase();
+    setTimeout(() => {
+        container.innerHTML = "";
+        loadDatabase();
+    }, 2000);
 }
 
 function loadDatabase(){
+
+    container.innerHTML = "Loading data...";
+
     d3.tsv("data/database.tsv")
         .row( (d, i) => {
             d.longueur = (d.longueur === "None")? 0 : +d.longueur;
@@ -57,6 +62,7 @@ function loadDatabase(){
                 volume: d.longueur*d.largeur*d.hauteur,
                 poids: (d.poids === "None")? 0 : d.poids,
                 marque_id: +d.marque_id,
+                couleur : +d.couleur,
             }
         })
         .get( (error, rows) => {
@@ -64,6 +70,7 @@ function loadDatabase(){
                 console.log(error);
             }
             else {
+                waiting.classList.add('waiting-of');
                 console.log("Database loaded :" + rows.length + " rows");
                 database = rows;
                 generate_mainNav();
@@ -99,7 +106,7 @@ function generate_mainNav() {
                 icon.src = tab.img;
                 btn.appendChild(icon);
                 btn.setAttribute("tooltip", tab.name);
-                btn.setAttribute("onclick", tab.show);
+                btn.setAttribute("onclick", tab.onclick);
                 btn.style.width = main_nav_width*0.6 + "px";
                 btn.style.height = main_nav_width*0.6 + "px";
                 btn.className = "button round-btn";
@@ -113,7 +120,6 @@ function generate_mainNav() {
 }
 
 function generate_secondaryNav(path) {
-    clearInterval(wave_id);
     let request = new XMLHttpRequest();
     request.open('GET', path);
     request.responseType = 'json';
@@ -141,7 +147,7 @@ function generate_secondaryNav(path) {
 
             if (secondary_nav_tabs.length > secondary_nav.max_tabs){
                 let rollRightBtn = document.createElement("button");
-                rollRightBtn.style.backgroundImage = "url('medias/rollRight.svg')";
+                rollRightBtn.style.backgroundImage = "url('medias/svg/rollRight.svg')";
                 rollRightBtn.alt = "roll right";
                 rollRightBtn.style.width = secondary_nav.btnSize;
                 rollRightBtn.style.height = secondary_nav.btnSize;
@@ -158,7 +164,7 @@ function generate_secondaryNav(path) {
                 icon.src = tab.img;
                 btn.appendChild(icon);
                 btn.setAttribute("tooltip", tab.name);
-                btn.setAttribute("onclick", tab.show);
+                btn.setAttribute("onclick", tab.onclick);
 
                 if (tab_id < secondary_nav.max_tabs) {
                     btn.style.width = secondary_nav.tabSize;
@@ -178,7 +184,7 @@ function generate_secondaryNav(path) {
 
             if (secondary_nav_tabs.length > secondary_nav.max_tabs){
                 let rollLeftBtn = document.createElement("button");
-                rollLeftBtn.style.backgroundImage = "url('medias/rollLeft.svg')";
+                rollLeftBtn.style.backgroundImage = "url('medias/svg/rollLeft.svg')";
                 rollLeftBtn.alt = "roll left";
                 rollLeftBtn.style.width = secondary_nav.btnSize;
                 rollLeftBtn.style.height = secondary_nav.btnSize;
@@ -186,7 +192,6 @@ function generate_secondaryNav(path) {
                 rollLeftBtn.className = "rollBtn";
                 secondary_nav.appendChild(rollLeftBtn)
             }
-            wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
         }
         else {
             console.log("Fail to load secondary nav : " + path);
@@ -249,18 +254,6 @@ function rollSecondaryNavRight() {
     }
 }
 
-function waveContent(items, itemClass) {
-    let elts = items.getElementsByClassName(itemClass);
-    for (let elt_id = 0; elt_id < elts.length; elt_id++){
-        setTimeout(() => {
-            elts[elt_id].classList.add("flying");
-        }, elt_id * 50);
-        setTimeout(() => {
-            elts[elt_id].classList.remove("flying");
-        }, elt_id * 50 + 100);
-    }
-}
-
 function showProject(){
     generate_secondaryNav("values/projectNav.json");
     container.innerHTML = ""
@@ -287,10 +280,8 @@ function showVisualization(){
 }
 
 function showClassifier() {
-    container.innerHTML = "Toys Classifier : <br> During our research we had a funny thought: what if the toys were so gendered, that a computer could predict which belong to the girl category and which belong to the boy category?";
-
-
-
+    generate_secondaryNav("values/classifierNav.json");
+    container.innerHTML = "";
     var input = document.createElement('input');
     input.classList.add("box__file");
     input.type = "file";

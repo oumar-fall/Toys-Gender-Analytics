@@ -1,31 +1,31 @@
 {
     "max_tabs" : 5,
-    "tabs" : [],
-    "tabs2" : [
+    "tabs1" : [],
+    "tabs" : [
         {
             "name" : "Colors",
-            "show" : "projectColor()",
-            "img" : "medias/color.svg"
+            "onclick" : "document.getElementById('color').scrollIntoView()",
+            "img" : "medias/svg/color.svg"
         },
         {
             "name" : "Pink Taxe",
-            "show" : "projectPinkTaxe()",
-            "img" : "medias/price.svg"
+            "onclick" : "document.getElementById('pink_taxe').scrollIntoView()",
+            "img" : "medias/svg/pink_taxe.svg"
         },
         {
             "name" : "Words",
-            "show" : "projectWords()",
-            "img" : "medias/size.svg"
+            "onclick" : "document.getElementById('words').scrollIntoView()",
+            "img" : "medias/svg/text.svg"
         },
         {
             "name" : "Brands",
-            "show" : "projectBrands()",
-            "img" : "medias/text.svg"
+            "onclick" : "document.getElementById('brands').scrollIntoView()",
+            "img" : "medias/svg/brand.svg"
         },
         {
             "name" : "Prices",
-            "show" : "projectPrices()",
-            "img" : "medias/price.svg"
+            "onclick" : "document.getElementById('prices').scrollIntoView()",
+            "img" : "medias/svg/price.svg"
         }
     ]
 }

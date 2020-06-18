@@ -54,14 +54,20 @@ http.createServer(function(request, response) {
     })
   }
   if(myPath.substr(0,7) == "medias/") {
-    fs.readFile(myPath, 'binary', function(err, file){
+    fs.readFile(myPath, function(err, file){
       if (err) {
         response.writeHead(404, {'Content-Type': 'text/html'});
         response.write("File not found")
         response.end();
       }
       else{
-        response.writeHead(200, {'Content-Type': 'image/svg+xml'});
+        if (myPath.substr(7, 4) === "svg/"){
+          response.writeHead(200, {'Content-Type': 'image/svg+xml'});
+        }
+        else {
+          response.writeHead(200, {'Content-Type': 'image/*'});
+        }
+        
         response.end(file);
       }
     })
