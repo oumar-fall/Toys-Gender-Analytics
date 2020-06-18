@@ -306,14 +306,14 @@ function showVisualisation3(){
 
 function showVisualisation4(){
     initVisualization();
-    container.innerHTML = "Visualization 4";
+    showFrance();
 }
 
 function appendDiv(tab){
     if (!tab.level){
         tab.level = 1;
     }
-    
+
     var tabName = document.createElement("span");
     tabName.classList.add("tabName", "level-" + tab.level);
     tabName.id = tab.tabname.toLowerCase().replace(" ", "-");
