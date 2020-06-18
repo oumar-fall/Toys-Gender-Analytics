@@ -287,20 +287,70 @@ function showVisualization(){
 }
 
 function showClassifier() {
-    container.innerHTML = "";
-    var sendButton = document.createElement("button");
-    sendButton.innerHTML = "SEND";
-    sendButton.id = 'send';
-    var form = document.createElement('form');
+    container.innerHTML = "Toys Classifier : <br> During our research we had a funny thought: what if the toys were so gendered, that a computer could predict which belong to the girl category and which belong to the boy category?";
+
+
+
     var input = document.createElement('input');
+    input.classList.add("box__file");
     input.type = "file";
-    input.accept = "image/*"
+    input.accept = "image/*";
     input.name = "imagepath";
-    form.appendChild(input);
+    input.id = "file";
+
+    var form = document.createElement('form');
+    form.classList.add("box");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "");
+    form.setAttribute("enctype", "multipart/form-data");
+
+    var divbox = document.createElement('div');
+    divbox.id ="dropper";
+    divbox.ondrop = send;
+
+    var label = document.createElement('label');
+    label.innerHTML = "<strong>Choose a file </strong>";
+    label.setAttribute("for", "file");
+
+    var span = document.createElement('span');
+    span.classList.add("box__dragndrop");
+    span.innerHTML = "or drag it here<br>";
+
+
+    var button = document.createElement("button");
+    button.innerHTML = "Upload";
+    button.classList.add("box__button");
+    button.setAttribute("type", "submit");
+    button.onclick = send;
+    label.appendChild(span);
+    divbox.appendChild(input);
+    divbox.appendChild(label);
+    divbox.appendChild(button);
+
+    setInterval(dragndrop, 100);
+
+    form.appendChild(divbox);
+
     container.appendChild(form);
-    container.appendChild(sendButton);
-    sendButton.onclick = send;
+
+    function dragndrop(){
+      var box = document.getElementById('dropper');
+      if (box){
+        /*console.log("haha");*/
+        document.querySelector('#dropper').addEventListener('dragover', function(e) {
+            e.preventDefault(); // Annule l'interdiction de "drop"
+        }, false);
+
+        document.querySelector('#dropper').addEventListener('drop', function(e) {
+            e.preventDefault(); // Cette méthode est toujours nécessaire pour éviter une éventuelle redirection inattendue
+            /*alert('Vous avez bien déposé votre élément !');*/
+        }, false);
+
+      }
+    }
+
     function send() {
+        console.log("Drop !");
         var xhr = new XMLHttpRequest();
         const FD = new FormData( form );
         xhr.open('POST', '../../imageupload');
