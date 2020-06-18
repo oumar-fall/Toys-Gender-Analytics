@@ -282,47 +282,75 @@ function showVisualization(){
 function showClassifier() {
     generate_secondaryNav("values/classifierNav.json");
     container.innerHTML = "";
-    var input = document.createElement('input');
-    input.classList.add("box__file");
-    input.type = "file";
-    input.accept = "image/*";
-    input.name = "imagepath";
-    input.id = "file";
+    let request = new XMLHttpRequest();
+    request.open('GET', "values/classifierDivs.json");
+    request.responseType = 'json';
+    request.send();
+    request.onload = function() {
+        var projectTabs = this.response;
+        if (projectTabs){
+            for (let tab of projectTabs){
+                appendDiv(tab);
+            }
+        }
+        else {
+            console.log("Can't load project index");
+        }
+        addDragNDrop();
+        console.log("hahaha2");
+      }
 
-    var form = document.createElement('form');
-    form.classList.add("box");
-    form.setAttribute("method", "post");
-    form.setAttribute("action", "");
-    form.setAttribute("enctype", "multipart/form-data");
+    function addDragNDrop(){
+      console.log("hahaha");
+      var input = document.createElement('input');
+      input.classList.add("box__file");
+      input.type = "file";
+      input.accept = "image/*";
+      input.name = "imagepath";
+      input.id = "file";
 
-    var divbox = document.createElement('div');
-    divbox.id ="dropper";
-    divbox.ondrop = send;
+      var form = document.createElement('form');
+      form.classList.add("box");
+      form.id = "imageForm";
+      /*form.setAttribute("method", "post");
+      form.setAttribute("action", "");
+      form.setAttribute("enctype", "multipart/form-data");*/
 
-    var label = document.createElement('label');
-    label.innerHTML = "<strong>Choose a file </strong>";
-    label.setAttribute("for", "file");
+      var divbox = document.createElement('div');
+      divbox.id ="dropper";
+      divbox.ondrop = send;
 
-    var span = document.createElement('span');
-    span.classList.add("box__dragndrop");
-    span.innerHTML = "or drag it here<br>";
+      var divtext = document.createElement('div');
+      divtext.id ="text__dragndrop";
+
+      var label = document.createElement('label');
+      label.classList.add("label__dragndrop");
+      label.innerHTML = "<strong>Choose an image </strong>";
+      label.setAttribute("for", "file");
+
+      var span = document.createElement('span');
+      span.classList.add("box__dragndrop");
+      span.innerHTML = "or drag it here<br>";
 
 
-    var button = document.createElement("button");
-    button.innerHTML = "Upload";
-    button.classList.add("box__button");
-    button.setAttribute("type", "submit");
-    button.onclick = send;
-    label.appendChild(span);
-    divbox.appendChild(input);
-    divbox.appendChild(label);
-    divbox.appendChild(button);
+      var button = document.createElement("button");
+      button.innerHTML = "Upload";
+      button.classList.add("box__button");
+      button.setAttribute("type", "submit");
+      button.onclick = send;
+      label.appendChild(span);
+      divtext.appendChild(input);
+      divtext.appendChild(label);
+      divbox.appendChild(divtext);
+      divbox.appendChild(button);
 
-    setInterval(dragndrop, 100);
+      setInterval(dragndrop, 100);
 
-    form.appendChild(divbox);
+      form.appendChild(divbox);
 
-    container.appendChild(form);
+      container.appendChild(form);
+    }
+
 
     function dragndrop(){
       var box = document.getElementById('dropper');
@@ -336,14 +364,16 @@ function showClassifier() {
             e.preventDefault(); // Cette méthode est toujours nécessaire pour éviter une éventuelle redirection inattendue
             /*alert('Vous avez bien déposé votre élément !');*/
         }, false);
+        clearInterval();
 
       }
     }
 
     function send() {
+        var theForm = document.getElementById("imageForm");
         console.log("Drop !");
         var xhr = new XMLHttpRequest();
-        const FD = new FormData( form );
+        const FD = new FormData( theForm );
         xhr.open('POST', '../../imageupload');
         xhr.send(FD);
         xhr.onload = function(){container.innerHTML = xhr.response;}

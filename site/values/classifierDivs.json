@@ -1,0 +1,7 @@
+[
+  {
+    "tabname" : "Toys Classifier",
+    "text" : "During our research we had a funny though: what if the toys were so genderd, that a computer could guess if they belong to the boy or the girl category? That's why we decided to build an artificial intelligence trained on our database able to classify toys in two categories: boy or girl. We had many ways to build such classifier, but we choose to focus on the images. Indeed when we looked at the images ",
+    "images" : []
+  }
+]
