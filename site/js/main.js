@@ -11,11 +11,15 @@ const [container] = document.getElementsByClassName("container");
 const [modal] = document.getElementsByClassName("modal");
 const [txt] = document.getElementsByClassName("mytext");
 
+const waiting = document.createElement("div");
+waiting.classList.add("waiting");
+
 var rollSecondaryNavLocked = false;
 var wave_id;
 var database, categories, marques;
 
 function init(){
+    body.appendChild(waiting);
     main.style.height = h + "px";
 
     let mainTitle = document.createElement("img");
@@ -23,9 +27,9 @@ function init(){
     mainTitle.src = "medias/mainTitle.png"
     container.appendChild(mainTitle);
 
-    let footerContent = document.createElement("p");
-    footerContent.innerHTML = "%footer%footer%footer%footer%footer%footer%footer%footer%footer%";
-    footer.appendChild(footerContent);
+    // let footerContent = document.createElement("p");
+    // footerContent.innerHTML = "%footer%footer%footer%footer%footer%footer%footer%footer%footer%";
+    // footer.appendChild(footerContent);
 
     setTimeout(() => {
         container.innerHTML = "";
@@ -67,6 +71,7 @@ function loadDatabase(){
                 console.log(error);
             }
             else {
+                waiting.classList.add('waiting-of');
                 console.log("Database loaded :" + rows.length + " rows");
                 database = rows;
                 generate_mainNav();
@@ -161,7 +166,7 @@ function generate_secondaryNav(path) {
                 icon.src = tab.img;
                 btn.appendChild(icon);
                 btn.setAttribute("tooltip", tab.name);
-                btn.setAttribute("onclick", tab.show);
+                btn.setAttribute("onclick", tab.onclick);
 
                 if (tab_id < secondary_nav.max_tabs) {
                     btn.style.width = secondary_nav.tabSize;
