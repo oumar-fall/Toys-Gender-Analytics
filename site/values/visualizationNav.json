@@ -3,22 +3,22 @@
     "tabs" : [
         {
             "name" : "Visualization 1",
-            "show" : "showVisualisation1()",
+            "onclick" : "showVisualisation1()",
             "img" : "medias/svg/price.svg"
         },
         {
             "name" : "Visualization 2",
-            "show" : "showVisualisation2()",
+            "onclick" : "showVisualisation2()",
             "img" : "medias/svg/color.svg"
         },
         {
             "name" : "Visualization 3",
-            "show" : "showVisualisation3()",
+            "onclick" : "showVisualisation3()",
             "img" : "medias/svg/size.svg"
         },
         {
             "name" : "Visualization 4",
-            "show" : "showVisualisation4()",
+            "onclick" : "showVisualisation4()",
             "img" : "medias/svg/text.svg"
         }
     ]

@@ -15,7 +15,6 @@ var x;
 var y;
 
 function initVisualization(){
-    clearInterval(wave_id);
     container.innerHTML = "";
     container.appendChild(divgrosse);
     boutton.innerText = "See"
@@ -156,7 +155,6 @@ function showVisu(){
         .attr('cy', (d) => compute_y(d, valeurmodeB))
         .attr('fill', (d) => colorgbm( d.genre))
         .on("mouseover",function(d){div4.innerHTML = "Description du jouet : <br> </br>" + "Nom : " +  (d.nom).toLowerCase() +"<br> </br> Prix : " + (d.prix) });
-        wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
     }
 
     if(valeurmode=="colors"){
@@ -169,7 +167,6 @@ function showVisu(){
         .attr('cy', (d) => compute_y(d, valeurmodeB))
         .attr('fill', (d) => color( +d.couleur))
         .on("mouseover",function(d){div4.innerHTML = "Description du jouet : <br> </br>" + "Nom : " +  (d.nom).toLowerCase() +"<br> </br> Prix : " + (d.prix) });
-        wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
     }
 }
 
@@ -199,7 +196,6 @@ function showVisualisation1(){
         .attr('cy', (d) => y(d.poids))
         .attr('fill', (d) => color(+ d.couleur))
         .on("mouseover",function(d){div4.innerHTML = "Description du jouet : <br> </br>" + "Nom : " +  (d.nom).toLowerCase() +"<br> </br> Prix : " + (d.prix) });
-    wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
 
 }
 

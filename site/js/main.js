@@ -106,7 +106,7 @@ function generate_mainNav() {
                 icon.src = tab.img;
                 btn.appendChild(icon);
                 btn.setAttribute("tooltip", tab.name);
-                btn.setAttribute("onclick", tab.show);
+                btn.setAttribute("onclick", tab.onclick);
                 btn.style.width = main_nav_width*0.6 + "px";
                 btn.style.height = main_nav_width*0.6 + "px";
                 btn.className = "button round-btn";
@@ -280,6 +280,7 @@ function showVisualization(){
 }
 
 function showClassifier() {
+    generate_secondaryNav("values/classifierNav.json");
     container.innerHTML = "";
     var sendButton = document.createElement("button");
     sendButton.innerHTML = "SEND";
