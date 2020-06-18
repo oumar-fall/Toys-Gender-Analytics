@@ -1,17 +1,17 @@
 [
     {
         "name" : "Project",
-        "show" : "showProject()",
+        "onclick" : "showProject()",
         "img" : "medias/svg/project.svg"
     }, 
     {
         "name" : "Visualization",
-        "show" : "showVisualization()",
+        "onclick" : "showVisualization()",
         "img" : "medias/svg/visualizations.svg"
     }, 
     {
         "name" : "Toy Classifier",
-        "show" : "showClassifier()",
+        "onclick" : "showClassifier()",
         "img" : "medias/svg/classifier.svg"
     }
 ]

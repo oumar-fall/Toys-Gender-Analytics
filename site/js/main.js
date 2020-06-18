@@ -15,7 +15,6 @@ const waiting = document.createElement("div");
 waiting.classList.add("waiting");
 
 var rollSecondaryNavLocked = false;
-var wave_id;
 var database, categories, marques;
 
 function init(){
@@ -121,7 +120,6 @@ function generate_mainNav() {
 }
 
 function generate_secondaryNav(path) {
-    clearInterval(wave_id);
     let request = new XMLHttpRequest();
     request.open('GET', path);
     request.responseType = 'json';
@@ -194,7 +192,6 @@ function generate_secondaryNav(path) {
                 rollLeftBtn.className = "rollBtn";
                 secondary_nav.appendChild(rollLeftBtn)
             }
-            wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
         }
         else {
             console.log("Fail to load secondary nav : " + path);
@@ -254,18 +251,6 @@ function rollSecondaryNavRight() {
         {
             rollSecondaryNavLocked = false;
         }, 2000);
-    }
-}
-
-function waveContent(items, itemClass) {
-    let elts = items.getElementsByClassName(itemClass);
-    for (let elt_id = 0; elt_id < elts.length; elt_id++){
-        setTimeout(() => {
-            elts[elt_id].classList.add("flying");
-        }, elt_id * 50);
-        setTimeout(() => {
-            elts[elt_id].classList.remove("flying");
-        }, elt_id * 50 + 100);
     }
 }
 
