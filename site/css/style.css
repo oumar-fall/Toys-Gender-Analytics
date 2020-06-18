@@ -6,9 +6,7 @@ body {
     background: rgb(255,255,255);
     font-family: Arial, Helvetica, sans-serif;
     /* background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,247,211,1) 90%); */
-<<<<<<< HEAD
-    /*overflow: hidden;*/
-=======
+
 }
 body::-webkit-scrollbar{
     display: none;
@@ -25,7 +23,6 @@ body::-webkit-scrollbar{
 }
 .waiting-of{
     display: none;
->>>>>>> c66b52fe2d4fa3b9b8f764e2179c0178a4cd539e
 }
 
 header {
@@ -409,6 +406,7 @@ a{
     font-size: small;
     line-height : 70%;
     margin-left: 0px;
+    left : 0;
 
 }
 #right {
@@ -437,5 +435,9 @@ a{
 
 #see {
     margin-top: 10px;
+}
+
+#canvas {
+    overflow:scroll;
 }
 

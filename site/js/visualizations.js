@@ -13,6 +13,8 @@ boutton.onclick = showVisu;
 var z;
 var x;
 var y;
+var xaxis;
+var yaxis;
 
 function initVisualization(){
     //clearInterval(wave_id);
@@ -100,19 +102,20 @@ function compute_y(d,val){
                 return(y(d.poids));
 }
 
-function prix(d){
-    return(d3.scaleLinear()
+function prix(){
+    var scale = d3.scaleLinear()
     .domain(d3.extent(databaseL, (d) => d.prix))
-    .range([20, parseFloat(canvas_h)-20]) );
+    .range([20, parseFloat(canvas_h)-20]);
+    return(scale);
 }
 
-function poids(d){
+function poids(){
     return(d3.scaleLinear()
     .domain(d3.extent(databaseL, (d) => d.poids))
     .range([20, parseFloat(canvas_h)-20]) );
 }
 
-function volume(d){
+function volume(){
     return(d3.scaleLinear()
     .domain(d3.extent(databaseL, (d) => d.largeur * d.longueur  * d.hauteur))
     .range([20, parseFloat(canvas_h)-20]) );
@@ -124,6 +127,7 @@ function showVisu(){
             .attr("width", canvas_w)
             .attr("height", canvas_h)
             .attr("class", "canvas")
+    
     console.log("visu visu");
     var radios = document.getElementsByName('mode');
     console.log(radios)
@@ -160,18 +164,30 @@ function showVisu(){
     switch(valeurmodeB){
         case "prix":
             y = prix();
+            yaxis = d3.axisRight()
+            .scale(y);
         case "volume":
             y = volume();
+            yaxis = d3.axisRight()
+            .scale(y);
         case "poids": 
             y = poids();
+            yaxis = d3.axisRight()
+            .scale(y);
 }
     switch(valeurmodeA){
         case "prix":
             x = prix();
+            xaxis = d3.axisBottom()
+            .scale(x);
         case "volume":
             x = volume();
+            xaxis = d3.axisBottom()
+            .scale(x);
         case "poids": 
             x = poids();
+            xaxis = d3.axisBottom()
+            .scale(x);
 
     }
     
@@ -200,6 +216,11 @@ function showVisu(){
         .attr('fill', (d) => colorgbm( d.genre))
         .on("mouseover",function(d){div4.innerHTML = "Description du jouet : <br> </br>" + "Nom : " +  (d.nom).toLowerCase() +"<br> </br> Prix : " + (d.prix) });
         //wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
+
+        svg.append("g")
+        .call(xaxis);
+        svg.append("g")
+        .call(yaxis);
     }
 
     if(valeurmode=="colors"){
@@ -213,6 +234,10 @@ function showVisu(){
         .attr('fill', (d) => color( +d.couleur))
         .on("mouseover",function(d){div4.innerHTML = "Description du jouet : <br> </br>" + "Nom : " +  (d.nom).toLowerCase() +"<br> </br> Prix : " + (d.prix) });
         //wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
+        svg.append("g")
+        .call(xaxis);
+        svg.append("g")
+        .call(yaxis);
     }
 }
 
@@ -229,6 +254,15 @@ function showVisualisation1(){
     let y = d3.scaleLinear()
             .domain(d3.extent(databaseL, (d) => d.poids))
             .range([20, parseFloat(canvas_h)-20]);
+
+    yaxis = d3.axisRight()
+    .scale(y);
+
+    
+
+    xaxis = d3.axisBottom()
+    .scale(x);
+
     
     // let color = d3.scaleOrdinal()
     //             .domain(['Boy', 'Girl', 'Mixte'])
@@ -244,6 +278,10 @@ function showVisualisation1(){
         .attr('fill', (d) => color(+ d.couleur))
         .on("mouseover",function(d){div4.innerHTML = "Description du jouet : <br> </br>" + "Nom : " +  (d.nom).toLowerCase() +"<br> </br> Prix : " + (d.prix) });
    // wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
+   svg.append("g")
+        .call(yaxis);
+   svg.append("g")
+    .call(xaxis);
 
 }
 
