@@ -3,29 +3,14 @@
     "tabs1" : [],
     "tabs" : [
         {
-            "name" : "Colors",
-            "onclick" : "document.getElementById('color').scrollIntoView()",
+            "name" : "Data Scraping",
+            "onclick" : "showScraping()",
             "img" : "medias/svg/color.svg"
         },
         {
-            "name" : "Pink Taxe",
-            "onclick" : "document.getElementById('pink_taxe').scrollIntoView()",
-            "img" : "medias/svg/pink_taxe.svg"
-        },
-        {
-            "name" : "Words",
-            "onclick" : "document.getElementById('words').scrollIntoView()",
-            "img" : "medias/svg/text.svg"
-        },
-        {
-            "name" : "Brands",
-            "onclick" : "document.getElementById('brands').scrollIntoView()",
-            "img" : "medias/svg/brand.svg"
-        },
-        {
-            "name" : "Prices",
-            "onclick" : "document.getElementById('prices').scrollIntoView()",
-            "img" : "medias/svg/price.svg"
+            "name" : "Project description",
+            "onclick" : "showProject()",
+            "img" : "medias/svg/project.svg"
         }
     ]
 }

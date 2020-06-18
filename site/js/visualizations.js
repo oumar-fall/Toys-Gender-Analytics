@@ -13,8 +13,11 @@ boutton.onclick = showVisu;
 var z;
 var x;
 var y;
+var xaxis;
+var yaxis;
 
 function initVisualization(){
+    //clearInterval(wave_id);
     container.innerHTML = "";
     container.appendChild(divgrosse);
     boutton.innerText = "See"
@@ -23,8 +26,8 @@ function initVisualization(){
     div2.id = "center";
     div3.id = "right";
     div4.id ="right_right";
-    div1.innerHTML="Select the abscissa : <div><input type='radio' id='price' name='abs' value='price'checked><label for='price'> Price</label></div> <div><input type='radio' id='volume' name='abs' value='volume'> <label for='volume'>Volume</label></div><div><input type='radio' id='weight' name='abs' value='weight'><label for='weight'> Weight</label></div><div><input type='radio' id='age' name='abs' value='age'checked><label for='age'> Age</label></div>";
-    div2.innerHTML="Select the ordinate : <div><input type='radio' id='price' name='od' value='price'checked><label for='price'> Price</label></div> <div><input type='radio' id='volume' name='od' value='volume'> <label for='volume'>Volume</label></div><div><input type='radio' id='weight' name='od' value='weight'><label for='weight'> Weight</label></div><div><input type='radio' id='age' name='od' value='age'checked><label for='age'> Age</label></div>";
+    div1.innerHTML="Select the abscissa : <div><input type='radio' id='price' name='abs' value='prix'checked><label for='price'> Price</label></div> <div><input type='radio' id='volume' name='abs' value='volume'> <label for='volume'>Volume</label></div><div><input type='radio' id='weight' name='abs' value='poids'><label for='weight'> Weight</label></div><div><input type='radio' id='age' name='abs' value='age'checked><label for='age'> Age</label></div>";
+    div2.innerHTML="Select the ordinate : <div><input type='radio' id='price' name='od' value='prix'checked><label for='price'> Price</label></div> <div><input type='radio' id='volume' name='od' value='volume'> <label for='volume'>Volume</label></div><div><input type='radio' id='weight' name='od' value='poids'><label for='weight'> Weight</label></div><div><input type='radio' id='age' name='od' value='age'checked><label for='age'> Age</label></div>";
     div3.innerHTML = "Select your mode : <div><input type='radio' id='gbm' name='mode' value='gbm'checked><label for='gbm'> Girl Boy Mixt </label></div> <div><input type='radio' id='colors' name='mode' value='colors'> <label for='colors'>Main color</label></div>";
  
     divgrosse.appendChild(div1);
@@ -44,54 +47,79 @@ function color(c){
 }
 
 function compute_x(d,val){
-    console.log("salut");
-    switch(val){
-            case "price":
-                z = d3.scaleLinear()
-                .domain(d3.extent(database, (d) => d.prix))
+    // console.log("salut");
+    // switch(val){
+    //         case "price":
+    //             z = d3.scaleLinear()
+    //             .domain(d3.extent(databaseL, (d) => d.prix))
+    //             .range([20, parseFloat(canvas_w)-20]);
+    //             return(z(d.prix))
+    //             break;
+    //         case "volume":
+    //             z = d3.scaleLinear()
+    //             .domain(d3.extent(databaseL, (d) => d.longueur * d.largeur * d.hauteur))
+    //             .range([20, parseFloat(canvas_w)-20]);
+    //             return(z(d.longueur * d.largeur * d.hauteur));
+    //             break;
+    //         case "weight": 
+    //             z = d3.scaleLinear()
+    //             .domain(d3.extent(databaseL, (d) => d.poids))
+    //             .range([20, parseFloat(canvas_w)-20]);
+    //             return(z(d.poids));
+    //             break;
+    // }
+    z = d3.scaleLinear()
+                .domain(d3.extent(databaseL, (d) => d.prix))
                 .range([20, parseFloat(canvas_w)-20]);
                 return(z(d.prix))
-                break;
-            case "volume":
-                z = d3.scaleLinear()
-                .domain(d3.extent(database, (d) => volume))
-                .range([20, parseFloat(canvas_w)-20]);
-                return(z(volume));
-                break;
-            case "weight": 
-                z = d3.scaleLinear()
-                .domain(d3.extent(database, (d) => d.poids))
-                .range([20, parseFloat(canvas_w)-20]);
-                return(z(d.poids));
-                break;
-    }
 }
 
 function compute_y(d,val){
-    switch(val){
-            case "price":
-                y = d3.scaleLinear()
-                .domain(d3.extent(database, (d) => d.prix))
-                .range([20, parseFloat(canvas_h)-20]);
-                return(y(d.prix))
-                break;
-            case "volume":
-                y = d3.scaleLinear()
-                .domain(d3.extent(database, (d) => volume))
-                .range([20, parseFloat(canvas_h)-20]);
-                console.log("coucou");
-                return(y(volume));
-                break;
-            case "weight": 
-                y = d3.scaleLinear()
-                .domain(d3.extent(database, (d) => d.poids))
+    // switch(val){
+    //         case "price":
+    //             y = d3.scaleLinear()
+    //             .domain(d3.extent(databaseL, (d) => d.prix))
+    //             .range([20, parseFloat(canvas_h)-20]);
+    //             return(y(d.prix))
+    //             break;
+    //         case "volume":
+    //             y = d3.scaleLinear()
+    //             .domain(d3.extent(databaseL, (d) => d.longueur * d.largeur * d.hauteur))
+    //             .range([20, parseFloat(canvas_h)-20]);
+    //             console.log("coucou");
+    //             return(y(d.longueur * d.largeur * d.hauteur));
+    //             break;
+    //         case "weight": 
+    //             y = d3.scaleLinear()
+    //             .domain(d3.extent(databaseL, (d) => d.poids))
+    //             .range([20, parseFloat(canvas_h)-20]);
+    //             return(y(d.poids));
+    //             break;
+    // }
+    y = d3.scaleLinear()
+                .domain(d3.extent(databaseL, (d) => d.poids))
                 .range([20, parseFloat(canvas_h)-20]);
                 return(y(d.poids));
-                break;
-    }
 }
 
+function prix(){
+    var scale = d3.scaleLinear()
+    .domain(d3.extent(databaseL, (d) => d.prix))
+    .range([20, parseFloat(canvas_h)-20]);
+    return(scale);
+}
 
+function poids(){
+    return(d3.scaleLinear()
+    .domain(d3.extent(databaseL, (d) => d.poids))
+    .range([20, parseFloat(canvas_h)-20]) );
+}
+
+function volume(){
+    return(d3.scaleLinear()
+    .domain(d3.extent(databaseL, (d) => d.largeur * d.longueur  * d.hauteur))
+    .range([20, parseFloat(canvas_h)-20]) );
+}
 function showVisu(){
     d3.select("svg").remove();
     svg = d3.select(container)
@@ -99,6 +127,7 @@ function showVisu(){
             .attr("width", canvas_w)
             .attr("height", canvas_h)
             .attr("class", "canvas")
+    
     console.log("visu visu");
     var radios = document.getElementsByName('mode');
     console.log(radios)
@@ -129,11 +158,42 @@ function showVisu(){
             valeurmodeB = radiosB[i].value;
         }
     }
+
+    console.log(valeurmodeA);
+    console.log(valeurmodeB);
+    switch(valeurmodeB){
+        case "prix":
+            y = prix();
+            yaxis = d3.axisRight()
+            .scale(y);
+        case "volume":
+            y = volume();
+            yaxis = d3.axisRight()
+            .scale(y);
+        case "poids": 
+            y = poids();
+            yaxis = d3.axisRight()
+            .scale(y);
+}
+    switch(valeurmodeA){
+        case "prix":
+            x = prix();
+            xaxis = d3.axisBottom()
+            .scale(x);
+        case "volume":
+            x = volume();
+            xaxis = d3.axisBottom()
+            .scale(x);
+        case "poids": 
+            x = poids();
+            xaxis = d3.axisBottom()
+            .scale(x);
+
+    }
     
 
-    // }
     // let x = d3.scaleLinear()
-    //         .domain(d3.extent(database, (d) => d.poids))
+    //         .domain(d3.extent(database, (d) => d.longueur * d.largeur * d.hauteur))
     //         .range([20, parseFloat(canvas_w)-20]);
     
     // let y = d3.scaleLinear()
@@ -147,19 +207,25 @@ function showVisu(){
             .range(['blue', 'pink', 'grey'])
 
         svg.selectAll('circle')
-        .data(database)
+        .data(databaseL)
         .enter()
         .append('circle')
         .attr('r', 3)
-        .attr('cx', (d) => compute_x(d,valeurmodeA))
-        .attr('cy', (d) => compute_y(d, valeurmodeB))
+        .attr('cx', (d) => x(d[valeurmodeA]))
+        .attr('cy', (d) => y(d[valeurmodeB]))
         .attr('fill', (d) => colorgbm( d.genre))
         .on("mouseover",function(d){div4.innerHTML = "Description du jouet : <br> </br>" + "Nom : " +  (d.nom).toLowerCase() +"<br> </br> Prix : " + (d.prix) });
+        //wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
+
+        svg.append("g")
+        .call(xaxis);
+        svg.append("g")
+        .call(yaxis);
     }
 
     if(valeurmode=="colors"){
         svg.selectAll('circle')
-        .data(database)
+        .data(databaseL)
         .enter()
         .append('circle')
         .attr('r', 3)
@@ -167,37 +233,58 @@ function showVisu(){
         .attr('cy', (d) => compute_y(d, valeurmodeB))
         .attr('fill', (d) => color( +d.couleur))
         .on("mouseover",function(d){div4.innerHTML = "Description du jouet : <br> </br>" + "Nom : " +  (d.nom).toLowerCase() +"<br> </br> Prix : " + (d.prix) });
+        //wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
+        svg.append("g")
+        .call(xaxis);
+        svg.append("g")
+        .call(yaxis);
     }
 }
 
 
 function showVisualisation1(){
-    initVisualization();
     d3.select("svg").remove();
+    initVisualization();
+    
 
     let x = d3.scaleLinear()
-            .domain(d3.extent(database, (d) => d.poids))
+            .domain(d3.extent(databaseL, (d) => d.prix))
             .range([20, parseFloat(canvas_w)-20]);
     
     let y = d3.scaleLinear()
-            .domain(d3.extent(database, (d) => d.poids))
+            .domain(d3.extent(databaseL, (d) => d.poids))
             .range([20, parseFloat(canvas_h)-20]);
+
+    yaxis = d3.axisRight()
+    .scale(y);
+
+    
+
+    xaxis = d3.axisBottom()
+    .scale(x);
+
     
     // let color = d3.scaleOrdinal()
     //             .domain(['Boy', 'Girl', 'Mixte'])
     //             .range(['blue', 'pink', 'grey'])
 
     svg.selectAll('circle')
-        .data(database)
+        .data(databaseL)
         .enter()
         .append('circle')
         .attr('r', 3)
-        .attr('cx', (d) => x(d.poids))
+        .attr('cx', (d) => x(d.prix))
         .attr('cy', (d) => y(d.poids))
         .attr('fill', (d) => color(+ d.couleur))
         .on("mouseover",function(d){div4.innerHTML = "Description du jouet : <br> </br>" + "Nom : " +  (d.nom).toLowerCase() +"<br> </br> Prix : " + (d.prix) });
+   // wave_id = setInterval(() => waveContent(secondary_nav, "tab"), 3000);
+   svg.append("g")
+        .call(yaxis);
+   svg.append("g")
+    .call(xaxis);
 
 }
+
 
 function showVisualisation2(){
     initVisualization();
@@ -223,9 +310,13 @@ function showVisualisation4(){
 }
 
 function appendDiv(tab){
+    if (!tab.level){
+        tab.level = 1;
+    }
+    
     var tabName = document.createElement("span");
-    tabName.classList.add("tabName");
-    tabName.id = tab.tabname.toLowerCase().replace(" ", "_");
+    tabName.classList.add("tabName", "level-" + tab.level);
+    tabName.id = tab.tabname.toLowerCase().replace(" ", "-");
     tabName.innerHTML = tab.tabname;
     container.appendChild(tabName);
 
@@ -255,7 +346,6 @@ function appendDiv(tab){
         tabDiv.appendChild(imgContent);
     }
     container.appendChild(tabDiv);
-    container.appendChild(document.createElement("hr"));
 }
 
 function showImg(imgPath) {

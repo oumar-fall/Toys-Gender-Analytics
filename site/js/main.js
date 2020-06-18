@@ -16,6 +16,7 @@ waiting.classList.add("waiting");
 
 var rollSecondaryNavLocked = false;
 var database, categories, marques;
+var databaseL;
 
 function init(){
     body.appendChild(waiting);
@@ -70,9 +71,46 @@ function loadDatabase(){
                 console.log(error);
             }
             else {
-                waiting.classList.add('waiting-of');
+                waiting.classList.add('waiting-off');
                 console.log("Database loaded :" + rows.length + " rows");
                 database = rows;
+                generate_mainNav();
+                showProject();
+            }
+        });
+        d3.tsv("data/databaseL.tsv")
+        .row( (d, i) => {
+            d.longueur = (d.longueur === "None")? 0 : +d.longueur;
+            d.largeur = (d.largeur === "None")? 0 : +d.largeur;
+            d.hauteur = (d.hauteur === "None")? 0 : +d.hauteur;
+            return {
+                id: d.id,
+                nom: d.nom,
+                genre: d.genre,
+                prix: (d.prix === "None")? 0 : +d.prix,
+                description: (d.description === "None")? "" : d.description,
+                securite: (d.securite === "None")? "" : d.securite,
+                codeInterne: +d.codeInterne,
+                referenceFabricant: d.referenceFabricant,
+                ageMin: (d.ageMin === "None")? 0 : +d.ageMin,
+                categorie_id: +d.categorie_id,
+                longueur: d.longueur,
+                largeur: d.largeur,
+                hauteur: d.hauteur,
+                volume: d.longueur*d.largeur*d.hauteur,
+                poids: (d.poids === "None")? 0 : d.poids,
+                marque_id: +d.marque_id,
+                couleur : +d.couleur,
+            }
+        })
+        .get( (error, rows) => {
+            if (error){
+                console.log(error);
+            }
+            else {
+                waiting.classList.add('waiting-off');
+                console.log("Database loaded :" + rows.length + " rows");
+                databaseL = rows;
                 generate_mainNav();
                 showProject();
             }
@@ -270,6 +308,25 @@ function showProject(){
         }
         else {
             console.log("Can't load project index");
+        }
+    }
+}
+
+function showScraping(){
+    container.innerHTML = ""
+    let request = new XMLHttpRequest();
+    request.open('GET', "values/scrapingDivs.json");
+    request.responseType = 'json';
+    request.send();
+    request.onload = function() {
+        var projectTabs = this.response;
+        if (projectTabs){
+            for (let tab of projectTabs){
+                appendDiv(tab);
+            }
+        }
+        else {
+            console.log("Can't load scraping datas");
         }
     }
 }
