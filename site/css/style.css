@@ -6,9 +6,6 @@ body {
     background: rgb(255,255,255);
     font-family: Arial, Helvetica, sans-serif;
     /* background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,247,211,1) 90%); */
-<<<<<<< HEAD
-    /*overflow: hidden;*/
-=======
 }
 body::-webkit-scrollbar{
     display: none;
@@ -23,9 +20,8 @@ body::-webkit-scrollbar{
     left:0;
     z-index: 5;
 }
-.waiting-of{
+.waiting-off{
     display: none;
->>>>>>> c66b52fe2d4fa3b9b8f764e2179c0178a4cd539e
 }
 
 header {
@@ -120,7 +116,7 @@ main {
     background-color: white;
     overflow: scroll;
     overflow-x: hidden;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .container::-webkit-scrollbar {
@@ -224,11 +220,26 @@ a{
 }
 
 .tabName {
-    font-size: 1.5em;
-    width: 80%;
     align-self: flex-start;
     border-bottom: darkgray solid 1px;
     margin-bottom: 10px;
+}
+
+.level-1 {
+    font-size: 1.5em;
+    width: 80%;
+}
+
+.level-2 {
+    font-size: 1.3em;
+    width: 50%;
+    margin-left : 3%;
+}
+
+.level-3 {
+    font-size: 1.1em;
+    width: auto;
+    margin-left : 5%;
 }
 
 .tabDiv {
@@ -315,7 +326,27 @@ a{
     }
 }
 
-<<<<<<< HEAD
+table {
+    line-height: initial;
+    margin : 2px 0;
+}
+thead {
+    font-size: 0.8em;
+}
+tbody {
+    font-size: 0.5em;
+    word-break: break-all;
+}
+.code-block {
+    font-size: 0.5em;
+    margin-left: 5%;
+    line-height: initial;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: whitesmoke;
+    padding: 1em;
+    overflow-x: scroll;
+}
+
 #drop_zone {
   border: 5px solid blue;
   width:  200px;
@@ -370,10 +401,6 @@ a{
   margin: 5%;
   margin-bottom: 0%;
 }
-
-
-
-=======
 
 .modal {
     display: none;

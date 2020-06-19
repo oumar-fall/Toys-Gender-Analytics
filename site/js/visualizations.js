@@ -316,7 +316,7 @@ function appendDiv(tab){
     
     var tabName = document.createElement("span");
     tabName.classList.add("tabName", "level-" + tab.level);
-    tabName.id = tab.tabname.toLowerCase().replace(" ", "-");
+    tabName.id = tab.tabname.toLowerCase().replace(/\s/g, "-");
     tabName.innerHTML = tab.tabname;
     container.appendChild(tabName);
 

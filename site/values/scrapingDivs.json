@@ -1,8 +1,15 @@
 [
+
+    {
+        "tabname" : "Scraping Method",
+        "level" : 1,
+        "text" : "Source : <a href='https://www.lagranderecre.fr' target='_blank'><em><strong>La Grande Récré</strong></em></a><br>Database : <a href='https://drive.google.com/open?id=1i_q4RZ_1FFNXxMFa9GEUovXstCq9KEFg' target='_blank'><em>Download (7.9Go)</em></a></p>",
+        "images" : []
+    },
     {
         "tabname" : "Table of content",
         "level" : 1,
-        "text" : "<ul><li><a href='#a-scraping-method'>A. Scraping Method</a><ul><li><a href='#1-properties'>1. Properties</a></li><li><a href='#2-method'>2. Method</a><ul><li><a href='#analysing-html-structure'>Analysing html structure</a></li><li><a href='#getting-the-different-categories'>Getting the different categories</a></li><li><a href='#modifying-gender-filter'>Modifying gender filter</a></li><li><a href='#navigate-between-pages'>Navigate between pages</a></li><li><a href='#browsing-pages'>Browsing pages</a></li><li><a href='#data-scrapping'>Data scrapping</a></li><li><a href='#summary'>Summary</a></li></ul></li><li><a href='#3-limitations'>3. Limitations</a><ul><li><a href='#observations'>Observations</a></li><li><a href='#tests'>Tests</a></li><li><a href='#solutions'>Solutions</a></li></ul></li></ul></li><li><a href='#b-database'>B. Database</a><ul><li><a href='#1-properties-1'>1. Properties</a></li><li><a href='#2-reorganization'>2. Reorganization</a></li><li><a href='#3-structure'>3. Structure</a></li></ul></li></ul>",
+        "text" : "<ul><li><a href='#scraping-method'>Scraping Method</a><ul><li><a href='#properties'>Properties</a></li><li><a href='#method'>Method</a><ul><li><a href='#analysing-html-structure'>Analysing html structure</a></li><li><a href='#getting-the-different-categories'>Getting the different categories</a></li><li><a href='#modifying-gender-filter'>Modifying gender filter</a></li><li><a href='#navigate-between-pages'>Navigate between pages</a></li><li><a href='#browsing-pages'>Browsing pages</a></li><li><a href='#data-scrapping'>Data scrapping</a></li><li><a href='#summary'>Summary</a></li></ul></li><li><a href='#limitations'>Limitations</a><ul><li><a href='#observations'>Observations</a></li><li><a href='#tests'>Tests</a></li><li><a href='#solutions'>Solutions</a></li></ul></li></ul></li><li><a href='#database'>Database</a><ul><li><a href='#db-properties-1'>DB Properties</a></li><li><a href='#reorganization'>Reorganization</a></li><li><a href='#structure'>Structure</a></li></ul></li></ul>",
         "images" : []
     },
     {
@@ -12,17 +19,80 @@
         "images" : []
     },
     {
-        "tabname" : "",
+        "tabname" : "Properties",
+        "level" : 2,
+        "text" : "<ul><li><strong>Source</strong> : <em><a href='http://www.lagranderecre.fr'>www.lagranderecre.fr</a></em></li><li><strong>Begin</strong> : <em>10/04/2020</em> at <em>00:01:32</em></li><li><strong>End</strong> : <em>11/04/2020</em> at <em>02:56:12</em></li><li><strong>Code</strong> : <a href='#'>scrap_LGR.js</a></li></ul>",
+        "images" : []
+    },
+    {
+        "tabname" : "Method",
+        "level" : 2,
+        "text" : "<p>The idea was to browse the website in order to collect as much information as possible about each toy sold on this website. I decided to code the algorithm by myself in <strong>javascript</strong> using <a href='https://pptr.dev/' target='_blank'><strong><code>puppeteer</code></strong></a> library. This allowed me to open an headless browser to visit webpages programmatically.</p><p><a href='#summary'><em><sub>Skip Details and go to summary</sub></em></a></p>",
+        "images" : []
+    },
+    {
+        "tabname" : "Analysing HTML structure",
+        "level" : 3,
+        "text" : "<p>First, I figured out that I had to analyse the <strong>html structure</strong> of the pages to determine how to access each field. I then realized that the fields weren't organized with a unique ID for each one like I thought. Thus I had to manage it using <strong>XPath selectors</strong>.</p>",
+        "images" : []
+    },
+    {
+        "tabname" : "Getting the different categories",
+        "level" : 3,
+        "text" : "<p>--&gt; <em><a href='https://www.lagranderecre.fr/age/' target='_blank'>https://www.lagranderecre.fr/age/</a></em></p> <p>Using an appropriate XPath selector, we can get the list of categories and corresponding urls:</p>        <table>        <thead>        <tr>        <th>Field</th>        <th>XPath selector</th>        </tr>        </thead>        <tbody>        <tr>        <td><em>Links</em></td>        <td><code>$x('//div[@class=&quot;items-container&quot;]//div[@class=&quot;item&quot;]//a')</code></td>        </tr>        </tbody>        </table>        <p>From this we can extract:</p>        <table>        <thead>        <tr>        <th>Category name</th>        <th>Url</th>        </tr>        </thead>        <tbody>        <tr>        <td>JOUETS BÉBÉ 0 À 12 MOIS</td>        <td><a href='https://www.lagranderecre.fr/1062584/jouets-be-be-0-a-12-mois.html' target='_blank'>https://www.lagranderecre.fr/1062584/jouets-be-be-0-a-12-mois.html</a></td>        </tr>        <tr>        <td>JOUETS ENFANT 1 À 3 ANS</td>        <td><a href='https://www.lagranderecre.fr/1062589/jouets-enfant-1-a-3-ans.html' target='_blank'>https://www.lagranderecre.fr/1062589/jouets-enfant-1-a-3-ans.html</a></td>        </tr>        <tr>        <td>JOUETS ENFANT 3 À 5 ANS</td>        <td><a href='https://www.lagranderecre.fr/1062594/jouets-enfant-3-a-5-ans.html' target='_blank'>https://www.lagranderecre.fr/1062594/jouets-enfant-3-a-5-ans.html</a></td>        </tr>        <tr>        <td>JOUETS ENFANT 6 À 8 ANS</td>        <td><a href='https://www.lagranderecre.fr/1062599/jouets-enfant-6-a-8-ans.html' target='_blank'>https://www.lagranderecre.fr/1062599/jouets-enfant-6-a-8-ans.html</a></td>        </tr>        <tr>        <td>JOUETS ENFANT 9 À 11 ANS</td>        <td><a href='https://www.lagranderecre.fr/1062604/jouets-enfant-9-a-11-ans.html' target='_blank'>https://www.lagranderecre.fr/1062604/jouets-enfant-9-a-11-ans.html</a></td>        </tr>        <tr>        <td>JOUETS 12 ANS ET PLUS</td>        <td><a href='https://www.lagranderecre.fr/1062609/jouets-12-ans-et-plus.html' target='_blank'>https://www.lagranderecre.fr/1062609/jouets-12-ans-et-plus.html</a></td>        </tr>        </tbody>        </table>        <p>Then I could iter in each Category through those urls.</p>",
+        "images" : ["medias/Scraping/RM_AgeList.png"]
+    },
+    {
+        "tabname" : "Modifying gender filter",
+        "level" : 3,
+        "text" : "<p>First, I tried to filter gender using filter tab frow the website. With <code>puppeteer</code>, I was able to simulate a click on an element.</p><p>But after that, I realized that the delay between the click and the catalogue update was way too long and I started to collect data before this update. Then I used a little trick, I noticed that filters were displayed in clear in the url so I determined resulting url from the current one.</p><table><thead><tr><th>Gender</th><th>url</th></tr></thead><tbody><tr><td>Girl</td><td><span style='color:lightblue;'>[current url]</span>?facetFilters%5Bf_973192%5D%5B<strong style='color:red;'>Girl</strong>%5D=1&amp;storeStockFilter=0&amp;webStoreStockFilter=1</td></tr><tr><td>Boy</td><td><span style='color:lightblue;'>[current url]</span>?facetFilters%5Bf_973192%5D%5B<strong style='color:red;'>Boy</strong>%5D=1&amp;storeStockFilter=0&amp;webStoreStockFilter=1</td></tr><tr><td>mixed</td><td><span style='color:lightblue;'>[current url]</span>?facetFilters%5Bf_973192%5D%5B<strong style='color:red'>Mixte</strong>%5D=1&amp;storeStockFilter=0&amp;webStoreStockFilter=1</td></tr></tbody></table><p>Then I change the value of <em>webStoreStockFilter</em> to <strong>0</strong> (<em>see <a href='limitations'>Limitations</a></em>)</p>",
+        "images" : ["medias/Scraping/RM_GenderFilter.png"]
+    },
+    {
+        "tabname" : "Navigate between pages",
+        "level" : 3,
+        "text" : "<p>Once again, I first tried to navigate between pages by clicking on the next button at the nottom of the page.</p><p>But I got the same issue about charging time so I used the same trick looking for page number in the url. To do so, I had to know the total number of available pages. Inspecting the html code, I discovered that, at the bottom of each page, there was an hidden <code>&lt;span&gt;</code> that I could use to get this value:</p><pre class='code-block'><code class='language-html'><div><span class='hljs-tag'>&lt;<span class='hljs-name'>li</span> <span class='hljs-attr'>class</span>=<span class='hljs-string'>'page-count'</span>&gt;</span><br>    <span class='hljs-tag'>&lt;<span class='hljs-name'>span</span>&gt;</span> Page 1 sur 43 <span class='hljs-tag'>&lt;/<span class='hljs-name'>span</span>&gt;</span><br><span class='hljs-tag'>&lt;/<span class='hljs-name'>li</span>&gt;</span></div></code></pre><p>From there I could build the specific url for each page by adding &quot;<em>&amp;pageNumber-23=<strong>[pageNumber]</strong>#top-23</em>&quot; at its end.</p><p>I also added &quot;<em>&amp;sortBy-23=title.asc</em>&quot; before &quot;<em>#top-23</em>&quot; (<em>see <a href='#3-limitations'>Limitations</a></em>)</p>",
+        "images" : ["medias/Scraping/RM_NextPage.png"]
+    },
+    {
+        "tabname" : "Browsing pages",
+        "level" : 3,
+        "text" : "<p>Now that I got all of the pages' url, the next step was to browse those pages to isolate each toy-specific informations such as names and prices. Once again I inspected html code in order to determine the corresponding XPath selector.</p><table>        <thead><tr><th>Field</th><th>XPath selector</th></tr></thead><tbody><tr><td><em>Product names</em></td><td><code>$x('//div[contains(@class, &quot;thumbnail-product&quot;)]//a[@class = &quot;product-name&quot;]')</code></td></tr><tr><td><em>Prices</em></td><td><code>$x('//div[contains(@class, &quot;thumbnail-product&quot;)]//li[contains(@class, &quot;price-with-taxes&quot;)]//span[@class = &quot;price-value&quot;]')</code></td></tr></tbody></table><p>Then, for each toy, I extracted the url of the page contained in the html <code>&lt;a&gt;</code> tags of the names and open this page in a new tab of my browser.</p><pre class='code-block'><code class='language-html'><div><span class='hljs-tag'>&lt;<span class='hljs-name'>a</span> <span class='hljs-attr'>class</span>=<span class='hljs-string'>'product-name'</span> <span class='hljs-attr'>...</span> <span class='hljs-attr'>href</span>=<span class='hljs-string'>'https://www.lagranderecre.fr/3-mini-vehicules-city-a-friction.html'</span>&gt;</span> 3 MINI VÉHICULES CITY À FRICTION <span class='hljs-tag'>&lt;/<span class='hljs-name'>a</span>&gt;</span></div></code></pre>",
+        "images" : ["medias/Scraping/RM_ToySection.png"]
+    },
+    {
+        "tabname" : "Data scrapping",
+        "level" : 3,
+        "text" : "<p>I identified the fields I wanted to extract and determined the corresponding XPath selectors.</p><table><thead><tr><th>Field</th><th>XPath selector</th></tr></thead><tbody><tr><td><em>Images</em></td><td><code>$x('//img[@class = &quot;media-visuals-main-img&quot;]')</code></td></tr><tr><td><em>Brand</em></td><td><code>$x('//div[@class = &quot;product-brand&quot;]//a')</code></td></tr><tr><td><em>Description</em></td><td><code>$x(&quot;//div[@class = 'description-container']//h4[contains(text(), 'RACONTE MOI UNE HISTOIRE')]/following-sibling::*&quot;)</code></td></tr><tr><td><em>Security Instructions</em></td><td><code>$x('//div[@class = &quot;description-container&quot;]//h4[contains(text(), &quot;SÉCURITÉ&quot;)]/following-sibling::*')</code></td></tr><tr><td><em>Internal code</em></td><td><code>$x('//*[*[contains(text(), &quot;CODE INTERNE&quot;)]]')</code></td></tr><tr><td><em>EAN code</em></td><td><code>$x('//*[*[contains(text(), &quot;CODE EAN&quot;)]]')</code></td></tr><tr><td><em>Manufacturer reference</em></td><td><code>$x('//*[*[contains(text(), &quot;RÉFÉRENCE FABRICANT&quot;)]]')</code></td></tr><tr><td><em>Min age</em></td><td><code>$x('//i[contains(@class, &quot;icon-cake&quot;)]/following-sibling::p')</code></td></tr><tr><td><em>Dimensions</em></td><td><code>$x('//i[contains(@class, &quot;icon-size&quot;)]/following-sibling::p')</code></td></tr><tr><td><em>Weight</em></td><td><code>$x('//i[contains(@class, &quot;icon-weight&quot;)]/following-sibling::p')</code></td></tr></tbody></table><p>I then collected all of this information and downloaded all of the images.</p>",
+        "images" : ["medias/Scraping/RM_ProductPage.png"]
+    },
+    {
+        "tabname" : "Summary",
+        "level" : 3,
+        "text" : "All of the above steps can be summarized in the following diagram.",
+        "images" : ["medias/Scraping/RM_ScrapingTree.png"]
+    },
+    {
+        "tabname" : "Scraping Method",
+        "level" : 1,
         "text" : "",
         "images" : []
     },
     {
-        "tabname" : "",
+        "tabname" : "Scraping Method",
+        "level" : 1,
         "text" : "",
         "images" : []
     },
     {
-        "tabname" : "",
+        "tabname" : "Scraping Method",
+        "level" : 1,
+        "text" : "",
+        "images" : []
+    },
+    {
+        "tabname" : "Scraping Method",
+        "level" : 1,
         "text" : "",
         "images" : []
     }
