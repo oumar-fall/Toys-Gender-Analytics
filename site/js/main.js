@@ -444,27 +444,7 @@ function showClassifier() {
       }
     }
 
-<<<<<<< HEAD
     function send() {
-=======
-
-    function sendDnD(file){
-      console.log(file);
-      var xhr = new XMLHttpRequest();
-      const FD = new FormData();
-      FD.append("imagepath", file);
-      xhr.open('POST', '../../imageupload', true);
-      xhr.send(FD);
-      xhr.onload = function(){
-        document.getElementById("result").value=xhr.response;
-        console.log(xhr.response);
-    }
-    }
-
-    function send() {
-
-        var theForm = document.getElementById("imageForm");
->>>>>>> af7e6638dd72af8388465af5ab8400b64c625029
         var xhr = new XMLHttpRequest();
         if(FD.get("imagepath")){
             xhr.open('POST', '../../imageupload', true);
