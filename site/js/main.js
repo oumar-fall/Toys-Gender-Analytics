@@ -428,16 +428,14 @@ function showClassifier() {
 
     function sendDnD(file){
       console.log(file);
-      var theForm = document.getElementById("imageForm");
-      console.log("Drop !");
-      theForm.append("file", file, file.name);
       var xhr = new XMLHttpRequest();
-      const FD = new FormData( theForm );
-      xhr.open('POST', '../../imageupload');
+      const FD = new FormData();
+      FD.append("imagepath", file);
+      xhr.open('POST', '../../imageupload', true);
       xhr.send(FD);
       xhr.onload = function(){
         container.innerHTML = xhr.response;
-        console.log = xhr.response;
+        console.log(xhr.response);
     }
     }
 
