@@ -136,7 +136,7 @@ http.createServer(function(request, response) {
     var form = new formidable.IncomingForm();
     form.parse(request, function (err, fields, files) {
       var oldpath = files.imagepath.path;
-      console.log(oldpath);
+      console.log("oldpath "+ oldpath);
       var newpath = encodeURI('temp/' + files.imagepath.name);
       console.log("New path : " + newpath);
       fs.rename(oldpath, newpath, function (err) {

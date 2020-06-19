@@ -419,7 +419,7 @@ function showClassifier() {
             e.preventDefault(); // Cette méthode est toujours nécessaire pour éviter une éventuelle redirection inattendue
             e.stopPropagation();
             var data = e.dataTransfer, file = data.files[0];
-            console.log(file);
+            console.log(file.name);
             sendDnD(file);
         }, false);
         clearInterval(myIntervall);
@@ -429,9 +429,10 @@ function showClassifier() {
 
 
     function sendDnD(file){
+      console.log(file);
       var theForm = document.getElementById("imageForm");
       console.log("Drop !");
-      theForm.append('file', file);
+      theForm.append("file", file, file.name);
       var xhr = new XMLHttpRequest();
       const FD = new FormData( theForm );
       xhr.open('POST', '../../imageupload');
