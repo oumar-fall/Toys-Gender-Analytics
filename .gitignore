@@ -5,3 +5,4 @@ package-lock.json
 *.tsv
 www/
 site/__pycache__/
+site/temp/
