@@ -392,6 +392,10 @@ function showClassifier() {
       button.setAttribute("type", "submit");
       button.onclick = send;
 
+      var result = document.createElement("output");
+      result.id = "result";
+
+
       label.appendChild(span);
       divtext.appendChild(input);
       divtext.appendChild(label);
@@ -403,6 +407,7 @@ function showClassifier() {
       form.appendChild(divbox);
 
       container.appendChild(form);
+      container.appendChild(result);
     }
 
 
@@ -429,7 +434,6 @@ function showClassifier() {
 
 
     function sendDnD(file){
-      console.log(file);
       var theForm = document.getElementById("imageForm");
       console.log("Drop !");
       theForm.append("file", file, file.name);
@@ -438,7 +442,8 @@ function showClassifier() {
       xhr.open('POST', '../../imageupload');
       xhr.send(FD);
       xhr.onload = function(){
-        container.innerHTML = xhr.response;
+        // container.innerHTML = xhr.response;
+        document.getElementById("result").value= xhr.response;
         console.log = xhr.response;
     }
     }
@@ -451,7 +456,8 @@ function showClassifier() {
         xhr.open('POST', '../../imageupload');
         xhr.send(FD);
         xhr.onload = function(){
-          container.innerHTML = xhr.response;
+          // container.innerHTML = xhr.response;
+          document.getElementById("result").value= xhr.response;
           console.log = xhr.response;
       }
     }
