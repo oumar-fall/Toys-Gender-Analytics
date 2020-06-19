@@ -112,7 +112,6 @@ function loadDatabase(){
                 console.log("Database loaded :" + rows.length + " rows");
                 databaseL = rows;
                 generate_mainNav();
-                showProject();
             }
         });
     d3.tsv("data/categories.tsv")
@@ -216,7 +215,7 @@ function generate_secondaryNav(path) {
                     btn.firstChild.style.borderWidth = "0";
                 }
 
-                btn.className = "button round-btn tab";
+                btn.className = "button round-btn";
                 secondary_nav.appendChild(btn);
             }
 

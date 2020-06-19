@@ -313,12 +313,15 @@ function appendDiv(tab){
     if (!tab.level){
         tab.level = 1;
     }
+
+    var fullTab = document.createElement('div');
+    fullTab.classList.add('tab');
     
     var tabName = document.createElement("span");
     tabName.classList.add("tabName", "level-" + tab.level);
     tabName.id = tab.tabname.toLowerCase().replace(/\s/g, "-");
     tabName.innerHTML = tab.tabname;
-    container.appendChild(tabName);
+    fullTab.appendChild(tabName);
 
     var tabDiv = document.createElement("div");
     tabDiv.classList.add("tabDiv");
@@ -345,7 +348,8 @@ function appendDiv(tab){
     if (n_img > 0){
         tabDiv.appendChild(imgContent);
     }
-    container.appendChild(tabDiv);
+    fullTab.appendChild(tabDiv);
+    container.appendChild(fullTab);
 }
 
 function showImg(imgPath) {
