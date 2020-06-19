@@ -383,7 +383,7 @@ function showClassifier() {
 
       var label = document.createElement('label');
       label.classList.add("label__dragndrop");
-      label.innerHTML = "<strong>Choose an image </strong>";
+      label.innerHTML = "<strong>Click there to choose an image </strong>";
       label.setAttribute("for", "file");
 
       var span = document.createElement('span');
@@ -396,6 +396,12 @@ function showClassifier() {
       button.classList.add("box__button");
       button.onclick = send;
 
+      var result = document.createElement("output");
+      result.id = "result";
+      result.innerHTML = "Hey There";
+
+
+
       label.appendChild(span);
       form.appendChild(input);
       form.appendChild(label);
@@ -403,9 +409,11 @@ function showClassifier() {
       divbox.appendChild(form);
       divbox.appendChild(button);
 
+
       var myIntervall = setInterval(()=>{dragndrop(myIntervall)}, 100);
 
       container.appendChild(divbox);
+      container.appendChild(result);
     }
 
 
@@ -436,13 +444,34 @@ function showClassifier() {
       }
     }
 
+<<<<<<< HEAD
     function send() {
+=======
+
+    function sendDnD(file){
+      console.log(file);
+      var xhr = new XMLHttpRequest();
+      const FD = new FormData();
+      FD.append("imagepath", file);
+      xhr.open('POST', '../../imageupload', true);
+      xhr.send(FD);
+      xhr.onload = function(){
+        document.getElementById("result").value=xhr.response;
+        console.log(xhr.response);
+    }
+    }
+
+    function send() {
+
+        var theForm = document.getElementById("imageForm");
+>>>>>>> af7e6638dd72af8388465af5ab8400b64c625029
         var xhr = new XMLHttpRequest();
         if(FD.get("imagepath")){
             xhr.open('POST', '../../imageupload', true);
             xhr.send(FD);
             xhr.onreadystatechange = function(){
-                container.innerHTML = xhr.response;
+                document.getElementById("result").value=xhr.response;
+                // container.innerHTML = xhr.response;
                 console.log(xhr.response);
             }
         }
