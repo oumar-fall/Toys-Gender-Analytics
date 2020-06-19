@@ -378,7 +378,7 @@ function showClassifier() {
 
       var label = document.createElement('label');
       label.classList.add("label__dragndrop");
-      label.innerHTML = "<strong>Choose an image </strong>";
+      label.innerHTML = "<strong>Click there to choose an image </strong>";
       label.setAttribute("for", "file");
 
       var span = document.createElement('span');
@@ -393,6 +393,8 @@ function showClassifier() {
 
       var result = document.createElement("output");
       result.id = "result";
+      result.innerHTML = "Hey There";
+
 
 
       label.appendChild(span);
@@ -402,9 +404,11 @@ function showClassifier() {
       divbox.appendChild(form);
       divbox.appendChild(button);
 
+
       var myIntervall = setInterval(()=>{dragndrop(myIntervall)}, 100);
 
       container.appendChild(divbox);
+      container.appendChild(result);
     }
 
 
@@ -438,12 +442,13 @@ function showClassifier() {
       xhr.open('POST', '../../imageupload', true);
       xhr.send(FD);
       xhr.onload = function(){
-        container.innerHTML = xhr.response;
+        document.getElementById("result").value=xhr.response;
         console.log(xhr.response);
     }
     }
 
     function send() {
+
         var theForm = document.getElementById("imageForm");
         var xhr = new XMLHttpRequest();
         const FD = new FormData( theForm );
@@ -451,7 +456,8 @@ function showClassifier() {
             xhr.open('POST', '../../imageupload', true);
             xhr.send(FD);
             xhr.onreadystatechange = function(){
-                container.innerHTML = xhr.response;
+                document.getElementById("result").value=xhr.response;
+                // container.innerHTML = xhr.response;
                 console.log(xhr.response);
             }
         }
