@@ -45,7 +45,7 @@ def resize(tab, shape) :
 
 def predict(image) :
     
-    shape = (200,200,3) #reduce quality to simplify CNN
+    shape = (200,200) #reduce quality to simplify CNN
     desired_size = shape[0]
     
     X_test = np.empty((1, desired_size, desired_size, 3), dtype = 'uint8')
