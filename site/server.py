@@ -17,7 +17,10 @@ while 1:
         print('')
     if data:
         print(data.decode('utf-8'))
-        gender = prediction.predict(data.decode('utf-8'))
+        try:
+            gender = prediction.predict(data.decode('utf-8'))
+        except:
+            gender = b"ERROR"
         
         conn.sendall(gender)
         

@@ -389,7 +389,6 @@ function showClassifier() {
       var button = document.createElement("button");
       button.innerHTML = "Upload";
       button.classList.add("box__button");
-      button.setAttribute("type", "submit");
       button.onclick = send;
 
       var result = document.createElement("output");
@@ -397,17 +396,15 @@ function showClassifier() {
 
 
       label.appendChild(span);
-      divtext.appendChild(input);
-      divtext.appendChild(label);
-      divbox.appendChild(divtext);
+      form.appendChild(input);
+      form.appendChild(label);
+      form.appendChild(divtext);
+      divbox.appendChild(form);
       divbox.appendChild(button);
 
       var myIntervall = setInterval(()=>{dragndrop(myIntervall)}, 100);
 
-      form.appendChild(divbox);
-
-      container.appendChild(form);
-      container.appendChild(result);
+      container.appendChild(divbox);
     }
 
 
@@ -434,32 +431,33 @@ function showClassifier() {
 
 
     function sendDnD(file){
-      var theForm = document.getElementById("imageForm");
-      console.log("Drop !");
-      theForm.append("file", file, file.name);
+      console.log(file);
       var xhr = new XMLHttpRequest();
-      const FD = new FormData( theForm );
-      xhr.open('POST', '../../imageupload');
+      const FD = new FormData();
+      FD.append("imagepath", file);
+      xhr.open('POST', '../../imageupload', true);
       xhr.send(FD);
       xhr.onload = function(){
-        // container.innerHTML = xhr.response;
-        document.getElementById("result").value= xhr.response;
-        console.log = xhr.response;
+        container.innerHTML = xhr.response;
+        console.log(xhr.response);
     }
     }
 
     function send() {
         var theForm = document.getElementById("imageForm");
-        console.log("Drop !");
         var xhr = new XMLHttpRequest();
         const FD = new FormData( theForm );
-        xhr.open('POST', '../../imageupload');
-        xhr.send(FD);
-        xhr.onload = function(){
-          // container.innerHTML = xhr.response;
-          document.getElementById("result").value= xhr.response;
-          console.log = xhr.response;
-      }
+        if(FD.get("imagepath").name){
+            xhr.open('POST', '../../imageupload', true);
+            xhr.send(FD);
+            xhr.onreadystatechange = function(){
+                container.innerHTML = xhr.response;
+                console.log(xhr.response);
+            }
+        }
+        else {
+            alert("Please select a file");
+        }
     }
 }
 

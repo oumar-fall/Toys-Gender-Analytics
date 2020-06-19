@@ -324,6 +324,7 @@ a:hover {
         width: 100%;
         height: auto;
         flex-direction: row;
+        flex-wrap: wrap;
         margin : 30px 0;
     }
 
@@ -390,12 +391,17 @@ tbody {
 }*/
 
 #dropper {
-    width: 400px;
-    height: 150px;
+    width: auto;
+    height: auto;
     background-color: #bdc3c7;
     border-radius: 10px;
     border: 2px dashed black;
+    padding : 10px;
     /* transition: all 200ms linear; */
+}
+
+#dropper:hover, #dropper .label__dragndrop:hover {
+    cursor: pointer;
 }
 
 .box__file{
@@ -410,6 +416,9 @@ tbody {
   border-radius: 5px;
 	border: 1px solid black;
   font-family: Arial, Helvetica, sans-serif;
+}
+.box__button:hover{
+    border : inset black 1px;
 }
 
 #text__dragndrop{
@@ -445,10 +454,13 @@ tbody {
 /* je rajoute ici*/
 
 #left {
+    position: relative;
     float:left;
     font-size: small;
     line-height : 70%;
     margin-left: 0px;
+    size : 20%;
+    overflow-x: 0;  
 
 }
 #right {
@@ -456,14 +468,15 @@ tbody {
     font-size: small;
     line-height : 70%;
     margin-left: 20px;
+    size : 20%
 
 
 }
 #right_right {
-    float:left;
     font-size: small;
     line-height : 70%;
-    margin-left: 20px;
+    margin-top:10px;
+    size : 40%;
 
 
 }
@@ -472,9 +485,19 @@ tbody {
     font-size: small;
     line-height : 70%;
     margin-left : 20px;
+    size : 20%
 
 }
 
 #see {
     margin-top: 10px;
+    margin-bottom : 10px;
+}
+
+.canvas {
+    overflow : scroll;
+}
+
+.ylabel {
+    font-size: x-small;
 }
