@@ -67,7 +67,7 @@ http.createServer(function(request, response) {
         else {
           response.writeHead(200, {'Content-Type': 'image/*'});
         }
-        
+
         response.end(file);
       }
     })
