@@ -213,6 +213,9 @@ main {
 a{
   color: black;
 }
+a:hover {
+    opacity : 0.5;
+}
 
 .uploadPreview.uploadPreview {
     max-width : 300px;
@@ -223,6 +226,7 @@ a{
     align-self: flex-start;
     border-bottom: darkgray solid 1px;
     margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .level-1 {
@@ -242,6 +246,11 @@ a{
     margin-left : 5%;
 }
 
+.tab {
+    width:100%;
+    height: auto;
+}
+
 .tabDiv {
     width: 100%;
     display: flex;
@@ -249,6 +258,7 @@ a{
     align-items: center;
     justify-content: stretch;
     height: auto;
+    margin-bottom : 30px;
 
     /* background-color: blue;
     height: 200px; */
@@ -277,7 +287,7 @@ a{
     justify-content: center;
     display: flex;
     flex-direction: column;
-    margin-left: 30px;
+    margin: 30px auto 30px 30px;
     flex-shrink: 1;
 
     /* height: 100%;
@@ -314,6 +324,7 @@ a{
         width: 100%;
         height: auto;
         flex-direction: row;
+        margin : 30px 0;
     }
 
     .tabImage {
@@ -326,9 +337,14 @@ a{
     }
 }
 
-table {
+.table {
     line-height: initial;
+    max-width: 100%;
+    width: fit-content;
     margin : 2px 0;
+    background-color: lavender;
+    padding : 5px;
+    overflow-x: auto;
 }
 thead {
     font-size: 0.8em;
@@ -338,13 +354,13 @@ tbody {
     word-break: break-all;
 }
 .code-block {
-    font-size: 0.5em;
-    margin-left: 5%;
+    font-size: 0.7em;
+    margin: 10px 5%;
     line-height: initial;
     background-color: rgba(0, 0, 0, 0.8);
     color: whitesmoke;
     padding: 1em;
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 
 #drop_zone {

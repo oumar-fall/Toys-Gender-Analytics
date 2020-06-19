@@ -3,14 +3,14 @@
     "tabs1" : [],
     "tabs" : [
         {
-            "name" : "Data Scraping",
-            "onclick" : "showScraping()",
-            "img" : "medias/svg/color.svg"
-        },
-        {
             "name" : "Project description",
             "onclick" : "showProject()",
             "img" : "medias/svg/project.svg"
+        },
+        {
+            "name" : "Data Scraping",
+            "onclick" : "showScraping()",
+            "img" : "medias/svg/color.svg"
         }
     ]
 }

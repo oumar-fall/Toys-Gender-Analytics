@@ -136,6 +136,7 @@ http.createServer(function(request, response) {
     var form = new formidable.IncomingForm();
     form.parse(request, function (err, fields, files) {
       var oldpath = files.imagepath.path;
+      console.log(oldpath);
       var newpath = encodeURI('temp/' + files.imagepath.name);
       console.log("New path : " + newpath);
       fs.rename(oldpath, newpath, function (err) {
@@ -143,7 +144,6 @@ http.createServer(function(request, response) {
 
         var client = new net.Socket();
         client.connect(8484, '127.0.0.1', function() {
-            console.log('Connected');
             client.write(newpath);
         });
         client.on('data', function(data) {
