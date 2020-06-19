@@ -429,10 +429,13 @@ tbody {
 /* je rajoute ici*/
 
 #left {
+    position: relative;
     float:left;
     font-size: small;
     line-height : 70%;
     margin-left: 0px;
+    size : 20%;
+    overflow-x: 0;  
 
 }
 #right {
@@ -440,14 +443,15 @@ tbody {
     font-size: small;
     line-height : 70%;
     margin-left: 20px;
+    size : 20%
 
 
 }
 #right_right {
-    float:left;
     font-size: small;
     line-height : 70%;
-    margin-left: 20px;
+    margin-top:10px;
+    size : 40%;
 
 
 }
@@ -456,9 +460,19 @@ tbody {
     font-size: small;
     line-height : 70%;
     margin-left : 20px;
+    size : 20%
 
 }
 
 #see {
     margin-top: 10px;
+    margin-bottom : 10px;
+}
+
+.canvas {
+    overflow : scroll;
+}
+
+.ylabel {
+    font-size: x-small;
 }

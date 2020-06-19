@@ -8,8 +8,8 @@
         "tabname" : "Color",
         "text" : "One of the first clichés we wanted to check is the following: the toys for girls are <span class='pink'>pink</span> while the toys for boys are rather <span class='blue'>blue</span>. As you can see on the attached diagrams this cliché is confirmed. Pink is indeed very present on girls' toys, while boys' toys are more varied in colour. <br> <br> We obtained these diagrams from the toys in the catalogue la grande récrée by looking at the majority tint of each picture. White and black are not considered.  ",
         "images" : [
-            "data/img/color_repartition_1.png",
-            "data/img/color_repartition_2.png"
+            "data/img/color_repartition_bar1.png",
+            "data/img/color_repartition_bar2.png"
         ]
     },
     {
