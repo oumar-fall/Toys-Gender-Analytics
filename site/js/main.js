@@ -339,6 +339,7 @@ function showClassifier() {
     generate_secondaryNav("values/classifierNav.json");
     container.innerHTML = "";
     let request = new XMLHttpRequest();
+    const FD = new FormData();
     request.open('GET', "values/classifierDivs.json");
     request.responseType = 'json';
     request.send();
@@ -364,6 +365,10 @@ function showClassifier() {
       input.accept = "image/*";
       input.name = "imagepath";
       input.id = "file";
+      input.onchange = function() {
+          FD.set("imagepath", input.files[0]);
+          updatePreview();
+      }
 
       var form = document.createElement('form');
       form.classList.add("box");
@@ -378,7 +383,7 @@ function showClassifier() {
 
       var label = document.createElement('label');
       label.classList.add("label__dragndrop");
-      label.innerHTML = "<strong>Choose an image </strong>";
+      label.innerHTML = "<strong>Click there to choose an image </strong>";
       label.setAttribute("for", "file");
 
       var span = document.createElement('span');
@@ -389,20 +394,26 @@ function showClassifier() {
       var button = document.createElement("button");
       button.innerHTML = "Upload";
       button.classList.add("box__button");
-      button.setAttribute("type", "submit");
       button.onclick = send;
 
+      var result = document.createElement("output");
+      result.id = "result";
+      result.innerHTML = "Hey There";
+
+
+
       label.appendChild(span);
-      divtext.appendChild(input);
-      divtext.appendChild(label);
-      divbox.appendChild(divtext);
+      form.appendChild(input);
+      form.appendChild(label);
+      form.appendChild(divtext);
+      divbox.appendChild(form);
       divbox.appendChild(button);
+
 
       var myIntervall = setInterval(()=>{dragndrop(myIntervall)}, 100);
 
-      form.appendChild(divbox);
-
-      container.appendChild(form);
+      container.appendChild(divbox);
+      container.appendChild(result);
     }
 
 
@@ -413,47 +424,49 @@ function showClassifier() {
         document.querySelector('#dropper').addEventListener('dragover', function(e) {
             e.preventDefault(); // Annule l'interdiction de "drop"
             e.stopPropagation();
+            this.classList.add("dragover");
+        }, false);
+
+        document.querySelector('#dropper').addEventListener('dragleave', function(e) {
+            this.classList.remove("dragover");
         }, false);
 
         document.querySelector('#dropper').addEventListener('drop', function(e) {
             e.preventDefault(); // Cette méthode est toujours nécessaire pour éviter une éventuelle redirection inattendue
             e.stopPropagation();
             var data = e.dataTransfer, file = data.files[0];
-            console.log(file.name);
-            sendDnD(file);
+            FD.set("imagepath", file);
+            updatePreview();
         }, false);
         clearInterval(myIntervall);
 
       }
     }
 
-
-    function sendDnD(file){
-      console.log(file);
-      var theForm = document.getElementById("imageForm");
-      console.log("Drop !");
-      theForm.append("file", file, file.name);
-      var xhr = new XMLHttpRequest();
-      const FD = new FormData( theForm );
-      xhr.open('POST', '../../imageupload');
-      xhr.send(FD);
-      xhr.onload = function(){
-        container.innerHTML = xhr.response;
-        console.log = xhr.response;
-    }
-    }
-
     function send() {
-        var theForm = document.getElementById("imageForm");
-        console.log("Drop !");
         var xhr = new XMLHttpRequest();
-        const FD = new FormData( theForm );
-        xhr.open('POST', '../../imageupload');
-        xhr.send(FD);
-        xhr.onload = function(){
-          container.innerHTML = xhr.response;
-          console.log = xhr.response;
-      }
+        if(FD.get("imagepath")){
+            xhr.open('POST', '../../imageupload', true);
+            xhr.send(FD);
+            xhr.onreadystatechange = function(){
+                document.getElementById("result").value=xhr.response;
+                // container.innerHTML = xhr.response;
+                console.log(xhr.response);
+            }
+        }
+        else {
+            alert("Please select a file");
+        }
+    }
+
+    function updatePreview() {
+        var preview;
+        if (!(preview = document.getElementById("file-preview"))){
+            preview = document.createElement("img");
+            preview.id = "file-preview";
+            document.getElementById('dropper').appendChild(preview);
+        }
+        preview.src = window.URL.createObjectURL(FD.get("imagepath"));
     }
 }
 
