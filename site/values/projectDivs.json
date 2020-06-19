@@ -38,8 +38,10 @@
         "tabname" : "Prices",
         "text" : "Are the most gendered toys the cheapest ones? <br> <br> Well! Not in the catalog of La Grande Récré! Among the girls' toys that cost less than 10 euros, 24% are pink while among the toys that cost more than 50 euros 31%. ",
         "images" : [
-            "data/img/prices_girls_1.png",
-            "data/img/prices_girls_2.png"
+            "data/img/price_girls_bar1.png",
+            "data/img/prices_girls_bar2.png",
+            "data/img/price_boys_1.png",
+            "data/img/price_boys_2.png"
         ]
     }
 ]
