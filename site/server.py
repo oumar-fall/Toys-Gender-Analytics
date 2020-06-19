@@ -8,9 +8,6 @@ s.bind((HOST, PORT))
 s.listen()
 
 
-
-
-
 while 1:
     try:
         conn, addr = s.accept()

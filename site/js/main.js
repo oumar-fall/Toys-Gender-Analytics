@@ -369,13 +369,10 @@ function showClassifier() {
       var form = document.createElement('form');
       form.classList.add("box");
       form.id = "imageForm";
-      /*form.setAttribute("method", "post");
-      form.setAttribute("action", "");
-      form.setAttribute("enctype", "multipart/form-data");*/
 
       var divbox = document.createElement('div');
       divbox.id ="dropper";
-      divbox.ondrop = send;
+      // divbox.ondrop = handleDrop;
 
       var divtext = document.createElement('div');
       divtext.id ="text__dragndrop";
@@ -395,13 +392,14 @@ function showClassifier() {
       button.classList.add("box__button");
       button.setAttribute("type", "submit");
       button.onclick = send;
+
       label.appendChild(span);
       divtext.appendChild(input);
       divtext.appendChild(label);
       divbox.appendChild(divtext);
       divbox.appendChild(button);
 
-      setInterval(dragndrop, 100);
+      var myIntervall = setInterval(()=>{dragndrop(myIntervall)}, 100);
 
       form.appendChild(divbox);
 
@@ -409,21 +407,40 @@ function showClassifier() {
     }
 
 
-    function dragndrop(){
+    function dragndrop(myIntervall){
       var box = document.getElementById('dropper');
       if (box){
-        /*console.log("haha");*/
+        console.log("box is ready to work");
         document.querySelector('#dropper').addEventListener('dragover', function(e) {
             e.preventDefault(); // Annule l'interdiction de "drop"
+            e.stopPropagation();
         }, false);
 
         document.querySelector('#dropper').addEventListener('drop', function(e) {
             e.preventDefault(); // Cette méthode est toujours nécessaire pour éviter une éventuelle redirection inattendue
-            /*alert('Vous avez bien déposé votre élément !');*/
+            e.stopPropagation();
+            var data = e.dataTransfer, file = data.files[0];
+            console.log(file);
+            sendDnD(file);
         }, false);
-        clearInterval();
+        clearInterval(myIntervall);
 
       }
+    }
+
+
+    function sendDnD(file){
+      var theForm = document.getElementById("imageForm");
+      console.log("Drop !");
+      theForm.append('file', file);
+      var xhr = new XMLHttpRequest();
+      const FD = new FormData( theForm );
+      xhr.open('POST', '../../imageupload');
+      xhr.send(FD);
+      xhr.onload = function(){
+        container.innerHTML = xhr.response;
+        console.log = xhr.response;
+    }
     }
 
     function send() {
@@ -433,7 +450,10 @@ function showClassifier() {
         const FD = new FormData( theForm );
         xhr.open('POST', '../../imageupload');
         xhr.send(FD);
-        xhr.onload = function(){container.innerHTML = xhr.response;}
+        xhr.onload = function(){
+          container.innerHTML = xhr.response;
+          console.log = xhr.response;
+      }
     }
 }
 

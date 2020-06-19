@@ -19,6 +19,8 @@ from keras.models import load_model
 
 def resize(tab, shape) :
   if tab.shape != shape :
+      
+    desired_size = shape[0]
     height = tab.shape[0]
     width = tab.shape[1]
     if ((desired_size-height)%2 == 1) :
@@ -38,12 +40,6 @@ def resize(tab, shape) :
     tab = np.pad(tab, ((ratio_height1,ratio_height2), (ratio_width1,ratio_width2), (0,0)), 'constant', constant_values = 0)
     
   return(tab[:,:,:3])
-  
-##Load model
-
-# load model
-
-
   
 ## Predict
 
