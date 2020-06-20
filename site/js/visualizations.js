@@ -10,6 +10,7 @@ const div4  = document.createElement("div");
 const boutton = document.createElement("button");
 boutton.id = "see";
 boutton.onclick = showVisu;
+var personnesress = [];
 var z;
 var x;
 var y;
@@ -38,6 +39,7 @@ function initVisualization(){
     
     container.appendChild(divsvg);
     container.appendChild(div4);
+    d3.select("svg").remove();
     svg = d3.select(divsvg)
             .append('svg')
             .attr("width", canvas_w )
@@ -329,6 +331,7 @@ function showVisualisation2(){
     img.classList.add("fullSize");
     img.src = "data/img/mosaique_boy.png";
     container.appendChild(img);
+
 }
 
 function showVisualisation3(){
