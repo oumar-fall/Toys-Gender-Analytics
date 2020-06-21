@@ -323,44 +323,41 @@ function showVisualisation1(){
 
 }
 
-
 function showVisualisation2(){
-    initVisualization();
-    container.innerHTML = "";
-    var img = document.createElement('img');
-    img.classList.add("fullSize");
-    img.src = "data/img/mosaique_boy.png";
-    container.appendChild(img);
+    container.innerHTML = ""
+    let request = new XMLHttpRequest();
+    request.open('GET', "values/visualisationDivs.json");
+    request.responseType = 'json';
+    request.send();
+    request.onload = function() {
+        var projectTabs = this.response;
+        if (projectTabs){
+            for (let tab of projectTabs){
+                appendDiv(tab);
+            }
+        }
+        else {
+            console.log("Can't load visualisation datas");
+        }
+    }
 
-}
-
-function showVisualisation3(){
-    initVisualization();
-    container.innerHTML = "";
-    var img = document.createElement('img');
-    img.classList.add("fullSize");
-    img.src = "data/img/mosaique_girl.png";
-    container.appendChild(img);
-}
-
-function showVisualisation4(){
-    initVisualization();
-    container.innerHTML = "Visualization 4";
 }
 
 function appendDiv(tab){
-    if (!tab.level){
+    if (tab.level===undefined){
         tab.level = 1;
     }
 
     var fullTab = document.createElement('div');
     fullTab.classList.add('tab');
     
-    var tabName = document.createElement("span");
-    tabName.classList.add("tabName", "level-" + tab.level);
-    tabName.id = tab.tabname.toLowerCase().replace(/\s/g, "-");
-    tabName.innerHTML = tab.tabname;
-    fullTab.appendChild(tabName);
+    if (tab.level !== "0"){
+        var tabName = document.createElement("span");
+        tabName.classList.add("tabName", "level-" + tab.level);
+        tabName.id = tab.tabname.toLowerCase().replace(/\s/g, "-");
+        tabName.innerHTML = tab.tabname;
+        fullTab.appendChild(tabName);
+    }
 
     var tabDiv = document.createElement("div");
     tabDiv.classList.add("tabDiv");
@@ -371,6 +368,10 @@ function appendDiv(tab){
 
     var imgContent = document.createElement("div");
     imgContent.classList.add("imgContent");
+
+    if (tab.horizontal) {
+        fullTab.classList.add("horizontalContent");
+    }
 
     var n_img = tab.images.length;
 
@@ -392,14 +393,97 @@ function appendDiv(tab){
 }
 
 function showImg(imgPath) {
+    var modalImgContainer = document.createElement('div');
+    modalImgContainer.classList.add("modal-img-container");
+    modal.appendChild(modalImgContainer);
+
     var img = document.createElement('img');
     img.src = imgPath;
-    modal.appendChild(img);
+    modalImgContainer.appendChild(img);
+    img.id = "modalImage";
+    
+    var zoom = document.createElement('div');
+    zoom.id = "modalZoom";
+    modal.appendChild(zoom);
+
     modal.style.display = "flex";
-    img.classList.add("modalImage");
+    imageZoom("modalImage", "modalZoom");
 }
 
 function closeModal() {
     modal.innerHTML = "";
     modal.style.display = "none";
 }
+
+function imageZoom(imgID, resultID) {
+    var img, lens, result, cx, cy;
+    img = document.getElementById(imgID);
+    result = document.getElementById(resultID);
+
+    /* Create lens: */
+    lens = document.createElement("div");
+    lens.id = "modal-zoom_lens";
+
+    /* Insert lens: */
+    img.parentElement.insertBefore(lens, img);
+
+    /* Calculate the ratio between result DIV and lens: */
+    cx = result.offsetWidth / lens.offsetWidth;
+    cy = result.offsetHeight / lens.offsetHeight;
+
+    /* Set background properties for the result DIV */
+    result.style.backgroundImage = "url("+img.src+")";
+    result.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
+
+    /* Execute a function when someone moves the cursor over the image, or the lens: */
+    lens.addEventListener("mousemove", moveLens);
+    img.addEventListener("mousemove", moveLens);
+
+    /* And also for touch screens: */
+    lens.addEventListener("touchmove", moveLens);
+    img.addEventListener("touchmove", moveLens);
+
+    function moveLens(e) {
+      var pos, x, y;
+
+      /* Prevent any other actions that may occur when moving over the image */
+      e.preventDefault();
+
+      /* Get the cursor's x and y positions: */
+      pos = getCursorPos(e);
+
+      /* Calculate the position of the lens: */
+      x = pos.x - (lens.offsetWidth / 2);
+      y = pos.y - (lens.offsetHeight / 2);
+
+      /* Prevent the lens from being positioned outside the image: */
+      if (x > img.width - lens.offsetWidth) {x = img.width - lens.offsetWidth;}
+      if (x < 0) {x = 0;}
+      if (y > img.height - lens.offsetHeight) {y = img.height - lens.offsetHeight;}
+      if (y < 0) {y = 0;}
+
+      /* Set the position of the lens: */
+      lens.style.left = x + "px";
+      lens.style.top = y + "px";
+
+      /* Display what the lens "sees": */
+      result.style.backgroundPosition = "-" + (x * cx) + "px -" + (y * cy) + "px";
+    }
+
+    function getCursorPos(e) {
+      var a, x = 0, y = 0;
+      e = e || window.event;
+
+      /* Get the x and y positions of the image: */
+      a = img.getBoundingClientRect();
+
+      /* Calculate the cursor's x and y coordinates, relative to the image: */
+      x = e.pageX - a.left;
+      y = e.pageY - a.top;
+
+      /* Consider any page scrolling: */
+      x = x - window.pageXOffset;
+      y = y - window.pageYOffset;
+      return {x : x, y : y};
+    }
+  }
