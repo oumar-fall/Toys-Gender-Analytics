@@ -448,11 +448,13 @@ function showClassifier() {
         var xhr = new XMLHttpRequest();
         if(FD.get("imagepath")){
             xhr.open('POST', '../../imageupload', true);
+            waiting.classList.remove('waiting-off');
             xhr.send(FD);
             xhr.onreadystatechange = function(){
                 document.getElementById("result").value=xhr.response;
                 // container.innerHTML = xhr.response;
                 console.log(xhr.response);
+                waiting.classList.add('waiting-off');
             }
         }
         else {
