@@ -58,12 +58,11 @@ def predict(image) :
     img = resize(tab, shape)
     X_test[0] = img
     
-    y_pred = model.predict(X_test)
+    [[y_pred]] = model.predict(X_test)
+
+    print(y_pred)
     
-    if(y_pred < 0.5) :
-        return(b"Boy !")
-    else :
-        return(b"Girl !")
+    return bytes(str(y_pred), 'utf8')
     
     
     

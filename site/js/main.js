@@ -362,6 +362,24 @@ function showClassifier() {
 
     function addDragNDrop(){
       console.log("hahaha");
+
+      var imgExempleDiv = document.createElement('div');
+      imgExempleDiv.classList.add('img-exemple-div');
+
+      var imgExempleList = ["data/img/fille1.jpg", "data/img/garcon1.jpg", "data/img/jouet1.jpg"];
+
+      for (var imgExempleId in imgExempleList) {
+          var imgExemple = document.createElement('img');
+          imgExemple.className = 'img-exemple tabImage';
+          imgExemple.src = imgExempleList[imgExempleId];
+          imgExemple.id = "img-exemple-" + imgExempleId;
+          imgExemple.draggable = true;
+          imgExemple.setAttribute("onclick",  "showImg('" + imgExemple.src + "');");
+          imgExempleDiv.appendChild(imgExemple);
+      }
+
+      container.appendChild(imgExempleDiv);
+
       var input = document.createElement('input');
       input.classList.add("box__file");
       input.type = "file";
@@ -393,24 +411,20 @@ function showClassifier() {
       span.classList.add("box__dragndrop");
       span.innerHTML = "or drag it here<br>";
 
+      var preview = document.createElement("img");
+      preview.id = "file-preview";
 
       var button = document.createElement("button");
       button.innerHTML = "Upload";
       button.classList.add("box__button");
       button.onclick = send;
 
-      var result = document.createElement("output");
-      result.id = "result";
-      result.innerHTML = "Result ?";
-
-
-
       label.appendChild(span);
       form.appendChild(input);
       form.appendChild(label);
       form.appendChild(divtext);
       divbox.appendChild(form);
-
+      divbox.appendChild(preview);
       divbox.appendChild(button);
 
 
@@ -421,25 +435,40 @@ function showClassifier() {
 
       container.appendChild(divbox);
       container.appendChild(divspace);
+
+      var result = document.createElement("output");
+      result.id = "result";
+      result.innerHTML = "Result ?";
       container.appendChild(result);
 
-      var imgExempleDiv = document.createElement('div');
-      imgExempleDiv.classList.add('img-exemple-div');
+      //Creating output bar
+      var resultbar = document.createElement("div");
+      resultbar.id = "result-bar";
 
-      var imgExempleList = ["data/img/fille1.jpg", "data/img/garcon1.jpg", "data/img/jouet1.jpg"];
+      var resultMaleContainer = document.createElement('div');
+      resultMaleContainer.className = "result-container";
+      resultMaleContainer.id = "result-male-container";
 
-      for (var imgExempleId in imgExempleList) {
-          var imgExemple = document.createElement('img');
-          imgExemple.className = 'img-exemple tabImage';
-          imgExemple.src = imgExempleList[imgExempleId];
-          imgExemple.id = "img-exemple-" + imgExempleId;
-          imgExemple.draggable = true;
-          imgExemple.setAttribute("onclick",  "showImg('" + imgExemple.src + "');");
-          imgExempleDiv.appendChild(imgExemple);
-      }
+      var resultFemaleContainer = document.createElement('div');
+      resultFemaleContainer.className = "result-container";
+      resultFemaleContainer.id = "result-female-container";
 
-      container.appendChild(imgExempleDiv);
-
+      var resultMainContainer = document.createElement('div');
+      resultMainContainer.id = "result-main-container";
+      var resultTrack = document.createElement('div');
+      resultTrack.id = "result-track";
+      var resultThumb = document.createElement('span');
+      resultThumb.className = "result-container";
+      resultThumb.id = "result-thumb";
+      resultThumb.style.opacity = 0;
+    
+      
+      resultMainContainer.appendChild(resultTrack);
+      resultMainContainer.appendChild(resultThumb);
+      resultbar.appendChild(resultMaleContainer);
+      resultbar.appendChild(resultMainContainer);
+      resultbar.appendChild(resultFemaleContainer);
+      container.appendChild(resultbar);
     }
 
   //   function drag(ev) {
@@ -487,8 +516,8 @@ function showClassifier() {
             xhr.open('POST', '../../imageupload', true);
             waiting.style.display = "block"
             xhr.send(FD);
-            xhr.onreadystatechange = function(){
-                document.getElementById("result").value=xhr.response;
+            xhr.onload = function(){
+                showResult(xhr.response);
                 // container.innerHTML = xhr.response;
                 console.log(xhr.response);
                 waiting.style.display = "none"
@@ -498,8 +527,8 @@ function showClassifier() {
             xhr.open('POST', '../../srcupload', true);
             waiting.style.display = "block"
             xhr.send(FD);
-            xhr.onreadystatechange = function(){
-                document.getElementById("result").value=xhr.response;
+            xhr.onload = function(){
+                showResult(xhr.response);
                 // container.innerHTML = xhr.response;
                 console.log(xhr.response);
                 waiting.style.display = "none"
@@ -512,18 +541,27 @@ function showClassifier() {
     }
 
     function updatePreview() {
-        var preview;
-        if (!(preview = document.getElementById("file-preview"))){
-            preview = document.createElement("img");
-            preview.id = "file-preview";
-            document.getElementById('dropper').appendChild(preview);
-        }
+        document.getElementById("result-thumb").style.opacity = 0;
+        var preview = document.getElementById("file-preview")
         if(FD.get("imagepath")){
             preview.src = window.URL.createObjectURL(FD.get("imagepath"));
         }
         else if (FD.get("imagesrc")){
             preview.src = FD.get("imagesrc");
         }
+    }
+
+    function showResult(res) {
+        var resultThumb = document.getElementById("result-thumb");
+        var preview = document.getElementById("file-preview")
+        var resultTrack = document.getElementById("result-track");
+
+        document.getElementById("result").value = (res > 0.5) ? 'Girl' : 'Boy';
+
+        resultThumb.style.backgroundImage = 'URL("' + preview.src + '")';
+        resultThumb.style.left = 10 + res * (resultTrack.offsetWidth - resultThumb.offsetWidth) + "px";
+        resultThumb.style.opacity = 1;
+        resultThumb.setAttribute("value", res);
     }
 }
 
