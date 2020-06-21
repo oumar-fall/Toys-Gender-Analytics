@@ -505,7 +505,7 @@ tbody {
 #modalImage {
   object-fit: contain;
   width: 100%;
-  height: 100%;
+  height: -webkit-fill-available;
 }
 #modalImage:hover {
   cursor: zoom-out;
