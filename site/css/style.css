@@ -286,6 +286,8 @@ a:hover {
   flex-direction: column;
   margin: 30px auto 30px 30px;
   flex-shrink: 1;
+  max-height: 100%;
+  overflow-y: auto;
 
   /* height: 100%;
     background-color: green; */
@@ -294,10 +296,15 @@ a:hover {
 .tabImage {
   max-width: 100%;
 }
-
 .tabImage:hover {
   opacity: 0.5;
   cursor: zoom-in;
+}
+
+.cropped {
+  object-fit: cover;
+  object-position: 0 0;
+  width: 100%;
 }
 
 .n_img1 {
@@ -576,4 +583,22 @@ tbody {
 
 .ylabel {
   font-size: x-small;
+}
+
+
+.img-exemple-div {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 50px;
+  padding : 20px;
+  background-color: whitesmoke;
+}
+
+.img-exemple {
+  height : 200px;
+  width : auto;
+  margin : 10px;
+  max-width: none;
 }

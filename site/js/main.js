@@ -423,15 +423,22 @@ function showClassifier() {
       container.appendChild(divspace);
       container.appendChild(result);
 
-      var imggirl = document.createElement("img");
-      imggirl.src = "data/img/fille1.jpg";
-      imggirl.draggable = true;
-      imggirl.id = "drag1";
-      // imggirl.ondragstart = drag(event);
+      var imgExempleDiv = document.createElement('div');
+      imgExempleDiv.classList.add('img-exemple-div');
 
-      console.log("hola");
-      console.log(imggirl);
-      container.appendChild(imggirl);
+      var imgExempleList = ["data/img/fille1.jpg", "data/img/garcon1.jpg", "data/img/jouet1.jpg"];
+
+      for (var imgExempleId in imgExempleList) {
+          var imgExemple = document.createElement('img');
+          imgExemple.className = 'img-exemple tabImage';
+          imgExemple.src = imgExempleList[imgExempleId];
+          imgExemple.id = "img-exemple-" + imgExempleId;
+          imgExemple.draggable = true;
+          imgExemple.setAttribute("onclick",  "showImg('" + imgExemple.src + "');");
+          imgExempleDiv.appendChild(imgExemple);
+      }
+
+      container.appendChild(imgExempleDiv);
 
     }
 
@@ -456,7 +463,16 @@ function showClassifier() {
             e.preventDefault(); // Cette méthode est toujours nécessaire pour éviter une éventuelle redirection inattendue
             e.stopPropagation();
             var data = e.dataTransfer, file = data.files[0];
-            FD.set("imagepath", file);
+            if (file){
+                FD.set("imagepath", file);
+            }
+            else {
+                var img = e.dataTransfer.getData("text/html");
+                var div = document.createElement("div");
+                div.innerHTML = img;
+                var src = div.firstChild.src;
+                FD.set("imagesrc", src.replace(/http:\/\/localhost(:\d+)?/, "."))
+            }
             updatePreview();
         }, false);
         clearInterval(myIntervall);
@@ -467,7 +483,7 @@ function showClassifier() {
     function send() {
         var xhr = new XMLHttpRequest();
 
-        if(FD.get("imagepath") != undefined && FD.get("imagepath") != "undefined"){
+        if(FD.get("imagepath")){
             xhr.open('POST', '../../imageupload', true);
             waiting.style.display = "block"
             xhr.send(FD);
@@ -477,6 +493,18 @@ function showClassifier() {
                 console.log(xhr.response);
                 waiting.style.display = "none"
             }
+        }
+        else if (FD.get("imagesrc")){
+            xhr.open('POST', '../../srcupload', true);
+            waiting.style.display = "block"
+            xhr.send(FD);
+            xhr.onreadystatechange = function(){
+                document.getElementById("result").value=xhr.response;
+                // container.innerHTML = xhr.response;
+                console.log(xhr.response);
+                waiting.style.display = "none"
+            }
+
         }
         else {
             alert("Please select a file");
@@ -490,7 +518,12 @@ function showClassifier() {
             preview.id = "file-preview";
             document.getElementById('dropper').appendChild(preview);
         }
-        preview.src = window.URL.createObjectURL(FD.get("imagepath"));
+        if(FD.get("imagepath")){
+            preview.src = window.URL.createObjectURL(FD.get("imagepath"));
+        }
+        else if (FD.get("imagesrc")){
+            preview.src = FD.get("imagesrc");
+        }
     }
 }
 

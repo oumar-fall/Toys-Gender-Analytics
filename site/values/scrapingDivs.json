@@ -70,7 +70,8 @@
         "tabname" : "Summary",
         "level" : 3,
         "text" : "All of the above steps can be summarized in the following diagram.",
-        "images" : ["medias/Scraping/RM_ScrapingTree.png"]
+        "images" : ["medias/Scraping/RM_ScrapingTree.png"],
+        "horizontal" : true
     },
     {
         "tabname" : "Limitations",

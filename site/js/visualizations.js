@@ -380,6 +380,12 @@ function appendDiv(tab){
         img.src = tab.images[i];
         img.setAttribute("onclick",  "showImg('" + img.src + "');");
         imgContent.appendChild(img);
+        if (tab.cropImages) {
+            if (tab.cropImages[i] > 0) {
+                img.style.maxHeight = tab.cropImages[i] + "px";
+                img.classList.add("cropped")
+            }
+        }
     }
     
 

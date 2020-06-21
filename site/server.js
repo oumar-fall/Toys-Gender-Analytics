@@ -151,6 +151,7 @@ http.createServer(function(request, response) {
             response.write(data, 'binary')
             response.end();
             console.log('Received: ' + data);
+            fs.unlink(newpath, () => console.log(newpath + " successfully deleted"))
             client.destroy(); // kill client after server's response
         });
 
@@ -160,6 +161,24 @@ http.createServer(function(request, response) {
    });
 
 
+  }
+  if(myPath == "srcupload"){
+    var form = new formidable.IncomingForm();
+    form.parse(request, function (err, fields, files) {
+      var path = fields.imagesrc;
+      console.log("Path :"+ path);
+      var client = new net.Socket();
+      client.connect(8484, '127.0.0.1', function() {
+          client.write(path);
+      });
+      client.on('data', function(data) {
+          response.writeHead(200, {'Content-Type': 'text/json'});
+          response.write(data, 'binary')
+          response.end();
+          console.log('Received: ' + data);
+          client.destroy(); // kill client after server's response
+      });
+    });
   }
 
 }).listen(PORT);
