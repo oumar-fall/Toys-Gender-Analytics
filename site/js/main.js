@@ -565,6 +565,12 @@ function showClassifier() {
     }
 }
 
+window.addEventListener("resize", onResize);
+
+function onResize(){
+    document.getElementById("result-thumb").style.opacity = 0;
+}
+
 
 
 init();
