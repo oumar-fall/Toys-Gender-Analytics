@@ -345,8 +345,10 @@ function showClassifier() {
     request.send();
     request.onload = function() {
         var projectTabs = this.response;
+        console.log("proj " + projectTabs);
         if (projectTabs){
             for (let tab of projectTabs){
+              console.log("tab");
                 appendDiv(tab);
             }
         }
@@ -398,7 +400,7 @@ function showClassifier() {
 
       var result = document.createElement("output");
       result.id = "result";
-      result.innerHTML = "Hey There";
+      result.innerHTML = "Result ?";
 
 
 
@@ -407,20 +409,38 @@ function showClassifier() {
       form.appendChild(label);
       form.appendChild(divtext);
       divbox.appendChild(form);
+
       divbox.appendChild(button);
 
 
       var myIntervall = setInterval(()=>{dragndrop(myIntervall)}, 100);
 
+      var divspace = document.createElement('div');
+      divspace.innerHTML = '<br><br>';
+
       container.appendChild(divbox);
+      container.appendChild(divspace);
       container.appendChild(result);
+
+      var imggirl = document.createElement("img");
+      imggirl.src = "data/img/fille1.jpg";
+      imggirl.draggable = true;
+      imggirl.id = "drag1";
+      // imggirl.ondragstart = drag(event);
+
+      console.log("hola");
+      console.log(imggirl);
+      container.appendChild(imggirl);
+
     }
 
+  //   function drag(ev) {
+  //     ev.dataTransfer.setData("text", ev.target.id);
+  // }
 
     function dragndrop(myIntervall){
       var box = document.getElementById('dropper');
       if (box){
-        console.log("box is ready to work");
         document.querySelector('#dropper').addEventListener('dragover', function(e) {
             e.preventDefault(); // Annule l'interdiction de "drop"
             e.stopPropagation();
