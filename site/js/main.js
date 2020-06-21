@@ -435,7 +435,6 @@ function showClassifier() {
             e.preventDefault(); // Cette méthode est toujours nécessaire pour éviter une éventuelle redirection inattendue
             e.stopPropagation();
             var data = e.dataTransfer, file = data.files[0];
-            console.log(file.name);
             FD.set("imagepath", file);
             updatePreview();
         }, false);

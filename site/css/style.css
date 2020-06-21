@@ -247,6 +247,8 @@ a:hover {
 .tab {
   width: 100%;
   height: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .tabDiv {
@@ -308,6 +310,34 @@ a:hover {
 .n_img2 {
   max-height: 50%;
 }
+
+
+.horizontalContent .tabDiv {
+  flex-direction: column;
+}
+
+.horizontalContent .textContent {
+  width: 100%;
+}
+
+.horizontalContent .imgContent {
+  width: 100%;
+  height: auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 30px 0px;
+}
+
+.horizontalContent .tabImage {
+  max-height: none;
+  max-width: 40%;
+  margin : 0 5%;
+}
+
+.horizontalContent .n_img3 {
+  max-width: 30%;
+}
+
 
 @media screen and (max-aspect-ratio: 4/3) {
   .tabDiv {
@@ -457,21 +487,43 @@ tbody {
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
   align-items: center;
   justify-content: center;
 }
 
-.modalImage {
-  width: 70%;
-  height: 80%;
-  object-fit: contain;
+.modal-img-container {
+  position: relative;
+  margin : 30px 0 30px 60px;
+  width : fit-content;
+  height: fit-content;
+  max-width: 60%;
 }
 
-.modalImage:hover {
+#modalImage {
+  object-fit: contain;
+  width: 100%;
+  height: -webkit-fill-available;
+}
+#modalImage:hover {
   cursor: zoom-out;
+}
+
+#modalZoom {
+  flex-grow: 0;
+  width: 300px;
+  margin:5%;
+  height:300px;
+  border : solid black 2px
+}
+
+#modal-zoom_lens {
+  position: absolute;
+  border: 1px solid #817f7f;
+  width: 40px;
+  height: 40px;
 }
 /* je rajoute ici*/
 

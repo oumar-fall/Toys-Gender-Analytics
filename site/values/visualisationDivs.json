@@ -1,0 +1,81 @@
+[
+    {
+        "tabname" : "",
+        "level" : 0,
+        "text" : "<p>At the beginning of our study we made many toy mosaics, these different visualizations allowed us to know what were the important points to analyze. These mosaics have been made on python, no image is missing, and the size of the images has been reduced in order to reduce the execution time. We had also made mosaics not of the images of the toys but of squares filled with the dominant colour of the images. However, these mosaics do not add much, indeed, the dominant colour of the toys is relatively well visible on the images.</p><br><p>At first these mosaics allowed us to confirm that we had scraping problems, indeed some images were present several times. This is what we can see below, the mask of Darth Vader is present several times just like the blue mask next to it.</p>" ,
+        "images" : [
+            "data/img/mosaiqueimagesfillegarcon.png"
+        ]
+    },
+    {
+        "tabname" : "",
+        "level" : 0,
+        "text" : "<p>We redid the scraping, and we got a lot more footage. So we made other mosaics, much longer to create (about 2/3 hours). These mosaics highlighted the obvious difference in the colors of the toys. </p>" ,
+        "images" : [
+            "data/img/mosaique_boy.png",
+            "data/img/mosaique_girl.png"
+        ],
+        "horizontal" : true
+    },
+    {
+        "tabname" : "",
+        "level" : 0,
+        "text" : "<p>We then made mosaics to analyse the differences between expensive and cheap toys.  Below you can see the mosaics of the expensive and cheap toys for girls and boys. We then studied the price of the toys and their color more precisely. </p>" ,
+        "images" : [
+        ]
+    },
+    {
+        "tabname" : "",
+        "level" : 0,
+        "text" : "<p>For the cheap boys' toys :</p>" ,
+        "images" : [
+            "data/img/Boys_prixcatim0.png"
+        ],
+        "horizontal" : true
+    },
+    {
+        "tabname" : "",
+        "level" : 0,
+        "text" : "<p>For expensive boys' toys: </p>" ,
+        "images" : [
+            "data/img/Boys_prixcatim5.png"
+        ],
+        "horizontal" : true
+    },
+    {
+        "tabname" : "",
+        "level" : 0,
+        "text" : "<p>For cheap girls' toys: </p>" ,
+        "images" : [
+            "data/img/Girls_price0.png"
+        ],
+        "horizontal" : true
+    },
+    {
+        "tabname" : "",
+        "level" : 0,
+        "text" : "<p>For expensive girls' toys: </p>" ,
+        "images" : [
+            "data/img/Girls_prixcatim5.png"
+        ],
+        "horizontal" : true
+    },
+    {
+        "tabname" : "",
+        "level" : 0,
+        "text" : "<p>Finally, we wanted to observe the toys according to the age for which they are recommended. Here is the mosaic for the toys of the youngest children (0 to 12 months): </p>" ,
+        "images" : [
+            "data/img/BoysGirls1.png"
+        ],
+        "horizontal" : true
+    },
+    {
+        "tabname" : "",
+        "level" : 0,
+        "text" : "<p>And the one for toys for older children (12 years old and older): </p>" ,
+        "images" : [
+            "data/img/BoysGirls5.png"
+        ],
+        "horizontal" : true
+    }
+]
