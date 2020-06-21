@@ -262,7 +262,6 @@ function showVisu(){
 
 
 function showVisualisation1(){
-    
     d3.select("svg").remove();
     initVisualization();
     
@@ -319,8 +318,8 @@ function showVisualisation1(){
     .attr("x", -h/2 )
     .text("Weight (kg)");
     
-   
-
+    
+    waiting.style.display = "none";
 }
 
 function showVisualisation2(){

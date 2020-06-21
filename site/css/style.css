@@ -20,9 +20,6 @@ body::-webkit-scrollbar {
   left: 0;
   z-index: 5;
 }
-.waiting-off {
-  display: none;
-}
 
 header {
   grid-row: 1/3;
@@ -500,12 +497,23 @@ tbody {
   width : fit-content;
   height: fit-content;
   max-width: 60%;
+  max-height: 90%;
+  overflow-y: auto;
 }
+.modal-img-container::-webkit-scrollbar{
+  height : 100%;
+  width : -10px;
+  background-color: transparent;
+}
+.modal-img-container::-webkit-scrollbar-thumb {
+  background: white;
+  border: solid black 1px;
 
+}
 #modalImage {
   object-fit: contain;
   width: 100%;
-  height: -webkit-fill-available;
+  height: 100%;
 }
 #modalImage:hover {
   cursor: zoom-out;
@@ -521,7 +529,7 @@ tbody {
 
 #modal-zoom_lens {
   position: absolute;
-  border: 1px solid #817f7f;
+  border: 2px solid #817f7f;
   width: 40px;
   height: 40px;
 }

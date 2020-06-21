@@ -71,7 +71,7 @@ function loadDatabase(){
                 console.log(error);
             }
             else {
-                waiting.classList.add('waiting-off');
+                waiting.style.display = "none";
                 console.log("Database loaded :" + rows.length + " rows");
                 database = rows;
                 generate_mainNav();
@@ -108,7 +108,7 @@ function loadDatabase(){
                 console.log(error);
             }
             else {
-                waiting.classList.add('waiting-off');
+                waiting.style.display = "none";
                 console.log("Database loaded :" + rows.length + " rows");
                 databaseL = rows;
                 generate_mainNav();
@@ -332,7 +332,8 @@ function showScraping(){
 
 function showVisualization(){
     generate_secondaryNav("values/visualizationNav.json");
-    container.innerHTML = "Visualizations";
+    waiting.style.display = "block";
+    setTimeout(showVisualisation1, 500);
 }
 
 function showClassifier() {
@@ -465,15 +466,16 @@ function showClassifier() {
 
     function send() {
         var xhr = new XMLHttpRequest();
-        if(FD.get("imagepath")){
+
+        if(FD.get("imagepath") != undefined && FD.get("imagepath") != "undefined"){
             xhr.open('POST', '../../imageupload', true);
-            waiting.classList.remove('waiting-off');
+            waiting.style.display = "block"
             xhr.send(FD);
             xhr.onreadystatechange = function(){
                 document.getElementById("result").value=xhr.response;
                 // container.innerHTML = xhr.response;
                 console.log(xhr.response);
-                waiting.classList.add('waiting-off');
+                waiting.style.display = "none"
             }
         }
         else {
