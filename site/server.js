@@ -132,6 +132,7 @@ http.createServer(function(request, response) {
         client.destroy(); // kill client after server's response
     });
   }
+
   if(myPath == "imageupload"){
     var form = new formidable.IncomingForm();
     form.parse(request, function (err, fields, files) {
@@ -158,8 +159,6 @@ http.createServer(function(request, response) {
         // response.end();
       });
    });
-
-
   }
 
 }).listen(PORT);
