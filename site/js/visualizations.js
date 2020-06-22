@@ -164,7 +164,7 @@ function showVisu(){
             x = volumeA();
             xaxis = d3.axisBottom()
             .scale(x);
-            xnom = "Volume (m3)";
+            xnom = "Volume (cm3)";
             break;
         case "poids": 
             x = poidsA();

@@ -3,7 +3,7 @@
     "tabs" : [
         {
             "name" : "Visualization",
-            "onclick" : "setTimeout(showVisualisation1, 500);)",
+            "onclick" : "setTimeout(showVisualisation1, 500);",
             "img" : "medias/svg/visualization.svg"
         },
         {
