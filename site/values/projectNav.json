@@ -10,7 +10,7 @@
         {
             "name" : "Data Scraping",
             "onclick" : "showScraping()",
-            "img" : "medias/svg/color.svg"
+            "img" : "medias/svg/scraping.svg"
         }
     ]
 }

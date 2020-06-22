@@ -4,12 +4,12 @@
         {
             "name" : "Visualization",
             "onclick" : "setTimeout(showVisualisation1, 500);)",
-            "img" : "medias/svg/price.svg"
+            "img" : "medias/svg/visualization.svg"
         },
         {
             "name" : "Details",
             "onclick" : "showVisualisation2()",
-            "img" : "medias/svg/color.svg"
+            "img" : "medias/svg/details.svg"
         }
     ]
 }
