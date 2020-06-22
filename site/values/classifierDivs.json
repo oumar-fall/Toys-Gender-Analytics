@@ -15,6 +15,7 @@
       "data/img/model1.png",
       "data/img/modelarchi.png",
       "data/img/model2.png"
-    ]
+    ],
+    "cropImages" : [0, 400, 0]
   }
 ]

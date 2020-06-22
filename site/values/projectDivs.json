@@ -49,6 +49,7 @@
             "data/img/prices_girls_bar2.png",
             "data/img/price_boys_1.png",
             "data/img/price_boys_2.png"
-        ]
+        ],
+        "horizontal" : true
     }
 ]

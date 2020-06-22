@@ -19,6 +19,7 @@ while 1:
         print(data.decode('utf-8'))
         try:
             gender = prediction.predict(data.decode('utf-8'))
+            print(gender);
         except:
             gender = b"ERROR"
         
