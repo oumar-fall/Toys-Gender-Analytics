@@ -45,12 +45,12 @@ def resize(tab, shape) :
 
 def predict(image) :
     
-    shape = (200,200) #reduce quality to simplify CNN
+    shape = (400,400) #reduce quality to simplify CNN
     desired_size = shape[0]
     
     X_test = np.empty((1, desired_size, desired_size, 3), dtype = 'uint8')
     
-    model = load_model('model/model.h5')
+    model = load_model('model/model_transfert.h5')
     
     imgpil = Image.open(str(image))
     imgpil.thumbnail(shape, Image.ANTIALIAS) #With reduce the image quality
