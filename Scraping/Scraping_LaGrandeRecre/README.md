@@ -124,7 +124,7 @@ Then, for each toy, I extracted the url of the page contained in the html ```<a>
 
 I identified the fields I wanted to extract and determined the corresponding XPath selectors.
 
-![RM_ProductPage](/medias/RM_ProductPage.png)
+![RM_ProductPage](./medias/RM_ProductPage.png)
 
 |Field                 |XPath selector|
 |----------------------|--------------|
