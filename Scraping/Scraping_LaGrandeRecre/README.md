@@ -71,7 +71,7 @@ Then I could iter in each Category through those urls.
 >#### Modifying gender filter
 First, I tried to filter gender using filter tab frow the website. With ```puppeteer```, I was able to simulate a click on an element.
 
-![RM_GenderFilter](/medias/RM_GenderFilter.png)
+![RM_GenderFilter](./medias/RM_GenderFilter.png)
 
 But after that, I realized that the delay between the click and the catalogue update was way too long and I started to collect data before this update. Then I used a little trick, I noticed that filters were displayed in clear in the url so I determined resulting url from the current one.
 
@@ -87,7 +87,7 @@ Then I change the value of *webStoreStockFilter* to **0** (*see [Limitations](#3
 
 Once again, I first tried to navigate between pages by clicking on the next button at the nottom of the page.
 
-![RM_NextPage](/medias/RM_NextPage.png)
+![RM_NextPage](./medias/RM_NextPage.png)
 
 But I got the same issue about charging time so I used the same trick looking for page number in the url. To do so, I had to know the total number of available pages. Inspecting the html code, I discovered that, at the bottom of each page, there was an hidden ``` <span> ``` that I could use to get this value:
 
@@ -107,7 +107,7 @@ I also added "*&sortBy-23=title.asc*" before "*#top-23*" (*see [Limitations](#3-
 
 Now that I got all of the pages' url, the next step was to browse those pages to isolate each toy-specific informations such as names and prices. Once again I inspected html code in order to determine the corresponding XPath selector.
 
-![RM_ToySection](/medias/RM_ToySection.png)
+![RM_ToySection](./medias/RM_ToySection.png)
 
 |Field                 |XPath selector|
 |----------------------|--------------|
@@ -145,7 +145,7 @@ I then collected all of this information and downloaded all of the images.
 
 All of the above steps can be summarized in the following diagram.
 
-![RM_ScrapingTree](/medias/RM_ScrapingTree.png)
+![RM_ScrapingTree](./medias/RM_ScrapingTree.png)
 
 >### 3. Limitations
 However, I assume that this method may have some defaults.
